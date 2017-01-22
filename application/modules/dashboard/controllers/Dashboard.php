@@ -6,6 +6,7 @@ class Dashboard extends MX_Controller {
 
 	public function __construct()
   {
+		parent::__construct();
 		
 		//load template here
     $this->template_main = 'template/index';
