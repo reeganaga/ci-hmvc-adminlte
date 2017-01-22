@@ -7,7 +7,7 @@ http://localhost/test/codeigniter/
 ```
 atau
 ```
-http://localhost/test/codeigniter/index.php/dashboard
+http://localhost/test/codeigniter/index.php/dashboard/
 ```
 
 ## Configuration :
