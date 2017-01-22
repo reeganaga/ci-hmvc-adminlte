@@ -1,18 +1,27 @@
 # CI-AdminLTE-HMVC
-CodeIgniter dengan template AdminLTE dengan tambahan HMVC (**_Hierarchical model–view–controller_**)
+CodeIgniter dengan template AdminLTE dengan tambahan HMVC (**_Hierarchical model–view–controller_**).
+
+Perhatikan konfigurasi dibawah, setelah di konfigurasi aplikasi dapat di akses di :
+```
+http://localhost/test/codeigniter/
+```
+atau
+```
+http://localhost/test/codeigniter/index.php/dashboard
+```
 
 ## Configuration :
 buka file *config.php* yang ada di *application/config/*, lalu masukkan URL nya sesuai dengan lokasi folder codeigniternya di bagian *$config['base_url']*.
 
 ## Contoh :
 ### Windows
-misalkan folder diletakkan di **_D:/xampp/htdocs/test/codeigniter/_**
+misalkan aplikasi diletakkan di folder **_D:/xampp/htdocs/test/codeigniter/_**
 maka isinya  :
 ```
 $config['base_url'] = http://localhost/test/codeigniter/
 ```
 ### Linux
-misalkan folder diletakkan di **_/var/www/html/dev/codeigniter/_**
+misalkan aplikasi berada di direktori **_/var/www/html/dev/codeigniter/_**
 maka URL nya :
 ```
 $config['base_url'] = http://localhost/dev/codeigniter/
