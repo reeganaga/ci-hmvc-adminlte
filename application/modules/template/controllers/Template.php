@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Template extends MX_Controller {
+class Template extends MY_Controller {
 
 	public function index($data)
 	{
@@ -13,6 +13,10 @@ class Template extends MX_Controller {
 		$data['js'] = 'template/js';
 		$data['footer'] = 'template/footer';
 
+		foreach ($data['breadcrumbs'] as $key => $value) {
+			$this->breadcrumbs->push($key, $value);
+		}
+
 		$this->load->view('main', $data);
 	}
 
@@ -23,9 +27,13 @@ class Template extends MX_Controller {
 		$data['sidebar'] = 'template/sidebar';
 		$data['control_sidebar'] = 'template/control_sidebar';
 		$data['content_header'] = 'template/content_header';
-		//$data['content'] = 'template/content';
+		// $data['content'] = 'template/content';
 		$data['js'] = 'template/js';
 		$data['footer'] = 'template/footer';
+
+		foreach ($data['breadcrumbs'] as $key => $value) {
+			$this->breadcrumbs->push($key, $value);
+		}
 
 		$this->load->view('main', $data);
 	}

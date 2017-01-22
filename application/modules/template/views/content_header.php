@@ -4,8 +4,12 @@
     Dashboard HMVC
     <small>Version 2.0</small>
   </h1>
-  <ol class="breadcrumb">
+  <!-- <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
     <li class="active">Dashboard</li>
-  </ol>
+  </ol> -->
+  <?php
+    // output breadcrumbs
+  echo $this->breadcrumbs->show('<i class="fa fa-dashboard"></i>');
+    ?>
 </section>

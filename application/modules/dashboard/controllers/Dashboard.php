@@ -1,27 +1,28 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Dashboard extends MX_Controller {
+class Dashboard extends MY_Controller {
 
+	function __construct() {
 
-	public function __construct()
-  {
-		parent::__construct();
-		
 		//load template here
-    $this->template_main = 'template/index';
+		$this->template_main = 'template/index';
 		$this->template_member = 'template/user';
-  }
 
+	}
 	public function index()
 	{
-		$data = '';
+
+		// add breadcrumbs
+		$data['breadcrumbs'] = array('Dashboard' => '/dashboard');
+
 		echo Modules::run($this->template_main, $data);
 	}
 
 	public function member()
 	{
-		$data = '';
+		$data['breadcrumbs'] = array('Dashboard' => '/dashboard', 'Member' => '/dashboard/member');
+
 		echo Modules::run($this->template_member, $data);
 	}
 }
