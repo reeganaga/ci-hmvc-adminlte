@@ -36,3 +36,4 @@ $config['base_url'] = http://localhost/dev/codeigniter/
 | jQuery | 2.2.3 | [Website](http://jquery.com) | [Github](https://github.com/jquery/jquery)
 | Font Awesome | 4.7.0 | [Website](http://fortawesome.github.io/Font-Awesome/) | [Github](https://github.com/FortAwesome/Font-Awesome)
 | Modular Extensions | 5.5 | [Website] (http://wiredesignz.co.nz/) | [Bitbucket] (https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc)
+| Breadcrumbs | 1.0 | - | [Github] (https://github.com/nobuti/Codeigniter-breadcrumbs)
