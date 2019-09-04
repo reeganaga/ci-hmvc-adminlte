@@ -16,6 +16,6 @@
 <!-- ChartJS 1.0.1 -->
 <script src="<?php echo base_url('assets/plugins/chartjs/Chart.min.js') ?>"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<?php echo base_url('assets/dist/js/pages/dashboard2.js') ?>"></script>
+<!-- <script src="<?php echo base_url('assets/dist/js/pages/dashboard2.js') ?>"></script> -->
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url('assets/dist/js/demo.js') ?>"></script>

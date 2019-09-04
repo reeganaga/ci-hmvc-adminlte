@@ -8,6 +8,7 @@ class Kpi extends MY_Controller {
 		// //load template here
 		$this->template_main = 'template/index';
 		$this->template_member = 'template/user';
+		$this->load->model('kpi_model');
 
 	}
 	public function index()
@@ -26,22 +27,11 @@ class Kpi extends MY_Controller {
 
 	public function kpi_table()
 	{
-		try{
-			$crud = new grocery_CRUD();
-
-			$crud->set_theme('datatables');
-			$crud->set_table('tb_kpi_rev');
-			$crud->set_subject('KPI Table');
-			$crud->required_fields('nama_kpi');
-			$crud->columns('nama_kpi');
-
-			$output = $crud->render();
-
-			$this->display_kpi_table($output);
-
-		}catch(Exception $e){
-			show_error($e->getMessage().' --- '.$e->getTraceAsString());
-		}
-
+		$table = $this->kpi_model->get_all();
+		// var_dump($table);
+		$data['breadcrumbs'] = array('KPI' => '/kpi/kpi');
+		$data['content'] = 'kpi/kpi-table';
+		$data['kpis'] = $table;
+		echo Modules::run($this->template_member, $data);
 	}
 }
