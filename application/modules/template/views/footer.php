@@ -9,6 +9,7 @@
 <!-- ./wrapper -->
 
 <?php
+echo (!empty($content_footer)) ?$content_footer:"";
 $this->load->view($js);
 ?>
 </body>

@@ -1,5 +1,3 @@
-<!-- jQuery 2.2.3 -->
-<script src="<?php echo base_url('assets/plugins/jQuery/jquery-2.2.3.min.js') ?>"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="<?php echo base_url('assets/bootstrap/js/bootstrap.min.js') ?>"></script>
 <!-- FastClick -->
@@ -19,3 +17,12 @@
 <!-- <script src="<?php echo base_url('assets/dist/js/pages/dashboard2.js') ?>"></script> -->
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url('assets/dist/js/demo.js') ?>"></script>
+<script src="<?php echo base_url('assets/plugins/toastr/toastr.min.js'); ?>"></script>
+<script src="<?php echo base_url('assets/plugins/jquery-confirm/jquery-confirm.min.js'); ?>"></script>
+
+<?php
+alert('success',$this->session->flashdata('success'));
+alert('error',$this->session->flashdata('error'));
+alert('warning',$this->session->flashdata('warning'));
+alert('info',$this->session->flashdata('info'));
+?>
