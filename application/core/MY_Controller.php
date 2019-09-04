@@ -10,5 +10,13 @@ class MY_Controller extends MX_Controller {
     // load Breadcrumbs
     $this->load->library('breadcrumbs');
 
+    //check login
+    if(!$this->ion_auth->logged_in()){
+      redirect('security/auth');
+      // $this->login();
+    }
+
   }
+  
+
 }
