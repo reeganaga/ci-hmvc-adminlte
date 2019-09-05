@@ -24,6 +24,17 @@
 
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/plugins/jquery-confirm/jquery-confirm.min.css'); ?>">
 
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/custom/custom.css'); ?>">
+
+  <!-- iCheck -->
+  <link rel="stylesheet" href="<?php echo base_url('assets/plugins/iCheck/square/blue.css') ?>">
+
+  <!-- Datatables -->
+  <link rel="stylesheet" href="<?php echo base_url('assets/plugins/datatables/dataTables.bootstrap.css') ?>">
+
+  <!-- Datepicker -->
+  <link rel="stylesheet" href="<?php echo base_url('assets/plugins/datepicker/datepicker3.css') ?>">
+
   <!-- jQuery 2.2.3 -->
   <script src="<?php echo base_url('assets/plugins/jQuery/jquery-2.2.3.min.js') ?>"></script>
 

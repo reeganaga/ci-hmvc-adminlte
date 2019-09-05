@@ -39,10 +39,23 @@ function alert($type, $message)
 }
 
 
-function form_value($key,$form){
-    if(isset($form) && !empty($form[$key])){
+function form_value($key, $form)
+{
+    if (isset($form) && !empty($form[$key])) {
         echo $form[$key];
+    } else {
+        echo set_value($key);
+    }
+}
+
+function form_checked($key, $form, $checked=true)
+{
+    $temp_value = set_value($key);
+    if (!empty($temp_value) && $temp_value==1) {
+        echo "checked";
+    }elseif(isset($form[$key])) {
+        echo ($form[$key] == 1) ? "checked" : "";
     }else{
-        set_value($key);
+        echo ($checked)?"checked":"";
     }
 }

@@ -62,6 +62,14 @@
             </span>
           </a>
         </li>
+        <li class="">
+          <a href="/kpi/periode">
+            <i class="fa fa-th"></i> <span>Periode</span>
+            <span class="pull-right-container">
+              <small class="label pull-right bg-green">new</small>
+            </span>
+          </a>
+        </li>
 
         <!-- <li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
         <li class="header">LABELS</li>

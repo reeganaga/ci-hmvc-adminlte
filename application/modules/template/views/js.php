@@ -20,9 +20,35 @@
 <script src="<?php echo base_url('assets/plugins/toastr/toastr.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/plugins/jquery-confirm/jquery-confirm.min.js'); ?>"></script>
 
+<!-- datatables -->
+<script src="<?php echo base_url('assets/plugins/datatables/jquery.dataTables.min.js'); ?>"></script>
+<script src="<?php echo base_url('assets/plugins/datatables/dataTables.bootstrap.min.js'); ?>"></script>
+
+<!-- datepicker -->
+<script src="<?php echo base_url('assets/plugins/datepicker/bootstrap-datepicker.js'); ?>"></script>
+
+<!-- iCheck -->
+<script src="<?php echo base_url('assets/plugins/iCheck/icheck.min.js') ?>"></script>
+
+<script>
+    $(document).ready(function() {
+        console.log('test');
+        $('.iCheck').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            // radioClass: 'iradio_square-blue',
+            increaseArea: '20%' // optional
+        });
+    });
+
+    $('.input-datepicker').datepicker({
+        format: 'yyyy-mm-dd'
+    });
+    $('.datatable').DataTable();
+</script>
+
 <?php
-alert('success',$this->session->flashdata('success'));
-alert('error',$this->session->flashdata('error'));
-alert('warning',$this->session->flashdata('warning'));
-alert('info',$this->session->flashdata('info'));
+alert('success', $this->session->flashdata('success'));
+alert('error', $this->session->flashdata('error'));
+alert('warning', $this->session->flashdata('warning'));
+alert('info', $this->session->flashdata('info'));
 ?>

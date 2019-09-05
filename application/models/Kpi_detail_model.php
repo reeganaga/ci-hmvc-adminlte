@@ -6,7 +6,7 @@ class Kpi_detail_model extends MY_Model
     public function __construct()
 	{
         $this->table = 'tb_kpi_detail_rev';
-        $this->primary_key = 'id_kpi_detail_rev	';
+        $this->primary_key = 'id_kpi_detail_rev';
         // $this->has_many_pivot['authors'] = array(
         //     'foreign_model'=>'User_model',
         //     'pivot_table'=>'articles_users',
