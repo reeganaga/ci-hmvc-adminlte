@@ -44,7 +44,7 @@ class Periode extends MY_Controller
 		//save or update
 		if (!empty($id_periode_kpi)) {
 			//update
-			$id = $this->periode_model->from_form(null, null,array('asf'))->update();
+			$id = $this->periode_model->from_form(null, ['k_aktif' => $k_aktif])->update();
 			if ($id) {
 				$this->session->set_flashdata('success', 'Data periode berhasil diupdate');
 				redirect('/kpi/periode');

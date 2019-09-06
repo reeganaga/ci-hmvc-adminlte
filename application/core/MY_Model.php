@@ -356,6 +356,10 @@ class MY_Model extends CI_Model
                     }
                 }
             }
+            
+            //add default condition for update by primary key
+            $this->where($this->primary_key,$this->input->post(($this->primary_key)));
+            
             return $this;
         }
         else

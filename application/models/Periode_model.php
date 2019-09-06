@@ -38,7 +38,7 @@ class Periode_model extends MY_Model
             'id_periode_kpi'=>[
                 'field'=>'id_periode_kpi',
                 'label'=>'Id Periode KPI',
-                'rules'=>'trim|numeric|required'
+                'rules'=>'trim|is_natural_no_zero|required'
             ],
             'periode'=>[
                 'field'=>'periode',
