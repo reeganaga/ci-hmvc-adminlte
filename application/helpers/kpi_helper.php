@@ -59,3 +59,35 @@ function form_checked($key, $form, $checked=true)
         echo ($checked)?"checked":"";
     }
 }
+
+function send_email($to='',$subject='',$content=''){
+
+    $ci =& get_instance();
+
+    $ci->config->load('email');
+    $config['mailtype']= $ci->config->item('mailtype');
+    $config['charset']= $ci->config->item('charset');
+    $config['protocol']= $ci->config->item('protocol');
+    $config['smtp_host']= $ci->config->item('smtp_host');
+    $config['smtp_user']= $ci->config->item('smtp_user');
+    $config['smtp_pass']= $ci->config->item('smtp_pass');
+    $config['smtp_port']= $ci->config->item('smtp_port');
+    $config['crlf']= $ci->config->item('crlf');
+    $config['newline']    = $ci->config->item('newline');
+
+    // var_dump($config);
+    // die();
+
+    $config = 
+    $ci->load->library('email',$config);
+
+    $ci->email->from('rega@softwareseni.com', 'Rega');
+    $ci->email->to($to);
+    // $ci->email->cc('another@another-example.com');
+    $ci->email->bcc('rega.blank@gmail.com');
+    
+    $ci->email->subject($subject);
+    $ci->email->message($content);
+    
+    return $ci->email->send();    
+}

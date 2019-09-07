@@ -70,6 +70,14 @@
             </span>
           </a>
         </li>
+        <li class="">
+          <a href="/kpi/users">
+            <i class="fa fa-users"></i> <span>User</span>
+            <span class="pull-right-container">
+              <small class="label pull-right bg-green">new</small>
+            </span>
+          </a>
+        </li>
 
         <!-- <li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
         <li class="header">LABELS</li>
