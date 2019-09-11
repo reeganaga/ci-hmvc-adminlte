@@ -39,6 +39,10 @@ class Auth extends MY_Controller
 				$this->session->set_flashdata('error', 'Email / Password anda salah.');
 				redirect('/security/auth');
 			}
+		}else{
+			//already logged in
+			redirect('/dashboard');
+
 		}
 	}
 
@@ -70,7 +74,7 @@ class Auth extends MY_Controller
 				$this->session->set_flashdata('success', 'Register berhasil, silahkan cek email anda untuk verifikasi');
 				$message = $this->load->view('email-verification', $ok, true);
 				$send = send_email($email, 'Registration KPI User', $message);
-				var_dump($send);
+				// var_dump($send);
 			} else {
 				$this->session->set_flashdata('error', 'Register Gagal, silahkan kontak admin atau coba lagi.');
 			}

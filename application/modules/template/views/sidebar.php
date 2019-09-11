@@ -71,6 +71,14 @@
           </a>
         </li>
         <li class="">
+          <a href="/kpi/isi_kpi">
+            <i class="fa fa-users"></i> <span>isi KPI</span>
+            <span class="pull-right-container">
+              <small class="label pull-right bg-green">new</small>
+            </span>
+          </a>
+        </li>
+        <li class="">
           <a href="/kpi/users">
             <i class="fa fa-users"></i> <span>User</span>
             <span class="pull-right-container">
