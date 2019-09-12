@@ -55,7 +55,7 @@
                                 </tr>
                                 <?php
                                 // loop indikator start
-                                var_dump($indikator);
+                                // var_dump($indikator);
                                 if ($indikator) {
                                     foreach ($indikator as $value) { ?>
                                         <tr>
