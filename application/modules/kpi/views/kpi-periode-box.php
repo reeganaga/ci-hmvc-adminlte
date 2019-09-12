@@ -34,10 +34,10 @@
                                         <td><?= $row->tgl_buka; ?></td>
                                         <td><?= $row->tgl_tutup; ?></td>
                                         <td><?= $row->k_aktif; ?></td>
-                                        <td><button class="btn btn-primary" data-toggle="modal" data-target=".modal-ajax" data-title="Pilih Jenis KPI" data-url="<?= base_url('/kpi/isi_kpi/ajax_kpi_list'); ?>">Isi Kpi</button></td>
+                                        <td><button class="btn btn-primary" data-toggle="modal" data-target=".modal-ajax" data-body_class="no-padding" data-title="Pilih Jenis KPI" data-url="<?= base_url('/kpi/isi_kpi/ajax_kpi_list/'.$row->id_periode_kpi); ?>">Isi Kpi</button></td>
                                     </tr>
                                     <!-- <div class="col-md-3 col-sm-6 col-xs-12">
-                                        <a href="" class="link-black" data-toggle="modal" data-target=".modal-ajax" data-title="Pilih Jenis KPI" data-url="<?= base_url('/kpi/isi_kpi/ajax_kpi_list'); ?>">
+                                        <a href="" class="link-black" data-toggle="modal" data-target=".modal-ajax" data-title="Pilih Jenis KPI" data-url="<?= base_url('/kpi/isi_kpi/ajax_kpi_list/'.$row->id_periode_kpi); ?>">
                                             <div class="info-box">
                                                 <span class="info-box-icon bg-yellow"><?= $row->periode; ?></span>
                                                 <div class="info-box-content">

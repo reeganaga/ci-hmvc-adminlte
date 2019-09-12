@@ -22,9 +22,11 @@ $('.modal-ajax').on('show.bs.modal',function(e){
     var title = button.data('title')
 
     var url = button.data('url')
+    var body_class = button.data('body_class');
     // replace title
     var modal = $(this);
     modal.find('.modal-title').html(title)
+    modal.find('.modal-body').addClass(body_class);
     
     //replace content
     $.ajax({
