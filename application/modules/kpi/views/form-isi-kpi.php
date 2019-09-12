@@ -15,9 +15,9 @@
                     </div>
                 </div>
                 <!-- /.box-header -->
-                <div class="box-body">
-                    <form class="form-horizontal" action="">
-                        <table class="table table-bordered">
+                <div class="box-body no-padding">
+                    <form class="form-horizontal form-isi-kpi" action="/kpi/isi_kpi/proses_isi_kpi" method="post">
+                        <table class="table table-bordered table-striped">
                             <thead class="text-center">
                                 <tr>
                                     <th>No</th>
@@ -66,7 +66,7 @@
                                             <td>
                                                 <div class="form-group">
                                                     <div class="col-md-6">
-                                                        <input class="form-control" name="nilai_target">
+                                                        <input class="form-control" name="nilai[<?= $value->id_kpi_detail_rev ?>][target]">
                                                     </div>
                                                 </div>
                                             </td>
@@ -74,7 +74,7 @@
                                             <td>
                                                 <div class="form-group">
                                                     <div class="col-md-6">
-                                                        <input class="form-control" name="nilai_realisasi">
+                                                        <input class="form-control" name="nilai[<?= $value->id_kpi_detail_rev ?>][realisasi]">
                                                     </div>
                                                 </div>
                                             </td>
@@ -88,13 +88,17 @@
                                 ?>
                             </tbody>
                         </table>
+                        <input type="text" name="id_periode_kpi" value="<?= $id_periode_kpi; ?>">
+                        <input type="text" name="id_kpi_rev" value="<?= $kpi->id_kpi; ?>">
                     </form>
                     <!-- /.table-responsive -->
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer clearfix">
-                    <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left">Place New Order</a>
-                    <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">View All Orders</a>
+                    <button class="btn btn-primary btn-flat pull-right submit-isi-kpi" >Simpan</button>
+                    <a href="/kpi/isi_kpi" class="btn btn-default btn-flat pull-right" >Batal</a>
+                    <!-- <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left">Place New Order</a> -->
+                    <!-- <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">View All Orders</a> -->
                 </div>
                 <!-- /.box-footer -->
             </div>

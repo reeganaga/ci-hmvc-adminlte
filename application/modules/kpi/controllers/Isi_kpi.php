@@ -10,7 +10,7 @@ class Isi_kpi extends MY_Controller
 		// //load template here
 		$this->template_main = 'template/index';
 		$this->template_member = 'template/user';
-		$this->load->model(['periode_model', 'kpi_model','kpi_detail_model']);
+		$this->load->model(['periode_model', 'kpi_model','kpi_detail_model','penilaian_kpi_model']);
 	}
 	public function index()
 	{
@@ -47,11 +47,25 @@ class Isi_kpi extends MY_Controller
 		// var_dump($kpi);
 		$data['breadcrumbs'] = array('Isi KPI' => '/kpi/kpi');
 		$data['content'] = 'kpi/form-isi-kpi';
-		$data['data'] = $periode;
+		$data['id_periode_kpi'] = $id_periode_kpi;
 		$data['title'] = $title;
 		$data['kpi'] = $kpi;
 		$data['indikator'] = $this->kpi_detail_model->where('id_kpi',$id_kpi_rev)->get_all();
 		$data['subtitle'] = "Pengisian periode ke ".$periode_ke;
 		echo Modules::run($this->template_member, $data);
+	}
+
+	public function proses_isi_kpi(){
+		$post = $this->input->post();
+		$user = $this->ion_auth->user();
+		var_dump($user);
+		foreach ($post['nilai'] as $value) {
+			$data['id_periode_kpi']=$value['id_periode_kpi'];
+			$data['id_kpi_rev']=$value['id_kpi_rev'];
+			// $data['id_users']=;
+			$data['id_kpi_rev']=$value['id_kpi_rev'];
+		}
+		// $this->penilaian_kpi_model->insert($data);
+		// var_dump($post);
 	}
 }

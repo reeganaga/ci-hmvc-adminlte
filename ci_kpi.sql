@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: 12 Sep 2019 pada 22.33
+-- Generation Time: 13 Sep 2019 pada 06.50
 -- Versi Server: 5.7.27-0ubuntu0.18.04.1
 -- PHP Version: 7.2.19-0ubuntu0.18.04.2
 
@@ -8045,7 +8045,7 @@ INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activ
 (7, '127.0.0.1', 'rega.blank+5@gmail.com', '$2y$10$VK3lSDm1eTWHquk1sy1mdew1lpUCbN.xLl.0o2942G.d/yfxDyepe', 'rega.blank+5@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1567824388, NULL, 1, 'Rega Cahya Gumilang', NULL, NULL, NULL, 'Yogyakarta', 3471),
 (8, '127.0.0.1', 'rega.blank+6@gmail.com', '$2y$10$kiBxgibhtuqLlE.WZgUV1uF4i.SqDLTq5E0ZsN70fRwRFmsbFsH.a', 'rega.blank+6@gmail.com', '951b8063c94d45250b39', '$2y$10$aptfgnyGROQKsPVNi5vDTOlCcMs.0VivYAo1pB4Yu6yTP63OQG98y', NULL, NULL, NULL, NULL, NULL, 1567849028, NULL, 0, 'Rega Cahya Gumilang', NULL, NULL, NULL, 'Yogyakarta', 3471),
 (9, '127.0.0.1', 'rega.blank+7@gmail.com', '$2y$10$GWxapY7VuN7yMHsJAmS1OuWHE5AV4R7TmPxUNI8OveN4JZdU0x/Jq', 'rega.blank+7@gmail.com', NULL, NULL, NULL, NULL, NULL, '520eb0b3a0ebf54579f3051949d470ecc652cf50', '$2y$10$pVLdmyN7Ha9yxqtAE2UDyOe0igv5lQGEWWIxeHSAzrnoqBZwIM6uy', 1567849089, 1567849129, 1, 'Rega Cahya Gumilang', NULL, NULL, NULL, 'Yogyakarta', 3471),
-(10, '127.0.0.1', 'rega.blank+8@gmail.com', '$2y$10$2fr/tKncFpxr86LUtraVueX.E14F/V7IfEpR5UMdTlmfLrWT2uNBC', 'rega.blank+8@gmail.com', NULL, NULL, NULL, NULL, NULL, '6e46337f49a6968b426acf512300152f0c272358', '$2y$10$KRC4cO5vzORBd75DBoWf1e6IvYHOLEUdZulKOdCrJoDq867M1ZZty', 1568205910, 1568297766, 1, 'Rega Cahya Gumilang', NULL, NULL, NULL, 'Yogyakarta', 3471);
+(10, '127.0.0.1', 'rega.blank+8@gmail.com', '$2y$10$2fr/tKncFpxr86LUtraVueX.E14F/V7IfEpR5UMdTlmfLrWT2uNBC', 'rega.blank+8@gmail.com', NULL, NULL, NULL, NULL, NULL, '6e46337f49a6968b426acf512300152f0c272358', '$2y$10$KRC4cO5vzORBd75DBoWf1e6IvYHOLEUdZulKOdCrJoDq867M1ZZty', 1568205910, 1568327764, 1, 'Rega Cahya Gumilang', NULL, NULL, NULL, 'Yogyakarta', 3471);
 
 -- --------------------------------------------------------
 

@@ -30,21 +30,9 @@
 <!-- iCheck -->
 <script src="<?php echo base_url('assets/plugins/iCheck/icheck.min.js') ?>"></script>
 
-<script>
-    $(document).ready(function() {
-        console.log('test');
-        $('.iCheck').iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            // radioClass: 'iradio_square-blue',
-            increaseArea: '20%' // optional
-        });
-    });
+<!-- custom js -->
+<script src="<?php echo base_url('assets/custom/custom.js') ?>"></script>
 
-    $('.input-datepicker').datepicker({
-        format: 'yyyy-mm-dd'
-    });
-    $('.datatable').DataTable();
-</script>
 
 <?php
 alert('success', $this->session->flashdata('success'));
