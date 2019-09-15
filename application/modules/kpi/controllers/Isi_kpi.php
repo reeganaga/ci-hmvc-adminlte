@@ -44,27 +44,53 @@ class Isi_kpi extends MY_Controller
 		$title = ($kpi) ? $kpi->nama_kpi : "";
 		$periode_ke = ($periode) ? $periode->periode : "";
 
-		// var_dump($kpi);
+		$data_penilaian = $this->penilaian_kpi_model->get_penilaian_by_kpi($id_kpi_rev,$id_periode_kpi);
+		// var_dump($data_penilaian);
 		$data['breadcrumbs'] = array('Isi KPI' => '/kpi/kpi');
 		$data['content'] = 'kpi/form-isi-kpi';
 		$data['id_periode_kpi'] = $id_periode_kpi;
 		$data['title'] = $title;
 		$data['kpi'] = $kpi;
-		$data['indikator'] = $this->kpi_detail_model->where('id_kpi',$id_kpi_rev)->get_all();
+		$data['indikator'] = $this->kpi_detail_model->as_object()->where('id_kpi',$id_kpi_rev)->get_all();
 		$data['subtitle'] = "Pengisian periode ke ".$periode_ke;
+		$data['data_penilaian'] = $data_penilaian;
 		echo Modules::run($this->template_member, $data);
 	}
 
 	public function proses_isi_kpi(){
 		$post = $this->input->post();
-		$user = $this->ion_auth->user();
-		var_dump($user);
-		foreach ($post['nilai'] as $value) {
-			$data['id_periode_kpi']=$value['id_periode_kpi'];
-			$data['id_kpi_rev']=$value['id_kpi_rev'];
-			// $data['id_users']=;
-			$data['id_kpi_rev']=$value['id_kpi_rev'];
+		// var_dump($post);
+		$user = $this->ion_auth->user()->row();
+		// var_dump($user);
+		$kpi = $this->kpi_model->get($post['id_kpi_rev']);
+		$kpi_name="";
+		if($kpi){
+			$kpi_name = $kpi->nama_kpi;
 		}
+		foreach ($post['nilai'] as $id => $value) {
+			$data['id_periode_kpi']=$post['id_periode_kpi'];
+			$data['id_kpi_rev']=$post['id_kpi_rev'];
+			$data['id_users']=$user->id;
+			$data['id_kpi_detail_rev']=$id;
+			$data['nilai_target']=$value['target'];
+			$data['nilai_realisasi']=$value['realisasi'];
+
+			//calculate score
+			$kpi_detail = $this->kpi_detail_model->get($id);
+			$bobot = $kpi_detail->bobot;
+			$score = calculate_score($value['realisasi'],$value['target'],$bobot);
+			// var_dump($score);
+
+			$data['skor'] = $score['score'];
+			$data['skor_akhir'] = $score['end_score'];
+			// var_dump($data);
+			//insert table pengisian
+			$ok = $this->penilaian_kpi_model->insert($data);
+			// var_dump($ok);
+		}
+
+		$this->session->set_flashdata('success','KPI {$kpi_name} berhasil disimpan');
+		redirect($this->agent->referrer());
 		// $this->penilaian_kpi_model->insert($data);
 		// var_dump($post);
 	}

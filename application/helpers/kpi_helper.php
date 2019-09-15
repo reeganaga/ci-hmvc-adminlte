@@ -91,3 +91,12 @@ function send_email($to='',$subject='',$content=''){
     
     return $ci->email->send();    
 }
+
+function calculate_score($realisasi,$target,$bobot){
+    $score = ($realisasi/$target)*100;
+    $end_score = ($score * $bobot)/100;
+    
+    $result['score'] = $score;
+    $result['end_score'] = $end_score;
+    return $result;
+}

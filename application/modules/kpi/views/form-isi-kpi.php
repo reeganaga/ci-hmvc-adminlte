@@ -17,21 +17,21 @@
                 <!-- /.box-header -->
                 <div class="box-body no-padding">
                     <form class="form-horizontal form-isi-kpi" action="/kpi/isi_kpi/proses_isi_kpi" method="post">
-                        <table class="table table-bordered table-striped">
-                            <thead class="text-center">
-                                <tr>
-                                    <th>No</th>
-                                    <th>Sasaran Kunci</th>
-                                    <th>Indikator Pengukuran</th>
-                                    <th>Bobot</th>
-                                    <th colspan="2">Target</th>
-                                    <th colspan="2">Realisasi</th>
-                                    <th>Skor</th>
-                                    <th>Skor Akhir</th>
+                        <table class="table table-bordered">
+                            <thead class="">
+                                <tr class="bg-purple text-center">
+                                    <th class="text-center" >No</th>
+                                    <th class="text-center" >Sasaran Kunci</th>
+                                    <th class="text-center" >Indikator Pengukuran</th>
+                                    <th class="text-center" >Bobot</th>
+                                    <th class="text-center"  colspan="2">Target</th>
+                                    <th class="text-center"  colspan="2">Realisasi</th>
+                                    <th class="text-center" >Skor</th>
+                                    <th class="text-center" >Skor Akhir</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr class="text-bold text-center">
                                     <td colspan="3">&nbsp;</td>
                                     <td>%</td>
                                     <td>Nilai</td>
@@ -41,7 +41,7 @@
                                     <td>(Realisasi/Target)*100</td>
                                     <td>(Skor x Bobot)/100</td>
                                 </tr>
-                                <tr>
+                                <tr class="bg-orange text-center">
                                     <td>1</td>
                                     <td>2</td>
                                     <td>3</td>
@@ -54,42 +54,57 @@
                                     <td>10</td>
                                 </tr>
                                 <?php
+                                $total_bobot=0;
+                                $skor_akhir=0;
                                 // loop indikator start
-                                // var_dump($indikator);
                                 if ($indikator) {
-                                    foreach ($indikator as $value) { ?>
+                                    $i=1;
+                                    foreach ($indikator as $value) {
+                                        $total_bobot = $total_bobot + $value->bobot;
+                                        $skor_akhir = $skor_akhir + $data_penilaian[$value->id_kpi_detail_rev]['skor_akhir'];
+                                    ?>
                                         <tr>
-                                            <td><?= $value->id_kpi_detail_rev; ?></td>
+                                            <td><?= $i; $i++; ?></td>
                                             <td><?= $value->sasaran; ?></td>
                                             <td><?= $value->nama_indikator; ?></td>
-                                            <td><?= $value->bobot; ?></td>
+                                            <td class="text-right"><?= $value->bobot; ?></td>
                                             <td>
                                                 <div class="form-group">
-                                                    <div class="col-md-6">
-                                                        <input class="form-control" name="nilai[<?= $value->id_kpi_detail_rev ?>][target]">
+                                                    <div class="col-md-12">
+                                                        <input class="form-control input-kpi" value="<?= $data_penilaian[$value->id_kpi_detail_rev]['nilai_target']; ?>" name="nilai[<?= $value->id_kpi_detail_rev ?>][target]">
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td>%</td>
+                                            <td class="text-center">%</td>
                                             <td>
                                                 <div class="form-group">
-                                                    <div class="col-md-6">
-                                                        <input class="form-control" name="nilai[<?= $value->id_kpi_detail_rev ?>][realisasi]">
+                                                    <div class="col-md-12">
+                                                        <input class="form-control input-kpi" value="<?= $data_penilaian[$value->id_kpi_detail_rev]['nilai_realisasi']; ?>" name="nilai[<?= $value->id_kpi_detail_rev ?>][realisasi]">
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td>%</td>
-                                            <td class="skor">&nbsp;</td>
-                                            <td class="skor-akhir">&nbsp;</td>
+                                            <td class="text-center">%</td>
+                                            <td class="skor text-right"><?= $data_penilaian[$value->id_kpi_detail_rev]['skor']; ?></td>
+                                            <td class="skor-akhir text-right"><?= $data_penilaian[$value->id_kpi_detail_rev]['skor_akhir']; ?></td>
                                         </tr>
                                 <?php }
                                 }
                                 // loop indikator end
                                 ?>
+                                <tr>
+                                    <td colspan="3">&nbsp;</td>
+                                    <td class="text-bold text-right"><?= $total_bobot; ?></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-right text-bold"><?= $skor_akhir; ?></td>
+                                </tr>
                             </tbody>
                         </table>
-                        <input type="text" name="id_periode_kpi" value="<?= $id_periode_kpi; ?>">
-                        <input type="text" name="id_kpi_rev" value="<?= $kpi->id_kpi; ?>">
+                        <input type="hidden" name="id_periode_kpi" value="<?= $id_periode_kpi; ?>">
+                        <input type="hidden" name="id_kpi_rev" value="<?= $kpi->id_kpi; ?>">
                     </form>
                     <!-- /.table-responsive -->
                 </div>
