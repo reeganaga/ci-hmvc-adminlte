@@ -2,6 +2,8 @@
 <script src="<?php echo base_url('assets/bootstrap/js/bootstrap.min.js') ?>"></script>
 <!-- FastClick -->
 <script src="<?php echo base_url('assets/plugins/fastclick/fastclick.js') ?>"></script>
+<!-- custom js -->
+<script src="<?php echo base_url('assets/custom/custom.js') ?>"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url('assets/dist/js/app.min.js') ?>"></script>
 <!-- Sparkline -->
@@ -30,8 +32,6 @@
 <!-- iCheck -->
 <script src="<?php echo base_url('assets/plugins/iCheck/icheck.min.js') ?>"></script>
 
-<!-- custom js -->
-<script src="<?php echo base_url('assets/custom/custom.js') ?>"></script>
 
 
 <?php

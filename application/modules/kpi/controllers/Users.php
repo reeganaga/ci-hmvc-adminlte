@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Periode extends MY_Controller
+class Users extends MY_Controller
 {
 
 	function __construct()
@@ -10,20 +10,22 @@ class Periode extends MY_Controller
 		// //load template here
 		$this->template_main = 'template/index';
 		$this->template_member = 'template/user';
-		$this->load->model('periode_model');
-		$this->menu='kpi-periode';
+		// $this->load->model('users_model');
+		$this->menu='kpi-users';
 	}
 	public function index()
 	{
-		$this->periode_table();
+		$this->users_table();
 	}
 
 
-	public function periode_table()
+	public function users_table()
 	{
-		$table = $this->periode_model->get_all();
-		$data['breadcrumbs'] = array('Periode' => '/kpi/periode');
-		$data['content'] = 'kpi/kpi-periode-table';
+		$table = $this->ion_auth->users()->result();
+		// var_dump($table);
+		// die();
+		$data['breadcrumbs'] = array('Users' => '/kpi/users');
+		$data['content'] = 'kpi/kpi-users-table';
 		$data['tables'] = $table;
 		$data['menu_active'] = $this->menu;
 		echo Modules::run($this->template_member, $data);

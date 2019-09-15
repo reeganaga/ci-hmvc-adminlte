@@ -87,6 +87,7 @@ $this->load->view('template/sidebar');
       </div>
       <!-- /.row -->
 
+      <?php /*
       <div class="row">
         <div class="col-md-12">
           <div class="box">
@@ -841,6 +842,7 @@ $this->load->view('template/sidebar');
         <!-- /.col -->
       </div>
       <!-- /.row -->
+      */ ?>
     </section>
     <!-- /.content -->
   </div>

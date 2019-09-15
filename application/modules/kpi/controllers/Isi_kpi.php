@@ -11,6 +11,7 @@ class Isi_kpi extends MY_Controller
 		$this->template_main = 'template/index';
 		$this->template_member = 'template/user';
 		$this->load->model(['periode_model', 'kpi_model','kpi_detail_model','penilaian_kpi_model']);
+		$this->menu='kpi-isi-kpi';
 	}
 	public function index()
 	{
@@ -26,13 +27,17 @@ class Isi_kpi extends MY_Controller
 		$data['data'] = $periode;
 		$data['title'] = "Daftar periode aktif";
 		$data['subtitle'] = "Silahkan pilih periode";
+		$data['menu_active'] = $this->menu;
 		echo Modules::run($this->template_member, $data);
 	}
 
 	public function ajax_kpi_list($id_periode_kpi)
 	{
-		$jenis_kpi = $this->kpi_model->get_all();
+		// $jenis_kpi = $this->kpi_model->as_array()->get_all();
+
+		$jenis_kpi = $this->kpi_model->get_filled_kpi();
 		// var_dump($jenis_kpi);
+		// $
 		$this->load->view('kpi/modal-content-jeniskpi', ['jenis_kpi' => $jenis_kpi, 'id_periode_kpi' => $id_periode_kpi]);
 	}
 
@@ -54,6 +59,7 @@ class Isi_kpi extends MY_Controller
 		$data['indikator'] = $this->kpi_detail_model->as_object()->where('id_kpi',$id_kpi_rev)->get_all();
 		$data['subtitle'] = "Pengisian periode ke ".$periode_ke;
 		$data['data_penilaian'] = $data_penilaian;
+		$data['menu_active'] = $this->menu;
 		echo Modules::run($this->template_member, $data);
 	}
 

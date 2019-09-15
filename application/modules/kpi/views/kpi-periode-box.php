@@ -21,32 +21,39 @@
                             <thead>
                                 <tr>
                                     <th>Periode</th>
-                                    <th>tanggal Buka </th>
-                                    <th>tanggal Tutup </th>
+                                    <th>Tanggal Buka </th>
+                                    <th>Tanggal Tutup </th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($data as $row) { ?>
+                                <?php foreach ($data as $row) {
+                                    $closed_date = new DateTime($row->tgl_tutup);
+                                    $opened_date = new DateTime($row->tgl_buka);
+                                    // var_dump($date);
+                                    $now = new DateTime("midnight");
+                                    // var_dump($now);
+                                    $class_opened_date = ($opened_date <= $now && $row->k_aktif) ? 'text-bold text-green' : "text-bold text-gray";
+                                    $is_open = ($opened_date <= $now) ? true : false;
+
+                                    $class_closed_date = ($closed_date >= $now && $is_open && $row->k_aktif) ? 'text-bold text-green' : "text-bold text-gray";
+
+                                    ?>
                                     <tr>
                                         <td><?= $row->periode; ?></td>
-                                        <td><?= $row->tgl_buka; ?></td>
-                                        <td><?= $row->tgl_tutup; ?></td>
-                                        <td><?= $row->k_aktif; ?></td>
-                                        <td><button class="btn btn-primary" data-toggle="modal" data-target=".modal-ajax" data-body_class="no-padding" data-title="Pilih Jenis KPI" data-url="<?= base_url('/kpi/isi_kpi/ajax_kpi_list/'.$row->id_periode_kpi); ?>">Isi Kpi</button></td>
+                                        <td class="<?= $class_opened_date ?>"><?= kpi_format_date($row->tgl_buka); ?></td>
+                                        <td class="<?= $class_closed_date ?>"><?= kpi_format_date($row->tgl_tutup); ?></td>
+                                        <td><?= ($row->k_aktif == 1) ? "<span class='label bg-green'>Active</span>" : "<span class='label bg-gray'>Inactive</span>"; ?></td>
+                                        <td>
+                                            <?php
+                                                if ($row->k_aktif) { ?>
+                                                <button class="btn btn-primary btn-flat" data-toggle="modal" data-target=".modal-ajax" data-body_class="no-padding" data-title="Pilih Jenis KPI" data-url="<?= base_url('/kpi/isi_kpi/ajax_kpi_list/' . $row->id_periode_kpi); ?>">Isi Kpi</button>
+                                            <?php } else { ?>
+                                                <button class="btn btn-primary btn-flat disabled" >Isi Kpi</button>
+                                            <?php } ?>
+                                        </td>
                                     </tr>
-                                    <!-- <div class="col-md-3 col-sm-6 col-xs-12">
-                                        <a href="" class="link-black" data-toggle="modal" data-target=".modal-ajax" data-title="Pilih Jenis KPI" data-url="<?= base_url('/kpi/isi_kpi/ajax_kpi_list/'.$row->id_periode_kpi); ?>">
-                                            <div class="info-box">
-                                                <span class="info-box-icon bg-yellow"><?= $row->periode; ?></span>
-                                                <div class="info-box-content">
-                                                    <span class="info-box-text"><?= $row->tgl_buka; ?></span>
-                                                    <span class="info-box-number"><?= $row->tgl_tutup ?></span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div> -->
                                 <?php } ?>
                             </tbody>
                         </table>

@@ -88,6 +88,8 @@
                                             <td class="skor-akhir text-right"><?= $data_penilaian[$value->id_kpi_detail_rev]['skor_akhir']; ?></td>
                                         </tr>
                                 <?php }
+                                }else{
+                                    alert('info','Indikator belum ada, silahkan kontak admin terlebih dahulu');
                                 }
                                 // loop indikator end
                                 ?>

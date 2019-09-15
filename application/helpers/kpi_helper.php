@@ -20,7 +20,7 @@ function alert($type, $message)
             $script = "toastr.success('{$message}')";
             break;
 
-        case 'error':
+        case 'warning':
             $script = "toastr.error('{$message}')";
             # code...
             break;
@@ -95,8 +95,12 @@ function send_email($to='',$subject='',$content=''){
 function calculate_score($realisasi,$target,$bobot){
     $score = ($realisasi/$target)*100;
     $end_score = ($score * $bobot)/100;
-    
+
     $result['score'] = $score;
     $result['end_score'] = $end_score;
     return $result;
+}
+
+function kpi_format_date($data){
+    return date('l, d M Y',strtotime($data));
 }

@@ -12,6 +12,7 @@ class Kpi extends MY_Controller
 		$this->template_member = 'template/user';
 		$this->load->model('kpi_model');
 		$this->load->model('kpi_detail_model');
+		$this->menu='kpi';
 	}
 	public function index()
 	{
@@ -25,6 +26,7 @@ class Kpi extends MY_Controller
 		$data['breadcrumbs'] = array('KPI' => '/kpi/kpi');
 		$data['content'] = 'kpi/kpi-table';
 		$data['kpis'] = $table;
+		$data['menu_active'] = $this->menu;
 		echo Modules::run($this->template_member, $data);
 	}
 
@@ -70,6 +72,7 @@ class Kpi extends MY_Controller
 		$data['table_indikators'] = $this->kpi_detail_model->where('id_kpi', $id_kpi)->get_all();
 		// var_dump($data['table_indikators']);
 		// $data['kpis'] = $table;
+		$data['menu_active'] = $this->menu;
 		echo Modules::run($this->template_member, $data);
 	}
 	public function edit_indikator($id_kpi,$id_indikator){
