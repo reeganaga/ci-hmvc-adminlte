@@ -9,7 +9,11 @@
 
       </div>
       <div class="pull-left info">
-        <p>Alexander Pierce</p>
+        <?php
+        $user = $this->ion_auth->user()->row();
+        // var_dump($user);
+        ?>
+        <p><?= $user->first_name; ?></p>
         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
       </div>
     </div>
