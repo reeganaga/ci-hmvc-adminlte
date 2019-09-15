@@ -117,7 +117,7 @@ class Auth extends MY_Controller
 		} else {
 			// redirect them to the forgot password page
 			$this->session->set_flashdata('message', $this->ion_auth->errors());
-			redirect("auth/forgot_password", 'refresh');
+			redirect("security/auth", 'refresh');
 		}
 	}
 
