@@ -95,7 +95,7 @@ class Isi_kpi extends MY_Controller
 			// var_dump($ok);
 		}
 
-		$this->session->set_flashdata('success','KPI {$kpi_name} berhasil disimpan');
+		$this->session->set_flashdata('success',"KPI {$kpi_name} berhasil disimpan");
 		redirect($this->agent->referrer());
 		// $this->penilaian_kpi_model->insert($data);
 		// var_dump($post);

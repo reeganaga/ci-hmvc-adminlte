@@ -61,7 +61,7 @@
                                     $i=1;
                                     foreach ($indikator as $value) {
                                         $total_bobot = $total_bobot + $value->bobot;
-                                        $skor_akhir = $skor_akhir + $data_penilaian[$value->id_kpi_detail_rev]['skor_akhir'];
+                                        $skor_akhir = $skor_akhir + intval($data_penilaian[$value->id_kpi_detail_rev]['skor_akhir']);
                                     ?>
                                         <tr>
                                             <td><?= $i; $i++; ?></td>
