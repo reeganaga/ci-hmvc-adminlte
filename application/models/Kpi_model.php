@@ -27,10 +27,13 @@ class Kpi_model extends MY_Model
             foreach ($kpis as &$kpi) {
                 //check on pengisian kpi to detect it's already filled or not
                 $pengisian_kpis = $this->penilaian_kpi_model->as_array()->get(['id_kpi_rev' => $kpi['id_kpi']]);
+                // var_dump($pengisian_kpis['id_users']);
+                // var_dump($this->ion_auth->user()->row());
+                // var_dump($pengisian_kpis['id_users']);
                 if ($pengisian_kpis) {
                     $kpi['is_filled'] = true;
                     $kpi['penilaian'] = $pengisian_kpis;
-                    $kpi['is_allowed_to_fill'] = (($pengisian_kpis['id_users'] == $this->ion_auth->user()->row()) || $this->ion_auth->is_admin()) ? true : false;
+                    $kpi['is_allowed_to_fill'] = (($pengisian_kpis['id_users'] == $this->ion_auth->user()->row()->id) || $this->ion_auth->is_admin()) ? true : false;
                     $kpi['filled_by'] =  $this->ion_auth->user($pengisian_kpis['id_users'])->row();
                 }else{
                     $kpi['is_filled'] = false;
