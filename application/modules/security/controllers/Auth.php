@@ -69,7 +69,7 @@ class Auth extends MY_Controller
 
 			$ok = $this->ion_auth->register($username, $password, $email, $additional_data, $group);
 
-			var_dump($ok);
+			//var_dump($ok);
 			if ($ok) {
 				$this->session->set_flashdata('success', 'Register berhasil, silahkan cek email anda untuk verifikasi');
 				$message = $this->load->view('email-verification', $ok, true);
@@ -117,7 +117,7 @@ class Auth extends MY_Controller
 		} else {
 			// redirect them to the forgot password page
 			$this->session->set_flashdata('message', $this->ion_auth->errors());
-			redirect("auth/forgot_password", 'refresh');
+			redirect("security/auth", 'refresh');
 		}
 	}
 
