@@ -23,7 +23,7 @@
                     alert('error', form_error('first_name'));
                     alert('error', form_error('tempat'));
                     ?>
-                    <form class="form-horizontal" action="/kpi/user/save" method="post">
+                    <form class="form-horizontal" action="<?=  base_url();  ?>kpi/user/save" method="post">
                         <input type="hidden" name="id" value="<?= $id; ?>">
                         <div class="form-group">
                             <div class="col-md-3">

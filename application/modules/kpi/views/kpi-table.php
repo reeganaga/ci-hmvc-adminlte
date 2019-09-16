@@ -34,7 +34,7 @@
                         <td><?= $kpi->id_kpi; ?></td>
                         <td><a href="<?php echo base_url('') ?>"><?= $kpi->nama_kpi; ?></a></td>
                         <td>
-                          <a href="/kpi/add_indicator/<?= $kpi->id_kpi; ?>" class="btn btn-default">Configure indicator</a>
+                          <a href="<?=  base_url();  ?>kpi/add_indicator/<?= $kpi->id_kpi; ?>" class="btn btn-default">Configure indicator</a>
                         </td>
                       </tr>
                     <?php endforeach; ?>    

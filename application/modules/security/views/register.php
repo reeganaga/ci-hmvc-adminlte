@@ -2,7 +2,7 @@
     <div class="login-box-body">
       <p class="login-box-msg">Form Pendaftaran</p>
 
-      <form action="/security/auth/register" method="post">
+      <form action="<?=  base_url();  ?>security/auth/register" method="post">
         <div class="form-group has-feedback">
           <input type="text" name="nama" class="form-control" placeholder="Nama Lengkap">
           <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -55,8 +55,8 @@
       </div> -->
       <!-- /.social-auth-links -->
 
-      <a href="/security/auth/forgot">I forgot my password</a><br>
-      <a href="/security/auth/register" class="text-center">Register a new membership</a>
+      <a href="<?=  base_url();  ?>security/auth/forgot">I forgot my password</a><br>
+      <a href="<?=  base_url();  ?>security/auth/register" class="text-center">Register a new membership</a>
 
     </div>
     <!-- /.login-box-body -->

@@ -23,7 +23,7 @@
                     alert('error', form_error('nama_indikator'));
                     alert('error', form_error('bobot'));
                     ?>
-                    <form class="form-horizontal" action="/kpi/save_indikator/" method="post">
+                    <form class="form-horizontal" action="<?=  base_url();  ?>kpi/save_indikator/" method="post">
                         <input type="hidden" name="id_kpi" value="<?= $id_kpi; ?>">
                         <div class="form-group">
                             <div class="col-md-3">

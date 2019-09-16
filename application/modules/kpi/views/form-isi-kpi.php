@@ -16,7 +16,7 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body no-padding">
-                    <form class="form-horizontal form-isi-kpi" action="/kpi/isi_kpi/proses_isi_kpi" method="post">
+                    <form class="form-horizontal form-isi-kpi" action="<?=  base_url();  ?>kpi/isi_kpi/proses_isi_kpi" method="post">
                         <table class="table table-bordered">
                             <thead class="">
                                 <tr class="bg-purple text-center">
@@ -113,7 +113,7 @@
                 <!-- /.box-body -->
                 <div class="box-footer clearfix">
                     <button class="btn btn-primary btn-flat pull-right submit-isi-kpi" >Simpan</button>
-                    <a href="/kpi/isi_kpi" class="btn btn-default btn-flat pull-right" >Batal</a>
+                    <a href="<?=  base_url();  ?>kpi/isi_kpi" class="btn btn-default btn-flat pull-right" >Batal</a>
                     <!-- <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left">Place New Order</a> -->
                     <!-- <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">View All Orders</a> -->
                 </div>

@@ -15,7 +15,7 @@
                 </td>
                 <td>
                     <?php if ($value['is_allowed_to_fill']) { ?>
-                        <a href="/kpi/isi_kpi/start/<?= $id_periode_kpi; ?>/<?= $value['id_kpi']; ?>" class="btn btn-primary btn-flat">Isi Kpi</a>
+                        <a href="<?=  base_url();  ?>kpi/isi_kpi/start/<?= $id_periode_kpi; ?>/<?= $value['id_kpi']; ?>" class="btn btn-primary btn-flat">Isi Kpi</a>
                     <?php } else { ?>
                         <span class="btn btn-default disabled btn-flat" data-toggle="tooltip" title="Anda tidak diijinkan mengisi KPI ini">Isi Kpi</span>
                     <?php } ?>

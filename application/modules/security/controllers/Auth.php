@@ -37,7 +37,7 @@ class Auth extends MY_Controller
 				redirect('/dashboard');
 			} else {
 				$this->session->set_flashdata('error', 'Email / Password anda salah.');
-				redirect('/security/auth');
+				redirect(base_url().'security/auth');
 			}
 		}else{
 			//already logged in
