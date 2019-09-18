@@ -65,7 +65,7 @@
         if(!$is_accessed) continue;
         ?>
         <li class="<?= $class_active; ?>">
-          <a href="<?= $menu['uri']; ?>">
+          <a href="<?= base_url().$menu['uri']; ?>">
             <i class="<?= $menu['icon']; ?>"></i> <span><?= $menu['name'] ?></span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green"><?= $menu['label'] ?></small>
