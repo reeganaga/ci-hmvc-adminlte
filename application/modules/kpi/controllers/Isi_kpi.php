@@ -35,7 +35,7 @@ class Isi_kpi extends MY_Controller
 	{
 		// $jenis_kpi = $this->kpi_model->as_array()->get_all();
 
-		$jenis_kpi = $this->kpi_model->get_filled_kpi();
+		$jenis_kpi = $this->kpi_model->get_filled_kpi($id_periode_kpi);
 		// var_dump($jenis_kpi);
 		// $
 		$this->load->view('kpi/modal-content-jeniskpi', ['jenis_kpi' => $jenis_kpi, 'id_periode_kpi' => $id_periode_kpi]);
@@ -47,18 +47,35 @@ class Isi_kpi extends MY_Controller
 		$kpi = $this->kpi_model->get($id_kpi_rev);
 		$periode = $this->periode_model->get($id_periode_kpi);
 		$title = ($kpi) ? $kpi->nama_kpi : "";
-		$periode_ke = ($periode) ? $periode->periode : "";
+		$periode_ke = ($periode) ? "<b>".$periode->periode."</b>" : "";
+
+		$penilaian = $this->penilaian_kpi_model->get(['id_periode_kpi' => $id_periode_kpi, 'id_kpi_rev' => $id_kpi_rev]);
+		if ($this->ion_auth->in_group('members')) {
+			if ($penilaian && $penilaian->status == 2) {
+				$editable = false;
+			} else {
+				$editable = true;
+			}
+		} else {
+			$editable = true;
+		}
+
+		if ($penilaian) {
+			// var_dump($penilaian);
+			$penilaian_label = ($penilaian->status == 1) ? "<span class='label label-warning'>Pending</span>" : "<span class='label label-success'>Verified</span>";
+		}else $penilaian_label="";
 
 		$data_penilaian = $this->penilaian_kpi_model->get_penilaian_by_kpi($id_kpi_rev, $id_periode_kpi);
 		// var_dump($data_penilaian);
 		// die();
+		$data['editable'] = $editable;
 		$data['breadcrumbs'] = array('Isi KPI' => '/kpi/kpi');
 		$data['content'] = 'kpi/form-isi-kpi';
 		$data['id_periode_kpi'] = $id_periode_kpi;
 		$data['title'] = $title;
 		$data['kpi'] = $kpi;
 		$data['indikator'] = $this->kpi_detail_model->as_object()->where('id_kpi', $id_kpi_rev)->get_all();
-		$data['subtitle'] = "Pengisian periode ke " . $periode_ke;
+		$data['subtitle'] = "Pengisian periode ke " . $periode_ke . " " . $penilaian_label;
 		$data['data_penilaian'] = $data_penilaian;
 		$data['menu_active'] = $this->menu;
 		echo Modules::run($this->template_member, $data);

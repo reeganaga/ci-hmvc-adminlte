@@ -6,7 +6,7 @@ class Penilaian_kpi_detail_model extends MY_Model
     public function __construct()
 	{
         $this->table = 'tb_penilaian_kpi_detail';
-        $this->primary_key = 'id';        
+        $this->primary_key = 'id';
 		parent::__construct();
     }    
     

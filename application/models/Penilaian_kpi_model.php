@@ -8,7 +8,9 @@ class Penilaian_kpi_model extends MY_Model
         $this->primary_key = 'id';
         $this->load->model(['kpi_detail_model', 'penilaian_kpi_detail_model']);
         $this->has_many['details'] = 'Penilaian_kpi_detail_model';
-
+        $this->has_one['periode']=['Periode_model','id_periode_kpi','id_periode_kpi'];        
+        $this->has_one['user']=['Users_model','id','id_users'];        
+        $this->has_one['kpi']=['Kpi_model','id_kpi','id_kpi_rev'];        
         parent::__construct();
     }
 

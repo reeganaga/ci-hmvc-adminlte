@@ -6,6 +6,7 @@
             this.init_datepicker();
             this.init_datatable();
             this.submit_isi_kpi();
+            this.init_confirm_js();
         },
 
         /**
@@ -40,6 +41,30 @@
                 console.log('click')
                 $('.form-isi-kpi').submit();
             })
+        },
+
+        init_confirm_js: function () {
+
+            //confirm delete
+            $('.js-confirm').confirm({
+                // 'content': this.$target.data('content'),
+                // 'title': this.$target.data('title'),
+                'icon': 'fa fa-warning',
+                "theme": 'supervan',
+                "onContentReady":function(){
+                    self.$content=this.$target.data('content');
+                    self.$title=this.$target.data('title');
+                },
+                "buttons": {
+                    ok: function () {
+                        console.log('yes pressed')
+                        location.href = this.$target.data('target');
+                    },
+                    close: function () {
+                        console.log('cancel')
+                    }
+                }
+            })
         }
     }
     $(function () {
@@ -60,4 +85,4 @@ var AdminLTEOptions = {
     enableBoxRefresh: true,
     //Bootstrap.js tooltip
     enableBSToppltip: true
-  };
+};

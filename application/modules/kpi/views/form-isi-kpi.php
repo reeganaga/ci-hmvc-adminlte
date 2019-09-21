@@ -71,7 +71,7 @@
                                             <td>
                                                 <div class="form-group">
                                                     <div class="col-md-12">
-                                                        <input class="form-control input-kpi" value="<?= $data_penilaian[$value->id_kpi_detail_rev]['nilai_target']; ?>" name="nilai[<?= $value->id_kpi_detail_rev ?>][target]">
+                                                        <input <?= (!$editable)?"disabled":""; ?> class="form-control input-kpi" value="<?= $data_penilaian[$value->id_kpi_detail_rev]['nilai_target']; ?>" name="nilai[<?= $value->id_kpi_detail_rev ?>][target]">
                                                     </div>
                                                 </div>
                                             </td>
@@ -79,7 +79,7 @@
                                             <td>
                                                 <div class="form-group">
                                                     <div class="col-md-12">
-                                                        <input class="form-control input-kpi" value="<?= $data_penilaian[$value->id_kpi_detail_rev]['nilai_realisasi']; ?>" name="nilai[<?= $value->id_kpi_detail_rev ?>][realisasi]">
+                                                        <input <?= (!$editable)?"disabled":""; ?> class="form-control input-kpi" value="<?= $data_penilaian[$value->id_kpi_detail_rev]['nilai_realisasi']; ?>" name="nilai[<?= $value->id_kpi_detail_rev ?>][realisasi]">
                                                     </div>
                                                 </div>
                                             </td>
@@ -112,7 +112,7 @@
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer clearfix">
-                    <button class="btn btn-primary btn-flat pull-right submit-isi-kpi" >Simpan</button>
+                    <button class="btn btn-primary btn-flat pull-right <?= ($editable)?"submit-isi-kpi":"disabled";  ?> " >Simpan</button>
                     <a href="<?=  base_url();  ?>kpi/isi_kpi" class="btn btn-default btn-flat pull-right" >Batal</a>
                     <!-- <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left">Place New Order</a> -->
                     <!-- <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">View All Orders</a> -->

@@ -20,22 +20,29 @@ class Kpi_model extends MY_Model
         parent::__construct();
     }
 
-    public function get_filled_kpi()
+    public function get_filled_kpi($id_periode_kpi)
     {
         $kpis = $this->as_array()->get_all();
         if ($kpis) {
             foreach ($kpis as &$kpi) {
                 //check on pengisian kpi to detect it's already filled or not
-                $pengisian_kpis = $this->penilaian_kpi_model->as_array()->get(['id_kpi_rev' => $kpi['id_kpi']]);
-                // var_dump($pengisian_kpis['id_users']);
+                
+                $user = $this->ion_auth->user()->row();
+                
+                $where['id_kpi_rev'] = $kpi['id_kpi'];
+                $where['id_users'] = $user->id;
+                $where['id_periode_kpi'] = $id_periode_kpi;
+
+                $pengisian_kpis = $this->penilaian_kpi_model->as_array()->get($where);
+                // var_dump($pengisian_kpis);
                 // var_dump($this->ion_auth->user()->row());
                 // var_dump($pengisian_kpis['id_users']);
                 if ($pengisian_kpis) {
                     $kpi['is_filled'] = true;
                     $kpi['penilaian'] = $pengisian_kpis;
-                    $kpi['is_allowed_to_fill'] = (($pengisian_kpis['id_users'] == $this->ion_auth->user()->row()->id) || $this->ion_auth->is_admin()) ? true : false;
+                    $kpi['is_allowed_to_fill'] = (($pengisian_kpis['id_users'] == $user->id) || $this->ion_auth->is_admin()) ? true : false;
                     $kpi['filled_by'] =  $this->ion_auth->user($pengisian_kpis['id_users'])->row();
-                }else{
+                } else {
                     $kpi['is_filled'] = false;
                     $kpi['penilaian'] = false;
                     $kpi['is_allowed_to_fill'] = true;
