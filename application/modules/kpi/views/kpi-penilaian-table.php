@@ -41,7 +41,11 @@
                                                 <?php if ($table->status == 1) { ?>
                                                     <a class="btn btn-success btn-flat js-confirm" data-target="<?= base_url('kpi/penilaian/verifikasi/' . $table->id); ?>" data-title="Verifikasi KPI" data-content="Apakah anda sudah yakin dengan data KPI anda ? ">Verify</a>
                                                 <?php } ?>
-                                                <a class="btn btn-primary btn-flat" href="<?= base_url('kpi/isi_kpi/start/' . $table->id_periode_kpi."/".$table->id_kpi_rev); ?>">View</a>
+                                                <?php if ($this->ion_auth->is_admin()) { ?>
+                                                    <a class="btn btn-primary btn-flat" href="<?= base_url('kpi/isi_kpi/start/' . $table->id_periode_kpi . "/" . $table->id_kpi_rev.'?user_id='.$table->id_users); ?>">View</a>
+                                                <?php } else { ?>
+                                                    <a class="btn btn-primary btn-flat" href="<?= base_url('kpi/isi_kpi/start/' . $table->id_periode_kpi . "/" . $table->id_kpi_rev); ?>">View</a>
+                                                <?php } ?>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

@@ -107,6 +107,14 @@
                         </table>
                         <input type="hidden" name="id_periode_kpi" value="<?= $id_periode_kpi; ?>">
                         <input type="hidden" name="id_kpi_rev" value="<?= $kpi->id_kpi; ?>">
+                        <?php
+
+                        if ($this->ion_auth->is_admin() ) {
+                            $user_id = $this->input->get('user_id');
+                            echo form_hidden('user_id',$user_id);
+                            // var_dump($users_id);
+                        }
+                        ?>
                     </form>
                     <!-- /.table-responsive -->
                 </div>

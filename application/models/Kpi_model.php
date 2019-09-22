@@ -6,7 +6,7 @@ class Kpi_model extends MY_Model
     {
         $this->table = 'tb_kpi_rev';
         $this->primary_key = 'id_kpi';
-        $this->load->model('penilaian_kpi_model');
+        $this->load->model(['penilaian_kpi_model', 'periode_model']);
         // $this->has_many_pivot['authors'] = array(
         //     'foreign_model'=>'User_model',
         //     'pivot_table'=>'articles_users',
@@ -23,12 +23,14 @@ class Kpi_model extends MY_Model
     public function get_filled_kpi($id_periode_kpi)
     {
         $kpis = $this->as_array()->get_all();
+
+        
         if ($kpis) {
             foreach ($kpis as &$kpi) {
                 //check on pengisian kpi to detect it's already filled or not
-                
+
                 $user = $this->ion_auth->user()->row();
-                
+
                 $where['id_kpi_rev'] = $kpi['id_kpi'];
                 $where['id_users'] = $user->id;
                 $where['id_periode_kpi'] = $id_periode_kpi;

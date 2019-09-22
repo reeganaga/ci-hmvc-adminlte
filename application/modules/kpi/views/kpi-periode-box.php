@@ -48,7 +48,7 @@
                                         <td>
                                             <?php
                                                 if ($row->k_aktif) { ?>
-                                                <button class="btn btn-primary btn-flat" data-toggle="modal" data-target=".modal-ajax" data-body_class="no-padding" data-title="Pilih Jenis KPI" data-url="<?= base_url('/kpi/isi_kpi/ajax_kpi_list/' . $row->id_periode_kpi); ?>">Isi Kpi</button>
+                                                <button class="btn btn-primary btn-flat" data-toggle="modal" data-target=".modal-ajax" data-body_class="" data-title="Pilih Jenis KPI" data-url="<?= base_url('/kpi/isi_kpi/ajax_kpi_list/' . $row->id_periode_kpi); ?>">Isi Kpi</button>
                                             <?php } else { ?>
                                                 <button class="btn btn-primary btn-flat disabled" >Isi Kpi</button>
                                             <?php } ?>

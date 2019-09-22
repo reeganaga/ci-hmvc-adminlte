@@ -28,7 +28,7 @@ class Penilaian extends MY_Controller
 			// var_dump($user);
 			$table = $this->penilaian_kpi_model->with_periode()->with_kpi()->with_user()->where('id_users', $user->id)->get_all();
 		} else {
-			$table = $this->penilaian_kpi_model->get_all();
+			$table = $this->penilaian_kpi_model->with_periode()->with_kpi()->with_user()->get_all();
 		}
 
 		// var_dump($table);

@@ -1,3 +1,4 @@
+<h3 class="text-center text-bold"><?= ($periode)?"Pengisian KPI - Periode {$periode->periode}":""; ?></h3>
 <table class="table">
     <tbody>
         <tr>
