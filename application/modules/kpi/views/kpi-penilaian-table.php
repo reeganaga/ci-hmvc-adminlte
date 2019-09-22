@@ -33,7 +33,7 @@
                                     ?>
                                     <?php foreach ($tables as $table) : ?>
                                         <tr>
-                                            <td><?= isset($table->periode->periode) ? $table->periode->periode : ""; ?></td>
+                                            <td><?= isset($table->periode->periode) ? "Periode ".$table->periode->periode : ""; ?></td>
                                             <td><?= isset($table->user->first_name) ? $table->user->first_name : ""; ?></td>
                                             <td><?= isset($table->kpi->nama_kpi) ? $table->kpi->nama_kpi : ""; ?></td>
                                             <td><?= ($table->status) == 1 ? "<span class='label label-warning'>Pending</span>" : "<span class='label label-success'>Verified</span>"; ?></td>
