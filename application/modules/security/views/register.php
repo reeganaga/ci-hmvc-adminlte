@@ -31,16 +31,16 @@
           <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         </div>
         <div class="row">
-          <div class="col-xs-8">
+          <!-- <div class="col-xs-8">
             <div class="checkbox icheck">
               <label>
                 <input type="checkbox" value="1" name="remember" checked> Remember Me
               </label>
             </div>
-          </div>
+          </div> -->
           <!-- /.col -->
-          <div class="col-xs-4">
-            <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+          <div class="col-xs-12">
+            <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
           </div>
           <!-- /.col -->
         </div>
@@ -56,7 +56,7 @@
       <!-- /.social-auth-links -->
 
       <a href="<?=  base_url();  ?>security/auth/forgot">I forgot my password</a><br>
-      <a href="<?=  base_url();  ?>security/auth/register" class="text-center">Register a new membership</a>
+      <a href="<?=  base_url();  ?>security/auth/" class="text-center">Already have an account ? Sign In</a>
 
     </div>
     <!-- /.login-box-body -->
