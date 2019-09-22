@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: 13 Sep 2019 pada 06.50
+-- Generation Time: 22 Sep 2019 pada 07.29
 -- Versi Server: 5.7.27-0ubuntu0.18.04.1
 -- PHP Version: 7.2.19-0ubuntu0.18.04.2
 
@@ -7910,15 +7910,6 @@ CREATE TABLE `tb_kpi_detail_rev` (
   `deleted_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data untuk tabel `tb_kpi_detail_rev`
---
-
-INSERT INTO `tb_kpi_detail_rev` (`id_kpi_detail_rev`, `id_kpi`, `sasaran`, `nama_indikator`, `bobot`, `updated_at`, `created_at`, `deleted_at`) VALUES
-(5, 1, 'klj', 'jjaja', 11, '0000-00-00 00:00:00', '2019-09-04 22:56:01', '0000-00-00 00:00:00'),
-(9, 1, 'sasaran', 'indi', 1, '0000-00-00 00:00:00', '2019-09-04 23:02:27', '0000-00-00 00:00:00'),
-(10, 1, 'sasaran', 'indi', 20, '0000-00-00 00:00:00', '2019-09-05 05:23:12', '0000-00-00 00:00:00');
-
 -- --------------------------------------------------------
 
 --
@@ -7957,15 +7948,30 @@ INSERT INTO `tb_kpi_rev` (`id_kpi`, `nama_kpi`, `updated_at`, `created_at`) VALU
 --
 
 CREATE TABLE `tb_penilaian_kpi` (
-  `id_penilaian_kpi` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `id_periode_kpi` int(11) NOT NULL,
   `id_users` int(11) NOT NULL,
   `id_kpi_rev` int(11) NOT NULL,
+  `status` int(11) NOT NULL COMMENT '1=pending,2=verify',
+  `updated_at` datetime DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_penilaian_kpi_detail`
+--
+
+CREATE TABLE `tb_penilaian_kpi_detail` (
+  `id` int(11) NOT NULL,
   `id_kpi_detail_rev` int(11) NOT NULL,
+  `id_penilaian_kpi` int(11) NOT NULL,
   `nilai_target` int(11) NOT NULL,
   `nilai_realisasi` int(11) NOT NULL,
   `skor` int(11) NOT NULL,
-  `skor_akhir` int(11) NOT NULL,
+  `skor_akhir` float NOT NULL,
   `updated_at` datetime NOT NULL,
   `created_at` datetime NOT NULL,
   `deleted_at` datetime NOT NULL
@@ -7992,8 +7998,8 @@ CREATE TABLE `tb_periode_kpi` (
 --
 
 INSERT INTO `tb_periode_kpi` (`id_periode_kpi`, `periode`, `tgl_buka`, `tgl_tutup`, `k_aktif`, `updated_at`, `created_at`) VALUES
-(1, 2, '2019-09-12', '2019-09-14', 1, '2019-09-07 17:01:05', '2019-09-05 11:59:06'),
-(2, 3, '2019-09-12', '2019-09-14', 0, '2019-09-07 17:01:12', '2019-09-05 11:59:58'),
+(1, 2, '2019-09-12', '2019-09-16', 1, '2019-09-07 17:01:05', '2019-09-05 11:59:06'),
+(2, 3, '2019-09-15', '2019-09-18', 0, '2019-09-07 17:01:12', '2019-09-05 11:59:58'),
 (3, 4, '2019-09-12', '2019-09-14', 0, '2019-09-07 17:01:16', '2019-09-05 12:05:18'),
 (4, 4, '2019-09-12', '2019-09-14', 0, '2019-09-07 17:01:22', '2019-09-05 12:05:35'),
 (5, 5, '2019-09-12', '2019-09-14', 0, '2019-09-07 17:01:26', '2019-09-05 12:59:31'),
@@ -8036,7 +8042,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`, `tempat`, `id_kota`) VALUES
-(1, '127.0.0.1', 'administrator', '$2y$12$VHgXsfiBwp0N0xfaKocN8.1fj.MEQHpGnSA2hSniPH7gKhoxL9Hkq', 'admin@admin.com', NULL, '', NULL, NULL, NULL, 'a4c7629ee6695b4be8893098dbdf2471c1eaa053', '$2y$10$pPbcDf7565VTpkV8AQWG8uUbaVl1KCMc/iBk40YDSsmMO3ER5Gj9y', 1268889823, 1568157275, 1, 'Admin', 'istrator', 'ADMIN', '0', '', 0),
+(1, '127.0.0.1', 'administrator', '$2y$12$VHgXsfiBwp0N0xfaKocN8.1fj.MEQHpGnSA2hSniPH7gKhoxL9Hkq', 'admin@admin.com', NULL, '', NULL, NULL, NULL, '5dd635325e43015d2c5275e9ac4bdc2f586310ff', '$2y$10$Ss4obARc25nUbOzEYxLoNuIGYGNiX.bKq4LX7tbgIP2HZP2l45YMS', 1268889823, 1569110359, 1, 'Admin', 'istrator', 'ADMIN', '0', '', 0),
 (2, '127.0.0.1', 'rega.blank@gmail.com', '$2y$10$SKY/Tk7j4C0x4TyUNFzbW.LCfFGBKE2FjWlTniMOWxygp8x4O8z6y', 'rega.blank@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1567848417, NULL, 1, 'rega cahhya gumilang', NULL, NULL, NULL, 'nitikan', 3471),
 (3, '127.0.0.1', 'rega.blank+1@gmail.com', '$2y$10$2wxXvFh7O2TAbBGkrQXKxe.xZsJEBnrzy4dFsEe6V2yO9qwfYb7qi', 'rega.blank+1@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1567823395, NULL, 1, 'Rega Cahya Gumilang', NULL, NULL, NULL, 'Yogyakarta', 3471),
 (4, '127.0.0.1', 'rega.blank+2@gmail.com', '$2y$10$SQ7eACqgbGkJA8gtSHsCEuLn/fXCXC.6EzWAqSM2SppLYHqaPtnxy', 'rega.blank+2@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1567823950, NULL, 1, 'Rega Cahya Gumilang', NULL, NULL, NULL, 'Yogyakarta', 3471),
@@ -8045,7 +8051,8 @@ INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activ
 (7, '127.0.0.1', 'rega.blank+5@gmail.com', '$2y$10$VK3lSDm1eTWHquk1sy1mdew1lpUCbN.xLl.0o2942G.d/yfxDyepe', 'rega.blank+5@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1567824388, NULL, 1, 'Rega Cahya Gumilang', NULL, NULL, NULL, 'Yogyakarta', 3471),
 (8, '127.0.0.1', 'rega.blank+6@gmail.com', '$2y$10$kiBxgibhtuqLlE.WZgUV1uF4i.SqDLTq5E0ZsN70fRwRFmsbFsH.a', 'rega.blank+6@gmail.com', '951b8063c94d45250b39', '$2y$10$aptfgnyGROQKsPVNi5vDTOlCcMs.0VivYAo1pB4Yu6yTP63OQG98y', NULL, NULL, NULL, NULL, NULL, 1567849028, NULL, 0, 'Rega Cahya Gumilang', NULL, NULL, NULL, 'Yogyakarta', 3471),
 (9, '127.0.0.1', 'rega.blank+7@gmail.com', '$2y$10$GWxapY7VuN7yMHsJAmS1OuWHE5AV4R7TmPxUNI8OveN4JZdU0x/Jq', 'rega.blank+7@gmail.com', NULL, NULL, NULL, NULL, NULL, '520eb0b3a0ebf54579f3051949d470ecc652cf50', '$2y$10$pVLdmyN7Ha9yxqtAE2UDyOe0igv5lQGEWWIxeHSAzrnoqBZwIM6uy', 1567849089, 1567849129, 1, 'Rega Cahya Gumilang', NULL, NULL, NULL, 'Yogyakarta', 3471),
-(10, '127.0.0.1', 'rega.blank+8@gmail.com', '$2y$10$2fr/tKncFpxr86LUtraVueX.E14F/V7IfEpR5UMdTlmfLrWT2uNBC', 'rega.blank+8@gmail.com', NULL, NULL, NULL, NULL, NULL, '6e46337f49a6968b426acf512300152f0c272358', '$2y$10$KRC4cO5vzORBd75DBoWf1e6IvYHOLEUdZulKOdCrJoDq867M1ZZty', 1568205910, 1568327764, 1, 'Rega Cahya Gumilang', NULL, NULL, NULL, 'Yogyakarta', 3471);
+(10, '127.0.0.1', 'rega.blank+8@gmail.com', '$2y$10$2fr/tKncFpxr86LUtraVueX.E14F/V7IfEpR5UMdTlmfLrWT2uNBC', 'rega.blank+8@gmail.com', NULL, NULL, NULL, NULL, NULL, '7991cf7e304b5e7d31b03718d69b592f88842a78', '$2y$10$ObT6sq0hWGZpDbfIhLICxuuIQwZf9oD2z107aTj1/dsfL.EKlh1W.', 1568205910, 1569110395, 1, 'Rega Cahya Gumilang', NULL, NULL, NULL, 'Yogyakarta', 3471),
+(11, '127.0.0.1', 'rega.blank+9@gmail.com', '$2y$10$jM4YxI1Yt8lrdyTATfsR9eEROKTBqhCDac39aqjY1MbuAaRsNkRqS', 'rega.blank+9@gmail.com', NULL, NULL, NULL, NULL, NULL, 'b63d92acebbae34dc3b0d7675e90aa07fc017c31', '$2y$10$P4LNWJY022p2ZOGdRyeu.ekJEyb8OgourWta.gV3bN4kLs.lMcUuy', 1569109319, 1569109453, 1, 'Rega Cahya Gumilang +9', NULL, NULL, NULL, 'Yogyakarta', 3471);
 
 -- --------------------------------------------------------
 
@@ -8070,7 +8077,8 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (4, 7, 2),
 (5, 8, 2),
 (6, 9, 2),
-(7, 10, 2);
+(7, 10, 2),
+(8, 11, 2);
 
 -- --------------------------------------------------------
 
@@ -83156,7 +83164,13 @@ ALTER TABLE `tb_kpi_rev`
 -- Indexes for table `tb_penilaian_kpi`
 --
 ALTER TABLE `tb_penilaian_kpi`
-  ADD PRIMARY KEY (`id_penilaian_kpi`);
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_penilaian_kpi_detail`
+--
+ALTER TABLE `tb_penilaian_kpi_detail`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tb_periode_kpi`
@@ -83203,7 +83217,7 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT for table `login_attempts`
 --
 ALTER TABLE `login_attempts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tb_anggota`
 --
@@ -83213,7 +83227,7 @@ ALTER TABLE `tb_anggota`
 -- AUTO_INCREMENT for table `tb_kpi_detail_rev`
 --
 ALTER TABLE `tb_kpi_detail_rev`
-  MODIFY `id_kpi_detail_rev` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_kpi_detail_rev` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tb_kpi_rev`
 --
@@ -83223,7 +83237,12 @@ ALTER TABLE `tb_kpi_rev`
 -- AUTO_INCREMENT for table `tb_penilaian_kpi`
 --
 ALTER TABLE `tb_penilaian_kpi`
-  MODIFY `id_penilaian_kpi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tb_penilaian_kpi_detail`
+--
+ALTER TABLE `tb_penilaian_kpi_detail`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tb_periode_kpi`
 --
@@ -83233,12 +83252,12 @@ ALTER TABLE `tb_periode_kpi`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `users_groups`
 --
 ALTER TABLE `users_groups`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
