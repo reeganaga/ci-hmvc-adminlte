@@ -10,7 +10,7 @@ class Users extends MY_Controller
 		// //load template here
 		$this->template_main = 'template/index';
 		$this->template_member = 'template/user';
-		// $this->load->model('users_model');
+		$this->load->model('users_model');
 		$this->menu='kpi-users';
 	}
 	public function index()
@@ -74,22 +74,22 @@ class Users extends MY_Controller
 		redirect($this->agent->referrer(), 'location');
 	}
 
-	public function display_form_periode($id_periode_kpi = '')
+	public function display_form_user($id = '')
 	{
-		$data['breadcrumbs'] = array('KPI' => '/kpi/kpi', 'Form periode' => '/kpi');
-		$data['content'] = 'kpi/form-kpi-periode';
-		$data['id_periode_kpi'] = $id_periode_kpi;
-		$periode = '';
-		if (!empty($id_periode_kpi)) {
-			$periode = $this->periode_model->get($id_periode_kpi);
+		$data['breadcrumbs'] = array('KPI' => '/kpi/users', 'Form user' => '/kpi');
+		$data['content'] = 'kpi/form-user';
+		$data['id'] = $id;
+		$user = '';
+		if (!empty($id)) {
+			$user = $this->users_model->get($id);
 		}
-		// var_dump($id_indikator);
-		if (!empty($periode)) {
+		// var_dump($user);
+		if (!empty($user)) {
 			$data['form'] = [
-				'periode' => $periode->periode,
-				'tgl_buka' => $periode->tgl_buka,
-				'tgl_tutup' => $periode->tgl_tutup,
-				'k_aktif' => $periode->k_aktif,
+				'email' => $user->email,
+				'first_name' => $user->first_name,
+				'tempat' => $user->tempat,
+				'id_kota' => $user->id_kota,
 			];
 		} else {
 			$data['form'] = '';
@@ -102,8 +102,8 @@ class Users extends MY_Controller
 		echo Modules::run($this->template_member, $data);
 	}
 
-	public function edit($id_periode)
+	public function edit($id_user)
 	{
-		$this->display_form_periode($id_periode);
+		$this->display_form_user($id_user);
 	}
 }

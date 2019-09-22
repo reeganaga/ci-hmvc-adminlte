@@ -7,7 +7,7 @@
       <!-- TABLE: LATEST ORDERS -->
       <div class="box box-info">
         <div class="box-header with-border">
-          <h3 class="box-title">KPI Periode<a href="/kpi/periode/add" class="btn btn-default ml-1">Add</a></h3>
+          <h3 class="box-title">KPI Periode<a href="<?=  base_url();  ?>kpi/periode/add" class="btn btn-default ml-1">Add</a></h3>
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
             </button>
@@ -37,7 +37,7 @@
                       <td><?= $table->tgl_tutup; ?></td>
                       <td><?= ($table->k_aktif)==1 ?"<span class='label label-success'>Active</span>":"<span class='label label-default'>Not Active</span>"; ?></td>
                       <td>
-                        <a href="/kpi/periode/edit/<?= $table->id_periode_kpi; ?>" class="btn btn-default">Edit Periode</a>
+                        <a href="<?=  base_url();  ?>kpi/periode/edit/<?= $table->id_periode_kpi; ?>" class="btn btn-default">Edit Periode</a>
                       </td>
                     </tr>
                   <?php endforeach; ?>

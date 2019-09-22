@@ -16,7 +16,7 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body no-padding">
-                    <form class="form-horizontal form-isi-kpi" action="/kpi/isi_kpi/proses_isi_kpi" method="post">
+                    <form class="form-horizontal form-isi-kpi" action="<?=  base_url();  ?>kpi/isi_kpi/proses_isi_kpi" method="post">
                         <table class="table table-bordered">
                             <thead class="">
                                 <tr class="bg-purple text-center">
@@ -71,7 +71,7 @@
                                             <td>
                                                 <div class="form-group">
                                                     <div class="col-md-12">
-                                                        <input class="form-control input-kpi" value="<?= $data_penilaian[$value->id_kpi_detail_rev]['nilai_target']; ?>" name="nilai[<?= $value->id_kpi_detail_rev ?>][target]">
+                                                        <input <?= (!$editable)?"disabled":""; ?> class="form-control input-kpi" value="<?= $data_penilaian[$value->id_kpi_detail_rev]['nilai_target']; ?>" name="nilai[<?= $value->id_kpi_detail_rev ?>][target]">
                                                     </div>
                                                 </div>
                                             </td>
@@ -79,7 +79,7 @@
                                             <td>
                                                 <div class="form-group">
                                                     <div class="col-md-12">
-                                                        <input class="form-control input-kpi" value="<?= $data_penilaian[$value->id_kpi_detail_rev]['nilai_realisasi']; ?>" name="nilai[<?= $value->id_kpi_detail_rev ?>][realisasi]">
+                                                        <input <?= (!$editable)?"disabled":""; ?> class="form-control input-kpi" value="<?= $data_penilaian[$value->id_kpi_detail_rev]['nilai_realisasi']; ?>" name="nilai[<?= $value->id_kpi_detail_rev ?>][realisasi]">
                                                     </div>
                                                 </div>
                                             </td>
@@ -107,13 +107,21 @@
                         </table>
                         <input type="hidden" name="id_periode_kpi" value="<?= $id_periode_kpi; ?>">
                         <input type="hidden" name="id_kpi_rev" value="<?= $kpi->id_kpi; ?>">
+                        <?php
+
+                        if ($this->ion_auth->is_admin() ) {
+                            $user_id = $this->input->get('user_id');
+                            echo form_hidden('user_id',$user_id);
+                            // var_dump($users_id);
+                        }
+                        ?>
                     </form>
                     <!-- /.table-responsive -->
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer clearfix">
-                    <button class="btn btn-primary btn-flat pull-right submit-isi-kpi" >Simpan</button>
-                    <a href="/kpi/isi_kpi" class="btn btn-default btn-flat pull-right" >Batal</a>
+                    <button class="btn btn-primary btn-flat pull-right <?= ($editable)?"submit-isi-kpi":"disabled";  ?> " >Simpan</button>
+                    <a href="<?=  base_url();  ?>kpi/isi_kpi" class="btn btn-default btn-flat pull-right" >Batal</a>
                     <!-- <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left">Place New Order</a> -->
                     <!-- <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">View All Orders</a> -->
                 </div>

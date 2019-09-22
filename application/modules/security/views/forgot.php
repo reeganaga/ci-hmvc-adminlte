@@ -1,7 +1,7 @@
 <div class="login-box-body">
     <p class="login-box-msg">Fill you email address</p>
 
-    <form action="/security/auth/process_forgot_password" method="post">
+    <form action="<?=  base_url();  ?>security/auth/process_forgot_password" method="post">
         <div class="form-group has-feedback">
             <input type="email" name="email" class="form-control" placeholder="Email">
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>

@@ -23,7 +23,7 @@
                     alert('error', form_error('nama_indikator'));
                     alert('error', form_error('bobot'));
                     ?>
-                    <form class="form-horizontal" action="/kpi/save_indikator/" method="post">
+                    <form class="form-horizontal" action="<?=  base_url();  ?>kpi/save_indikator/" method="post">
                         <input type="hidden" name="id_kpi" value="<?= $id_kpi; ?>">
                         <div class="form-group">
                             <div class="col-md-3">
@@ -77,7 +77,7 @@
                                     <td><?= $indikator->bobot; ?></td>
                                     <td>
                                         <a href="<?= base_url('kpi/edit_indikator/' . $indikator->id_kpi . "/" . $indikator->id_kpi_detail_rev); ?>" class="btn btn-default">Edit</a>
-                                        <button data-target="<?= base_url('kpi/delete_indikator/' . $indikator->id_kpi_detail_rev); ?>" class="btn btn-danger delete-button">Delete</button>
+                                        <button data-target="<?= base_url('kpi/delete_indikator/' . $indikator->id_kpi_detail_rev); ?>" data-content="Apakah anda ingin menghapus data ini ?" data-title="Konfirmasi Hapus" class="btn btn-danger js-confirm">Delete</button>
                                     </td>
                                 </tr>
                         <?php }
@@ -85,25 +85,6 @@
                         ?>
                     </tbody>
                 </table>
-                <script>
-                    $(document).ready(function() {
-                        $('.delete-button').confirm({
-                            'content': "Apakah anda ingin menghapus data ini ?",
-                            'title': "Konfirmasi Hapus",
-                            'icon': 'fa fa-warning',
-                            "theme": 'supervan',
-                            "buttons": {
-                                ok: function() {
-                                    console.log('yes pressed')
-                                    location.href = this.$target.data('target');
-                                },
-                                close: function() {
-                                    console.log('cancel')
-                                }
-                            }
-                        })
-                    })
-                </script>
                 <!-- <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left">Place New Order</a> -->
                 <!-- <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">View All Orders</a> -->
             </div>

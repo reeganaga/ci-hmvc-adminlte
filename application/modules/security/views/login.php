@@ -1,7 +1,7 @@
 <div class="login-box-body">
       <p class="login-box-msg">Sign in to start your session</p>
 
-      <form action="/security/auth/check" method="post">
+      <form action="<?=  base_url();  ?>security/auth/check" method="post">
         <div class="form-group has-feedback">
           <input type="email" name="email" class="form-control" placeholder="Email">
           <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -27,7 +27,7 @@
       </form>
 
 
-      <a href="/security/auth/forgot">I forgot my password</a><br>
-      <a href="/security/auth/register" class="text-center">Register a new membership</a>
+      <a href="<?=  base_url();  ?>security/auth/forgot">I forgot my password</a><br>
+      <a href="<?=  base_url();  ?>security/auth/register" class="text-center">Register a new membership</a>
 
     </div>
