@@ -106,7 +106,7 @@ class Isi_kpi extends MY_Controller
 	public function proses_isi_kpi()
 	{
 		$post = $this->input->post();
-		var_dump($post);
+		//var_dump($post);
 
 		$user = $this->ion_auth->user()->row();
 		$user_id = $user->id; // for memmber get user id by session
@@ -143,9 +143,10 @@ class Isi_kpi extends MY_Controller
 			// die();
 		} else {
 			//empty , so insert
+			$data_penilaian['status'] = 1; // set pending first
 			$id_penilaian = $this->penilaian_kpi_model->insert($data_penilaian);
 			$insert = true;
-			$data_penilaian['status'] = 1; // set pending first
+			
 			// var_dump($id_penilaian);
 			// die();
 		}
@@ -167,11 +168,12 @@ class Isi_kpi extends MY_Controller
 
 				$data['skor'] = $score['score'];
 				$data['skor_akhir'] = $score['end_score'];
-				// var_dump($data);
+				 //var_dump($data);
 				//insert table pengisian
 				if ($insert) {
 					//insert kpi detail
 					$ok = $this->penilaian_kpi_detail_model->insert($data);
+					//var_dump($ok);
 				} else {
 					//update kpi detail
 					// var_dump($data);
@@ -186,7 +188,7 @@ class Isi_kpi extends MY_Controller
 				// var_dump($ok);
 			}
 		}
-		// die();
+		//die();
 
 
 

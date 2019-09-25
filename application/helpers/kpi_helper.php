@@ -93,7 +93,12 @@ function send_email($to='',$subject='',$content=''){
 }
 
 function calculate_score($realisasi,$target,$bobot){
-    $score = ($realisasi/$target)*100;
+	
+	
+	
+	if($target==0) $score= 0;
+	else $score = ($realisasi/$target)*100;
+	
     $end_score = ($score * $bobot)/100;
 
     $result['score'] = $score;
