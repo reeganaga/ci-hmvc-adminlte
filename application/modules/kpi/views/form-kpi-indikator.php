@@ -22,15 +22,16 @@
                     alert('error', form_error('sasaran'));
                     alert('error', form_error('nama_indikator'));
                     alert('error', form_error('bobot'));
+                    alert('error', form_error('nilai_target'));
                     ?>
-                    <form class="form-horizontal" action="<?=  base_url();  ?>kpi/save_indikator/" method="post">
+                    <form class="form-horizontal" action="<?= base_url(); ?>kpi/save_indikator/" method="post">
                         <input type="hidden" name="id_kpi" value="<?= $id_kpi; ?>">
                         <div class="form-group">
                             <div class="col-md-3">
                                 <label for="" class="control-label">Sasaran</label>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" value="<?php form_value('sasaran',$form); ?>" name="sasaran" placeholder="Judul Sasaran">
+                                <input type="text" class="form-control" value="<?php form_value('sasaran', $form); ?>" name="sasaran" placeholder="Judul Sasaran">
                             </div>
                         </div>
                         <div class="form-group">
@@ -38,7 +39,7 @@
                                 <label for="" class="control-label">Nama Indikator</label>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" value="<?php form_value('nama_indikator',$form); ?>" name="nama_indikator" placeholder="Nama Indikator">
+                                <input type="text" class="form-control" value="<?php form_value('nama_indikator', $form); ?>" name="nama_indikator" placeholder="Nama Indikator">
                             </div>
                         </div>
                         <div class="form-group">
@@ -46,7 +47,15 @@
                                 <label for="" class="control-label">Bobot</label>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" value="<?php form_value('bobot',$form); ?>" name="bobot" placeholder="Nilai Bobot">
+                                <input type="text" class="form-control" value="<?php form_value('bobot', $form); ?>" name="bobot" placeholder="Nilai Bobot">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="" class="control-label">Nilai target</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" value="<?php form_value('nilai_target', $form); ?>" name="nilai_target" placeholder="Nilai Target">
                             </div>
                         </div>
                         <div class="form-group">
@@ -62,25 +71,29 @@
             <div class="box-footer clearfix">
                 <table class="table table-responsive">
                     <thead>
-                        <th>Sasaran</th>
-                        <th>Indikator</th>
-                        <th>Bobot</th>
-                        <th>Action</th>
+                    <th>Sasaran</th>
+                    <th>Indikator</th>
+                    <th>Bobot</th>
+                    <th>Target</th>
+                    <th>Action</th>
                     </thead>
                     <tbody>
                         <?php
                         if (!empty($table_indikators)) {
-                            foreach ($table_indikators as $indikator) { ?>
+                            foreach ($table_indikators as $indikator) {
+                                ?>
                                 <tr>
                                     <td><?= $indikator->sasaran; ?></td>
                                     <td><?= $indikator->nama_indikator; ?></td>
                                     <td><?= $indikator->bobot; ?></td>
+                                    <td><?= $indikator->nilai_target; ?></td>
                                     <td>
                                         <a href="<?= base_url('kpi/edit_indikator/' . $indikator->id_kpi . "/" . $indikator->id_kpi_detail_rev); ?>" class="btn btn-default">Edit</a>
                                         <button data-target="<?= base_url('kpi/delete_indikator/' . $indikator->id_kpi_detail_rev); ?>" data-content="Apakah anda ingin menghapus data ini ?" data-title="Konfirmasi Hapus" class="btn btn-danger js-confirm">Delete</button>
                                     </td>
                                 </tr>
-                        <?php }
+                                <?php
+                            }
                         }
                         ?>
                     </tbody>
@@ -93,7 +106,7 @@
         <!-- /.box -->
     </div>
     <!-- /.col -->
-    </div>
-    <!-- /.row -->
+</div>
+<!-- /.row -->
 </section>
 <!-- /.content -->
