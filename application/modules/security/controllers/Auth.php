@@ -39,20 +39,20 @@ class Auth extends MY_Controller
                 // var_dump($ok);
                 $user = $this->ion_auth->user()->row();
                 //checking status verify admin
-                if (!$this->ion_auth->is_admin() && $user->active_admin == 0) {
-                    //need activate first
-                    $this->ion_auth->logout();
-                    $this->session->set_flashdata('error', 'Anda perlu diverifikasi admin. Silahkan kontak admin');
-                    // echo 'test';
-                    // redirect(base_url() . 'security/auth','location');
-                    $this->index();
-                    // die();
-                }else{
+                // if (!$this->ion_auth->is_admin() && $user->active_admin == 0) {
+                //     //need activate first
+                //     $this->ion_auth->logout();
+                //     $this->session->set_flashdata('error', 'Anda perlu diverifikasi admin. Silahkan kontak admin');
+                //     // echo 'test';
+                //     // redirect(base_url() . 'security/auth','location');
+                //     $this->index();
+                //     // die();
+                // }else{
 
                     // var_dump($user);
                     // die();
                     redirect(base_url() . '/dashboard');
-                }
+                // }
             } else {
                 $this->session->set_flashdata('error', 'Email / Password anda salah.');
                 redirect(base_url() . 'security/auth');
