@@ -16,7 +16,7 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body no-padding">
-                    <form class="form-horizontal form-isi-kpi" action="<?=  base_url();  ?>kpi/isi_kpi/proses_isi_kpi" method="post">
+                    <form class="form-horizontal form-isi-kpi" action="<?= base_url(); ?>kpi/isi_kpi/proses_isi_kpi" method="post">
                         <table class="table table-bordered">
                             <thead class="">
                                 <tr class="bg-purple text-center">
@@ -54,32 +54,38 @@
                                     <td>10</td>
                                 </tr>
                                 <?php
-                                $total_bobot=0;
-                                $skor_akhir=0;
+                                $total_bobot = 0;
+                                $skor_akhir = 0;
+                                $total_nilai_target = 0;
                                 // loop indikator start
                                 if ($indikator) {
-                                    $i=1;
+                                    $i = 1;
                                     foreach ($indikator as $value) {
                                         $total_bobot = $total_bobot + $value->bobot;
+                                        $total_nilai_target = $total_nilai_target + $value->nilai_target;
                                         $skor_akhir = $skor_akhir + intval($data_penilaian[$value->id_kpi_detail_rev]['skor_akhir']);
-                                    ?>
+                                        ?>
                                         <tr>
-                                            <td><?= $i; $i++; ?></td>
+                                            <td><?=
+                                                $i;
+                                                $i++;
+                                                ?></td>
                                             <td><?= $value->sasaran; ?></td>
                                             <td><?= $value->nama_indikator; ?></td>
                                             <td class="text-right"><?= $value->bobot; ?></td>
-                                            <td>
-                                                <div class="form-group">
+        <!--                                             <td>
+                                               <div class="form-group">
                                                     <div class="col-md-12">
-                                                        <input <?= (!$editable)?"disabled":""; ?> class="form-control input-kpi" value="<?= $data_penilaian[$value->id_kpi_detail_rev]['nilai_target']; ?>" name="nilai[<?= $value->id_kpi_detail_rev ?>][target]">
+                                                        <input <?//= (!$editable)?"disabled":""; ?> class="form-control input-kpi" value="<?//= $data_penilaian[$value->id_kpi_detail_rev]['nilai_target']; ?>" name="nilai[<?//= $value->id_kpi_detail_rev ?>][target]">
                                                     </div>
                                                 </div>
-                                            </td>
+                                            </td>-->
+                                            <td class="text-right"><?= $value->nilai_target; ?></td>
                                             <td class="text-center">%</td>
                                             <td>
                                                 <div class="form-group">
                                                     <div class="col-md-12">
-                                                        <input <?= (!$editable)?"disabled":""; ?> class="form-control input-kpi" value="<?= $data_penilaian[$value->id_kpi_detail_rev]['nilai_realisasi']; ?>" name="nilai[<?= $value->id_kpi_detail_rev ?>][realisasi]">
+                                                        <input <?= (!$editable) ? "disabled" : ""; ?> class="form-control input-kpi" value="<?= $data_penilaian[$value->id_kpi_detail_rev]['nilai_realisasi']; ?>" name="nilai[<?= $value->id_kpi_detail_rev ?>][realisasi]">
                                                     </div>
                                                 </div>
                                             </td>
@@ -87,16 +93,17 @@
                                             <td class="skor text-right"><?= $data_penilaian[$value->id_kpi_detail_rev]['skor']; ?></td>
                                             <td class="skor-akhir text-right"><?= $data_penilaian[$value->id_kpi_detail_rev]['skor_akhir']; ?></td>
                                         </tr>
-                                <?php }
-                                }else{
-                                    alert('info','Indikator belum ada, silahkan kontak admin terlebih dahulu');
+                                        <?php
+                                    }
+                                } else {
+                                    alert('info', 'Indikator belum ada, silahkan kontak admin terlebih dahulu');
                                 }
                                 // loop indikator end
                                 ?>
                                 <tr>
                                     <td colspan="3">&nbsp;</td>
                                     <td class="text-bold text-right"><?= $total_bobot; ?></td>
-                                    <td></td>
+                                    <td class="text-bold text-right"><?= $total_nilai_target; ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -108,10 +115,9 @@
                         <input type="hidden" name="id_periode_kpi" value="<?= $id_periode_kpi; ?>">
                         <input type="hidden" name="id_kpi_rev" value="<?= $kpi->id_kpi; ?>">
                         <?php
-
-                        if ($this->ion_auth->is_admin() ) {
+                        if ($this->ion_auth->is_admin()) {
                             $user_id = $this->input->get('user_id');
-                            echo form_hidden('user_id',$user_id);
+                            echo form_hidden('user_id', $user_id);
                             // var_dump($users_id);
                         }
                         ?>
@@ -120,8 +126,8 @@
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer clearfix">
-                    <button class="btn btn-primary btn-flat pull-right <?= ($editable)?"submit-isi-kpi":"disabled";  ?> " >Simpan</button>
-                    <a href="<?=  base_url();  ?>kpi/isi_kpi" class="btn btn-default btn-flat pull-right" >Batal</a>
+                    <button class="btn btn-primary btn-flat pull-right <?= ($editable) ? "submit-isi-kpi" : "disabled"; ?> " >Simpan</button>
+                    <a href="<?= base_url(); ?>kpi/isi_kpi" class="btn btn-default btn-flat pull-right" >Batal</a>
                     <!-- <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left">Place New Order</a> -->
                     <!-- <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">View All Orders</a> -->
                 </div>
