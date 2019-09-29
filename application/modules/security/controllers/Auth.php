@@ -2,9 +2,11 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Auth extends MY_Controller {
+class Auth extends MY_Controller
+{
 
-    function __construct() {
+    function __construct()
+    {
 
         //load template here
         // $this->template_main = 'template/index';
@@ -13,7 +15,8 @@ class Auth extends MY_Controller {
         $this->load->model('regencies_model');
     }
 
-    public function index() {
+    public function index()
+    {
         // echo "test";
         // add breadcrumbs
         // $data['breadcrumbs'] = array('Dashboard' => '/dashboard');
@@ -21,7 +24,8 @@ class Auth extends MY_Controller {
         $this->load->view('auth-template', ['page' => 'login']);
     }
 
-    public function check() {
+    public function check()
+    {
         $email = $this->input->post('email');
         $password = $this->input->post('password');
         $remember = ($this->input->post('remember')) ? true : false;
@@ -29,25 +33,44 @@ class Auth extends MY_Controller {
         // var_dump($password);
         // die();
         if (!$this->ion_auth->logged_in()) {
+
             $ok = $this->ion_auth->login($email, $password, $remember);
             if ($ok) {
-                redirect('/dashboard');
+                // var_dump($ok);
+                $user = $this->ion_auth->user()->row();
+                //checking status verify admin
+                if (!$this->ion_auth->is_admin() && $user->active_admin == 0) {
+                    //need activate first
+                    $this->ion_auth->logout();
+                    $this->session->set_flashdata('error', 'Anda perlu diverifikasi admin. Silahkan kontak admin');
+                    // echo 'test';
+                    // redirect(base_url() . 'security/auth','location');
+                    $this->index();
+                    // die();
+                }else{
+
+                    // var_dump($user);
+                    // die();
+                    redirect(base_url() . '/dashboard');
+                }
             } else {
                 $this->session->set_flashdata('error', 'Email / Password anda salah.');
                 redirect(base_url() . 'security/auth');
             }
         } else {
             //already logged in
-            redirect('/dashboard');
+            redirect(base_url() . '/dashboard');
         }
     }
 
-    public function logout() {
+    public function logout()
+    {
         $this->ion_auth->logout();
         redirect('dashboard');
     }
 
-    public function register() {
+    public function register()
+    {
 
         //process register
         if (!empty($username = $this->input->post('email'))) {
@@ -56,8 +79,8 @@ class Auth extends MY_Controller {
             $email = $this->input->post('email');
             $additional_data = [
                 'first_name' => $this->input->post('nama'),
-//				'tempat' => $this->input->post('tempat'),
-//				'id_kota' => $this->input->post('id_kota'),
+                //				'tempat' => $this->input->post('tempat'),
+                //				'id_kota' => $this->input->post('id_kota'),
             ];
             $group = ['2']; //member
 
@@ -78,12 +101,13 @@ class Auth extends MY_Controller {
         $regencies = $this->regencies_model->get_all();
         // var_dump($regencies);
         $this->load->view(
-                'auth-template', [
-            'page' => 'register',
-            'data' => [
-                'regencies' => $regencies
-            ]
+            'auth-template',
+            [
+                'page' => 'register',
+                'data' => [
+                    'regencies' => $regencies
                 ]
+            ]
         );
     }
 
@@ -93,7 +117,8 @@ class Auth extends MY_Controller {
      * @param int         $id   The user ID
      * @param string|bool $code The activation code
      */
-    public function activate($id, $code = FALSE) {
+    public function activate($id, $code = FALSE)
+    {
         $activation = FALSE;
 
         if ($code !== FALSE) {
@@ -113,12 +138,13 @@ class Auth extends MY_Controller {
         }
     }
 
-    public function forgot() {
+    public function forgot()
+    {
         $this->load->view(
-                'auth-template', [
-            'page' => 'forgot',
-                ]
+            'auth-template',
+            [
+                'page' => 'forgot',
+            ]
         );
     }
-
 }

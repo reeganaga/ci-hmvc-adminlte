@@ -1,14 +1,14 @@
 <?php  if(!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Users_model extends MY_Model
+class Users_group_model extends MY_Model
 {
     
     public function __construct()
 	{
-        $this->table = 'users';
+        $this->table = 'users_groups';
         $this->primary_key = 'id';        
 
-        $this->has_many['groups'] = array('foreign_model'=>'Users_group_model','foreign_table'=>'Users_group','foreign_key'=>'user_id','local_key'=>'id');
+        // $this->has_many['groups'] = array('foreign_model'=>'Post_model','foreign_table'=>'posts','foreign_key'=>'author_id','local_key'=>'id');
 		parent::__construct();
     }    
     
