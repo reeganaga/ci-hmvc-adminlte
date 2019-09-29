@@ -14,7 +14,13 @@
         // var_dump($user);
         ?>
         <p><?= $user->first_name; ?></p>
-        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        <?php if ($user->active_admin == 0 && !$this->ion_auth->is_admin()) { ?>
+          <span class="text-sm" title="Anda perlu di verifikasi Admin" data-toggle="tooltip"><i class="fa fa-circle text-warning"></i> Status Tidak Aktif</span>
+          <!-- <span class="btn btn-default disabled btn-flat" data-toggle="tooltip" title="Anda tidak diijinkan mengisi KPI ini">Isi Kpi</span> -->
+          <?php } else { ?>
+            <span class="text-sm" title="Anda Aktif, Silahkan isi KPI" data-toggle="tooltip"><i class="fa fa-circle text-success"></i> Status Aktif</span>
+
+        <?php } ?>
       </div>
     </div>
     <!-- search form -->
@@ -59,13 +65,13 @@
           </ul>
         </li> -->
       <?php
-      foreach ($menus as $menu) { 
-        $class_active = (isset($menu_active) && $menu_active == $menu['id']) ?'active':'';
+      foreach ($menus as $menu) {
+        $class_active = (isset($menu_active) && $menu_active == $menu['id']) ? 'active' : '';
         $is_accessed = $this->ion_auth->in_group($menu['role']);
-        if(!$is_accessed) continue;
+        if (!$is_accessed) continue;
         ?>
         <li class="<?= $class_active; ?>">
-          <a href="<?= base_url().$menu['uri']; ?>">
+          <a href="<?= base_url() . $menu['uri']; ?>">
             <i class="<?= $menu['icon']; ?>"></i> <span><?= $menu['name'] ?></span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green"><?= $menu['label'] ?></small>

@@ -22,8 +22,14 @@ class Isi_kpi extends MY_Controller {
 
     public function kpi_periode() {
         $periode = $this->periode_model->get_all();
-        $data['breadcrumbs'] = array('Isi KPI' => '/kpi/kpi');
-        $data['content'] = 'kpi/kpi-periode-box';
+		$data['breadcrumbs'] = array('Isi KPI' => '/kpi/kpi');
+		$user = $this->ion_auth->user()->row();
+		if($user->active_admin==0){ // not verify
+			$this->session->set_flashdata('warning','Akun anda perlu diaktifkan admin, Silahkan kontak Admin');
+			$data['content'] = 'kpi/content-not-found';
+		}else{
+			$data['content'] = 'kpi/kpi-periode-box';
+		}
         $data['data'] = $periode;
         $data['title'] = "Daftar periode aktif";
         $data['subtitle'] = "Silahkan pilih periode";
