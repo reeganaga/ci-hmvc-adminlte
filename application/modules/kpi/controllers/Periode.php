@@ -12,6 +12,9 @@ class Periode extends MY_Controller
 		$this->template_member = 'template/user';
 		$this->load->model('periode_model');
 		$this->menu='kpi-periode';
+		
+		$this->set_groups([1]);
+		parent::__construct();
 	}
 	public function index()
 	{

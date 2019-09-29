@@ -12,6 +12,9 @@ class Isi_kpi extends MY_Controller
 		$this->template_member = 'template/user';
 		$this->load->model(['periode_model', 'kpi_model', 'kpi_detail_model', 'penilaian_kpi_model', 'penilaian_kpi_detail_model']);
 		$this->menu = 'kpi-isi-kpi';
+
+		$this->set_groups([1,2]);
+		parent::__construct();
 	}
 	public function index()
 	{

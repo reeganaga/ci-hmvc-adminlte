@@ -12,6 +12,9 @@ class Users extends MY_Controller
 		$this->template_member = 'template/user';
 		$this->load->model('users_model');
 		$this->menu='kpi-users';
+
+		$this->set_groups([1]);
+		parent::__construct();
 	}
 	public function index()
 	{
@@ -105,5 +108,18 @@ class Users extends MY_Controller
 	public function edit($id_user)
 	{
 		$this->display_form_user($id_user);
+	}
+
+	public function activate_user($id_user){
+
+		//update user data
+		$update = $this->users_model->update(['active_admin'=>1],$id_user);
+		if($update){
+			$this->session->set_flashdata('success','User berhasil diaktifkan');
+		}else{
+			$this->session->set_flashdata('error','User gagal diaktifkan');
+		}
+		redirect(base_url('/kpi/users'));
+		// var_dump($update);
 	}
 }

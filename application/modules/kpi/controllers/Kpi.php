@@ -13,6 +13,9 @@ class Kpi extends MY_Controller
 		$this->load->model('kpi_model');
 		$this->load->model('kpi_detail_model');
 		$this->menu='kpi';
+
+		$this->set_groups([1]);
+		parent::__construct();
 	}
 	public function index()
 	{
