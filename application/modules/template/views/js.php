@@ -32,7 +32,8 @@
 <!-- iCheck -->
 <script src="<?php echo base_url('assets/plugins/iCheck/icheck.min.js') ?>"></script>
 
-
+<!--  Select 2 -->
+<script src="<?php echo base_url('assets/plugins/select2/select2.full.min.js') ?>"></script>
 
 <?php
 alert('success', $this->session->flashdata('success'));

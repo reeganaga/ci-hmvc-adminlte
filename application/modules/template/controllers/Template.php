@@ -44,6 +44,14 @@ class Template extends MY_Controller
 			'icon' => 'fa fa-check',
 			'role'=>[1,2]
 		],
+		[
+			'id' => 'kpi-rekap',
+			'name' => "Rekap KPI",
+			'uri' => "kpi/rekap",
+			'label' => "new",
+			'icon' => 'fa fa-check',
+			'role'=>[1]
+		],
 	];
 
 	public function index($data)

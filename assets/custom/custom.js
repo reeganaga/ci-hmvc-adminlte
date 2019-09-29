@@ -7,6 +7,7 @@
             this.init_datatable();
             this.submit_isi_kpi();
             this.init_confirm_js();
+            this.init_select_2();
         },
 
         /**
@@ -64,6 +65,12 @@
                         console.log('cancel')
                     }
                 }
+            })
+        },
+    
+        init_select_2: function(){
+            $('.select2').select2({
+                placeholder: $(this).data('placeholder')
             })
         }
     }

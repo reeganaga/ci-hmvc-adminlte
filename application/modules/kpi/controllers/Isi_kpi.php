@@ -24,7 +24,7 @@ class Isi_kpi extends MY_Controller {
         $periode = $this->periode_model->get_all();
 		$data['breadcrumbs'] = array('Isi KPI' => '/kpi/kpi');
 		$user = $this->ion_auth->user()->row();
-		if($user->active_admin==0){ // not verify
+		if($user->active_admin==0 && !$this->ion_auth->is_admin()){ // not verify
 			$this->session->set_flashdata('warning','Akun anda perlu diaktifkan admin, Silahkan kontak Admin');
 			$data['content'] = 'kpi/content-not-found';
 		}else{

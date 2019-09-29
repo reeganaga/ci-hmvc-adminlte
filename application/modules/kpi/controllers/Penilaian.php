@@ -13,7 +13,7 @@ class Penilaian extends MY_Controller
 		$this->load->model('penilaian_kpi_model');
 		$this->menu = 'kpi-penilaian';
 
-		$this->set_groups([1,2]);
+		$this->set_groups([2]);
 		parent::__construct();
 	}
 	public function index()
@@ -39,7 +39,7 @@ class Penilaian extends MY_Controller
 		$data['breadcrumbs'] = array('Periode' => '/kpi/periode');
 		
 		$user = $this->ion_auth->user()->row();
-		if($user->active_admin==0){ // not verify
+		if($user->active_admin==0 && !$this->ion_auth->is_admin()){ // not verify
 			$this->session->set_flashdata('warning','Akun anda perlu diaktifkan admin, Silahkan kontak Admin');
 			$data['content'] = 'kpi/content-not-found';
 		}else{
