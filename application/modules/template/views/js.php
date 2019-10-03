@@ -35,6 +35,17 @@
 <!--  Select 2 -->
 <script src="<?php echo base_url('assets/plugins/select2/select2.full.min.js') ?>"></script>
 
+
+<!-- <script src="<?= base_url('assets/plugins/jsPDF/html2canvas.js'); ?>"></script>
+<script src="<?= base_url('assets/plugins/jsPDF/jspdf.min.js'); ?>"></script>
+<script src="<?= base_url('assets/plugins/jsPDF/html.js'); ?>"></script> -->
+
+<!-- <script src="<?= base_url('assets/plugins/Print.js-1.0.61/src/js/init.js'); ?>"></script> -->
+<!-- <script src="<?= base_url('assets/plugins/Print.js-1.0.61/src/js/print.js'); ?>"></script> -->
+<!-- <script src="https://printjs.crabbly.com/init.js"></script> -->
+<script src="https://printjs.crabbly.com/print.js?v1.0.61"></script>
+<!-- <script src="https://printjs.crabbly.com/print.js?v1.0.61"></script> -->
+
 <?php
 alert('success', $this->session->flashdata('success'));
 alert('error', $this->session->flashdata('error'));
