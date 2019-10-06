@@ -52,26 +52,32 @@
                         // var_dump($data_user);
                         // var_dump($periode);
                         ?>
-                        <button class='btn btn-primary' onclick="printJS('table-rekap', 'html',{'css':'<?= base_url('assets/bootstrap/css/bootstrap.min.css') ?>'} )">Print PDF</button>
+                        <!-- <button class='btn btn-primary' onclick="printJS('table-rekap', 'html',{'css':'<?= base_url('assets/bootstrap/css/bootstrap.min.css') ?>'} )">Print PDF</button> -->
+                        <button class='btn btn-primary print-pdf'>Print PDF</button>
+                        <div id="editor"></div>
+
+                        <!-- <button onclick="javascript:demoFromHTML();">PDF</button> -->
 
                         <div class="table-responsive " id="table-rekap">
-                            <h3 class="text-center text-bold">Pengisian KPI - <?= ($data_user) ? $data_user->first_name : ""; ?> - Periode <?= ($data_periode) ? $data_periode->periode : ""; ?></h3>
+                            <h3 class="hide text-bold">Pengisian KPI - <?= ($data_user) ? $data_user->first_name : ""; ?> - Periode <?= ($data_periode) ? $data_periode->periode : ""; ?></h3>
                             <table class="table no-margin table-striped">
+                                <colgroup>
+                                    <col width="50%">
+                                    <col width="50%">
+                                </colgroup>
                                 <thead>
                                     <tr>
                                         <th>Nama KPI</th>
                                         <th>Skor Akhir</th>
-                                        <!-- <th>Action</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php if (!empty($tables)) { //var_dump($tables); 
+                                    <?php if (!empty($tables)) { $total=0;  //var_dump($tables); 
                                             ?>
-                                        <?php foreach ($tables as $table) : ?>
+                                        <?php foreach ($tables as $table) : $total += $table->total_skor; ?>
                                             <tr>
                                                 <td><?= isset($table->kpi->nama_kpi) ? $table->kpi->nama_kpi : ""; ?></td>
                                                 <td><?= isset($table->total_skor) ? $table->total_skor : ""; ?></td>
-                                                <td>
                                                     <?php /*if ($table->status == 1) { ?>
                                                     <a class="btn btn-success btn-flat js-confirm" data-target="<?= base_url('kpi/penilaian/verifikasi/' . $table->id); ?>" data-title="Verifikasi KPI" data-content="Apakah anda sudah yakin dengan data KPI anda ? ">Verify</a>
                                                 <?php } ?>
@@ -80,10 +86,13 @@
                                                 <?php } else { ?>
                                                     <a class="btn btn-primary btn-flat" href="<?= base_url('kpi/isi_kpi/start/' . $table->id_periode_kpi . "/" . $table->id_kpi_rev); ?>">View</a>
                                                 <?php }*/ ?>
-                                                </td>
                                             </tr>
                                         <?php endforeach; ?>
                                     <?php } ?>
+                                    <tr>
+                                        <td class="text-bold">Total</td>
+                                        <td class="text-bold"><?= $total; ?></td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

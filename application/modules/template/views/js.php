@@ -2,8 +2,7 @@
 <script src="<?php echo base_url('assets/bootstrap/js/bootstrap.min.js') ?>"></script>
 <!-- FastClick -->
 <script src="<?php echo base_url('assets/plugins/fastclick/fastclick.js') ?>"></script>
-<!-- custom js -->
-<script src="<?php echo base_url('assets/custom/custom.js') ?>"></script>
+
 <!-- AdminLTE App -->
 <script src="<?php echo base_url('assets/dist/js/app.min.js') ?>"></script>
 <!-- Sparkline -->
@@ -37,18 +36,22 @@
 
 
 <!-- <script src="<?= base_url('assets/plugins/jsPDF/html2canvas.js'); ?>"></script>
-<script src="<?= base_url('assets/plugins/jsPDF/jspdf.min.js'); ?>"></script>
 <script src="<?= base_url('assets/plugins/jsPDF/html.js'); ?>"></script> -->
 
-<!-- <script src="<?= base_url('assets/plugins/Print.js-1.0.61/src/js/init.js'); ?>"></script> -->
-<!-- <script src="<?= base_url('assets/plugins/Print.js-1.0.61/src/js/print.js'); ?>"></script> -->
-<!-- <script src="https://printjs.crabbly.com/init.js"></script> -->
-<script src="https://printjs.crabbly.com/print.js?v1.0.61"></script>
-<!-- <script src="https://printjs.crabbly.com/print.js?v1.0.61"></script> -->
+<script src="<?= base_url('assets/plugins/jsPDF/jspdf.min.js'); ?>"></script>
+
 
 <!-- jquery validation -->
 <!-- <script src="<?= base_url('assets/plugins/jquery-validation/jquery.validate.min.js'); ?>"></script> -->
 <!-- <script src="<?= base_url('assets/plugins/jquery-validation/additional-methods.min.js'); ?>"></script> -->
+
+<!-- print pdf -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script> -->
+
+
+
+<!-- custom js -->
+<script src="<?php echo base_url('assets/custom/custom.js') ?>"></script>
 
 
 <?php
