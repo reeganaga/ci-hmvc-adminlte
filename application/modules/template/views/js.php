@@ -46,6 +46,11 @@
 <script src="https://printjs.crabbly.com/print.js?v1.0.61"></script>
 <!-- <script src="https://printjs.crabbly.com/print.js?v1.0.61"></script> -->
 
+<!-- jquery validation -->
+<!-- <script src="<?= base_url('assets/plugins/jquery-validation/jquery.validate.min.js'); ?>"></script> -->
+<!-- <script src="<?= base_url('assets/plugins/jquery-validation/additional-methods.min.js'); ?>"></script> -->
+
+
 <?php
 alert('success', $this->session->flashdata('success'));
 alert('error', $this->session->flashdata('error'));

@@ -15,19 +15,19 @@
                     </div>
                 </div>
                 <!-- /.box-header -->
-                <div class="box-body no-padding">
-                    <form class="form-horizontal form-isi-kpi" action="<?= base_url(); ?>kpi/isi_kpi/proses_isi_kpi" method="post">
+                <div class="box-body">
+                    <form class="form-horizontal form-isi-kpi" id="form-isi-kpi" action="<?= base_url(); ?>kpi/isi_kpi/proses_isi_kpi" method="post">
                         <table class="table table-bordered">
                             <thead class="">
                                 <tr class="bg-purple text-center">
-                                    <th class="text-center" >No</th>
-                                    <th class="text-center" >Sasaran Kunci</th>
-                                    <th class="text-center" >Indikator Pengukuran</th>
-                                    <th class="text-center" >Bobot</th>
-                                    <th class="text-center"  colspan="2">Target</th>
-                                    <th class="text-center"  colspan="2">Realisasi</th>
-                                    <th class="text-center" >Skor</th>
-                                    <th class="text-center" >Skor Akhir</th>
+                                    <th class="text-center">No</th>
+                                    <th class="text-center">Sasaran Kunci</th>
+                                    <th class="text-center">Indikator Pengukuran</th>
+                                    <th class="text-center">Bobot</th>
+                                    <th class="text-center" colspan="2">Target</th>
+                                    <th class="text-center" colspan="2">Realisasi</th>
+                                    <th class="text-center">Skor</th>
+                                    <th class="text-center">Skor Akhir</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -67,20 +67,23 @@
                                         ?>
                                         <tr>
                                             <td><?=
-                                                $i;
-                                                $i++;
-                                                ?></td>
+                                                            $i;
+                                                        $i++;
+                                                        ?></td>
                                             <td><?= $value->sasaran; ?></td>
-                                            <td><?= $value->nama_indikator; ?></td>
+                                            <td class="nama-indikator"><?= $value->nama_indikator; ?></td>
                                             <td class="text-right"><?= $value->bobot; ?></td>
-        <!--                                             <td>
+                                            <!--                                             <td>
                                                <div class="form-group">
                                                     <div class="col-md-12">
-                                                        <input <?//= (!$editable)?"disabled":""; ?> class="form-control input-kpi" value="<?//= $data_penilaian[$value->id_kpi_detail_rev]['nilai_target']; ?>" name="nilai[<?//= $value->id_kpi_detail_rev ?>][target]">
+                                                        <input <? //= (!$editable)?"disabled":""; 
+                                                                        ?> class="form-control input-kpi" value="<? //= $data_penilaian[$value->id_kpi_detail_rev]['nilai_target']; 
+                                                                                                                                                    ?>" name="nilai[<? //= $value->id_kpi_detail_rev 
+                                                                                                                                                                                                                                    ?>][target]">
                                                     </div>
                                                 </div>
                                             </td>-->
-                                            <td class="text-right"><?= $value->nilai_target; ?></td>
+                                            <td class="text-right nilai-target"><?= $value->nilai_target; ?></td>
                                             <td class="text-center">%</td>
                                             <td>
                                                 <div class="form-group">
@@ -93,7 +96,7 @@
                                             <td class="skor text-right"><?= $data_penilaian[$value->id_kpi_detail_rev]['skor']; ?></td>
                                             <td class="skor-akhir text-right"><?= $data_penilaian[$value->id_kpi_detail_rev]['skor_akhir']; ?></td>
                                         </tr>
-                                        <?php
+                                <?php
                                     }
                                 } else {
                                     alert('info', 'Indikator belum ada, silahkan kontak admin terlebih dahulu');
@@ -121,16 +124,17 @@
                             // var_dump($users_id);
                         }
                         ?>
+                        <button type="submit" class="btn btn-primary btn-flat pull-right <?= ($editable) ? "submit-isi-kpi" : "disabled"; ?> ">Simpan</button>
+                        <a href="<?= base_url(); ?>kpi/isi_kpi" class="btn btn-default btn-flat pull-right">Batal</a>
                     </form>
                     <!-- /.table-responsive -->
                 </div>
                 <!-- /.box-body -->
-                <div class="box-footer clearfix">
-                    <button class="btn btn-primary btn-flat pull-right <?= ($editable) ? "submit-isi-kpi" : "disabled"; ?> " >Simpan</button>
-                    <a href="<?= base_url(); ?>kpi/isi_kpi" class="btn btn-default btn-flat pull-right" >Batal</a>
+                <!-- <div class="box-footer clearfix"> -->
+
                     <!-- <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left">Place New Order</a> -->
                     <!-- <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">View All Orders</a> -->
-                </div>
+                <!-- </div> -->
                 <!-- /.box-footer -->
             </div>
             <!-- /.box -->

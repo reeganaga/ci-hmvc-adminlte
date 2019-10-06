@@ -5,9 +5,9 @@
             this.init_icheck();
             this.init_datepicker();
             this.init_datatable();
-            this.submit_isi_kpi();
             this.init_confirm_js();
             this.init_select_2();
+            this.submit_isi_kpi();
         },
 
         /**
@@ -39,8 +39,25 @@
 
         submit_isi_kpi: function () {
             $('.submit-isi-kpi').click(function (e) {
-                console.log('click')
-                $('.form-isi-kpi').submit();
+                e.preventDefault();
+                // console.log('click')
+                valid = true;
+                $('.input-kpi').each(function (index) {
+                    // console.log(index);
+                    target = $(this).closest('tr').find('.nilai-target').html();
+                    nama_indikator = $(this).closest('tr').find('.nama-indikator').html();
+                    // console.log(nama_indikator);
+                    value = $(this).val();
+                    //validate nilai cannot be greater than target
+                    if (value > target) {
+                        toastr.warning('Realisasi ' + nama_indikator + " Harus lebih kecil dari " + target)
+                        valid = false;
+                    }
+                    // console.log('check')
+                })
+                if (valid) {
+                    $('.form-isi-kpi').submit();
+                }
             })
         },
 
@@ -52,9 +69,9 @@
                 // 'title': this.$target.data('title'),
                 'icon': 'fa fa-warning',
                 "theme": 'supervan',
-                "onContentReady":function(){
-                    self.$content=this.$target.data('content');
-                    self.$title=this.$target.data('title');
+                "onContentReady": function () {
+                    self.$content = this.$target.data('content');
+                    self.$title = this.$target.data('title');
                 },
                 "buttons": {
                     ok: function () {
@@ -67,12 +84,12 @@
                 }
             })
         },
-    
-        init_select_2: function(){
+
+        init_select_2: function () {
             $('.select2').select2({
                 placeholder: $(this).data('placeholder')
             })
-        }
+        },
     }
     $(function () {
         // Run on DOM ready
