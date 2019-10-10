@@ -53,7 +53,7 @@ class Rekap extends MY_Controller
 
         //get data first
         $users = $this->users_model->get_all();
-        $periodes = $this->periode_model->get_all();
+        $periodes = $this->periode_model->order_by('periode', 'asc')->get_all();
         $periode = $this->periode_model->get($id_periode);
         $user = $this->users_model->get($id_user);
         // var_dump($periodes);
