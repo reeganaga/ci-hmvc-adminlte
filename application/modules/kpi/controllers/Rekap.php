@@ -14,7 +14,7 @@ class Rekap extends MY_Controller
         $this->load->model(['kpi_model', 'kpi_detail_model', 'penilaian_kpi_model', 'users_model', 'periode_model']);
         $this->menu = 'kpi-rekap';
 
-        $this->set_groups([1]);
+        $this->set_groups([1,2]);
         parent::__construct();
     }
 
@@ -37,7 +37,11 @@ class Rekap extends MY_Controller
         // 	$table = $this->penilaian_kpi_model->with_periode()->with_kpi()->with_user()->get_all();
         // }
 
-        $id_user = $this->input->get('id_user');
+        if ($this->ion_auth->is_admin()) {
+            $id_user = $this->input->get('id_user');
+        }else{
+            $id_user = $this->ion_auth->user()->row()->id;
+        }
         $data['id_user'] = $id_user;
 
         $id_periode = $this->input->get('id_periode');

@@ -50,7 +50,7 @@ class Template extends MY_Controller
 			'uri' => "kpi/rekap",
 			'label' => "new",
 			'icon' => 'fa fa-check',
-			'role'=>[1]
+			'role'=>[1,2]
 		],
 	];
 

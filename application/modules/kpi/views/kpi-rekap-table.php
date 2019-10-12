@@ -17,20 +17,24 @@
                 <!-- /.box-header -->
                 <div class="box-body">
                     <form class="form-inline form-filter-rekap" method="get">
-                        <div class="form-group">
-                            <label for="exampleInputName2">Nama user</label>
-                            <select required name="id_user" id="" data-placehoder="Pilih" class="select2 form-control">
-                                <option value="">Pilih nama user</option>
-                                <?php
-                                if ($users) {
-                                    foreach ($users as $user) {
-                                        $checked = ($id_user == $user->id) ? 'selected' : "";
-                                        echo "<option  {$checked} value='{$user->id}'>{$user->first_name}</option>";
-                                    }
-                                }
-                                ?>
-                            </select>
-                        </div>
+                        <?php
+                        if ($this->ion_auth->is_admin()) { ?>
+
+                            <div class="form-group">
+                                <label for="exampleInputName2">Nama user</label>
+                                <select required name="id_user" id="" data-placehoder="Pilih" class="select2 form-control">
+                                    <option value="">Pilih nama user</option>
+                                    <?php
+                                        if ($users) {
+                                            foreach ($users as $user) {
+                                                $checked = ($id_user == $user->id) ? 'selected' : "";
+                                                echo "<option  {$checked} value='{$user->id}'>{$user->first_name}</option>";
+                                            }
+                                        }
+                                        ?>
+                                </select>
+                            </div>
+                        <?php } ?>
                         <div class="form-group">
                             <label for="exampleInputEmail2">Periode</label>
                             <select required class="select2 form-control" data-placehoder="Pilih" name="id_periode" id="">
@@ -74,15 +78,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php if (!empty($tables)) { $total=0;  //var_dump($tables); 
+                                    <?php if (!empty($tables)) {
+                                            $total = 0;  //var_dump($tables); 
                                             ?>
                                         <?php foreach ($tables as $table) : $total += $table->total_skor;
-                                        ?>
+                                                    ?>
                                             <tr>
                                                 <td><?= isset($table->kpi->nama_kpi) ? $table->kpi->nama_kpi : ""; ?></td>
                                                 <td><?= isset($table->total_skor) ? $table->total_skor : ""; ?></td>
                                                 <td><?= isset($table->total_skor) ? calculate_nilai($table->total_skor) : ""; ?></td>
-                                                    <?php /*if ($table->status == 1) { ?>
+                                                <?php /*if ($table->status == 1) { ?>
                                                     <a class="btn btn-success btn-flat js-confirm" data-target="<?= base_url('kpi/penilaian/verifikasi/' . $table->id); ?>" data-title="Verifikasi KPI" data-content="Apakah anda sudah yakin dengan data KPI anda ? ">Verify</a>
                                                 <?php } ?>
                                                 <?php if ($this->ion_auth->is_admin()) { ?>
@@ -96,12 +101,14 @@
                                     <tr>
                                         <td class="text-bold">Total</td>
                                         <td class="text-bold"><?= $total; ?></td>
+                                        <td class="text-bold">&nbsp;</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     <?php } else { ?>
-                        <p class="alert alert-warning">Silahkan pilih Nama user dan periode</p>
+
+                        <p class="alert alert-warning">Silahkan pilih <?= $this->ion_auth->is_admin()?"Nama userd dan":""; ?> periode</p>
                     <?php } ?>
                     <!-- /.table-responsive -->
                 </div>
