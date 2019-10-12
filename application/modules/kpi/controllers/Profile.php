@@ -30,6 +30,7 @@ class Profile extends MY_Controller
 		$data['regencies'] = $regencies;
 		$data['list_pendidikan'] = $this->users_model->pendidikan;
 		$data['list_usaha'] = $this->users_model->jenis_usaha;
+		$data['list_kelompok_usaha'] = $this->users_model->kelompok_usaha;
 		$data['menu_active'] = $this->menu;
 		// var_dump($data);
 		echo Modules::run($this->template_member, $data);

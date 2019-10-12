@@ -82,6 +82,18 @@ $arr_user = (array) $user;
                         </div>
                         <div class="form-group">
                             <div class="col-md-3">
+                                <label for="" class="control-label">Kelompok usaha</label>
+                            </div>
+                            <div class="col-md-9">
+                                <?php foreach ($list_kelompok_usaha as $value) { ?>
+                                    <label for="kelompok_usaha">
+                                        <input required type="radio" name="kelompok_usaha" value="<?= $value; ?>" <?php form_checked('kelompok_usaha',$arr_user,false,$value); ?> > <?= $value; ?>
+                                    </label>
+                                <?php } ?>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
                                 <label for="" class="control-label">Jenis usaha</label>
                             </div>
                             <div class="col-md-9">
