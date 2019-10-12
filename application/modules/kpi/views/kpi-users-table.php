@@ -46,10 +46,30 @@ $base_url = base_url();
                       <td><?= $table->tempat; ?></td>
                       <td><?= $table->id_kota; ?></td>
                       <td><?= ($table->active) == 1 ? "<span class='label label-success'>Active</span>" : "<span class='label label-default'>Not Active</span>"; ?></td>
-                      <td><?= ($table->active_admin) == 1 ? 
-                      "<a class='label label-success js-confirm' data-target='{$base_url}kpi/users/active_deactive_user/{$table->id}/deactive' data-title='Konfirmasi Nonaktifan user' data-content='Apakah anda yakin ingin menonaktifkan user {$table->first_name} ini ?' >Active</a>" : 
+                      <td><?php 
+                      
+                      if ($table->active_admin==1) {
+                        $link = "{$base_url}kpi/users/active_deactive_user/{$table->id}/deactive";
+                        $title = "Konfirmasi Nonaktifan user";
+                        $content = "Apakah anda yakin ingin menonaktifkan user {$table->first_name} ini ?";
+                        $label = "Active";
+                        $class = "label-success";
+                      }elseif ($table->active_admin==0) {
+                        $link = "{$base_url}kpi/users/active_deactive_user/{$table->id}/active";
+                        $title = "Konfirmasi Aktifan user";
+                        $content = "Apakah anda yakin ingin mengaktifkan user {$table->first_name} ini ?";
+                        $label = "Not active";
+                        $class = "label-default";
+                      }elseif ($table->active_admin==2) {
+                        $link = "{$base_url}kpi/users/active_deactive_user/{$table->id}/active";
+                        $title = "Konfirmasi Aktifan user";
+                        $content = "Apakah anda yakin ingin mengaktifkan user {$table->first_name} ini ?";
+                        $label = "Need actived";
+                        $class = "label-info";
+                      }
 
-                      "<a class='label label-default js-confirm' data-target='{$base_url}kpi/users/active_deactive_user/{$table->id}/active' data-title='Konfirmasi Aktifan user' data-content='Apakah anda yakin ingin mengaktifkan user {$table->first_name} ini ?' >Not Active</a>"; ?></td>
+                      echo "<a class='label {$class} js-confirm' data-target='{$link}' data-title='{$title}' data-content='{$content}' >{$label}</a>"; ?>
+                      </td>
                       <td>
                         <a href="<?=  base_url();  ?>kpi/users/view/<?= $table->id; ?>" class="btn btn-default">View</a>
                       </td>

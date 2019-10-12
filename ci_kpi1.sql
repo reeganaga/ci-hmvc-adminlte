@@ -8072,31 +8072,41 @@ CREATE TABLE `users` (
   `created_on` int(11) UNSIGNED NOT NULL,
   `last_login` int(11) UNSIGNED DEFAULT NULL,
   `active` tinyint(1) UNSIGNED DEFAULT NULL,
+  `active_admin` tinyint(1) DEFAULT '0',
   `first_name` varchar(50) DEFAULT NULL,
   `last_name` varchar(50) DEFAULT NULL,
+  `no_ktp` varchar(50) NOT NULL,
+  `tempat_lahir` varchar(50) NOT NULL,
+  `tgl_lahir` date NOT NULL,
+  `pendidikan` enum('sd','smp','sma','d3','s1','s2/s3') NOT NULL,
+  `jenis_usaha` varchar(50) NOT NULL,
+  `deskripsi_usaha` varchar(200) NOT NULL,
+  `omset` int(15) NOT NULL,
   `company` varchar(100) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `tempat` varchar(255) NOT NULL,
-  `id_kota` int(11) NOT NULL
+  `id_kota` int(11) NOT NULL,
+  `id_provinsi` int(5) NOT NULL,
+  `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`, `tempat`, `id_kota`) VALUES
-(1, '127.0.0.1', 'administrator', '$2y$12$VHgXsfiBwp0N0xfaKocN8.1fj.MEQHpGnSA2hSniPH7gKhoxL9Hkq', 'admin@admin.com', NULL, '', NULL, NULL, NULL, '33c3417f62263cc8bcdce29c61cc418fe59f4c71', '$2y$10$x8i7XwEeJsN2xfNLgzbJyexO3XuKkkBMwIWYAy9Af4hzwAeHFjTlu', 1268889823, 1569739807, 1, 'Admin', 'istrator', 'ADMIN', '0', '', 0),
-(2, '127.0.0.1', 'suryo-utomo', '$2y$10$72z9NmeU.pJPn3.LYpni7uqzxmuSi7EFdF4apEzfVh3C.Jg5w6l3i', 'user.satu@gmail.com', NULL, NULL, NULL, NULL, NULL, 'f69f3e741d7719f38dc39b387ac7c1a524357d5d', '$2y$10$MD0hBv.2UAennEDuEkCgXeQO1Lvo27PJ12.ePV7J87YoBaT0lYd4K', 1567848417, 1569419635, 1, 'suryo utomo', NULL, NULL, NULL, 'nitikan', 3471),
-(3, '127.0.0.1', 'susilo-hadi', '$2y$10$ThfcKVKv4ktupJHLKs5G6uIdLxF4Mg3/szyQUKIMsV8UZOGJLnqzG', 'user.dua@gmail.com', NULL, NULL, NULL, NULL, NULL, 'ba9e1a821838b5e6aa950470a111f57615a62ee1', '$2y$10$zjYdypovxfXem5eezrCbs.B3V66KVKR10zBKyaxAH1TmZ4/05wuJW', 1567823395, 1569379591, 1, 'susilo hadi', NULL, NULL, NULL, 'Yogyakarta', 3471),
-(4, '127.0.0.1', 'rega.blank+2@gmail.com', '$2y$10$SQ7eACqgbGkJA8gtSHsCEuLn/fXCXC.6EzWAqSM2SppLYHqaPtnxy', 'rega.blank+2@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1567823950, NULL, 1, 'Rega Cahya Gumilang', NULL, NULL, NULL, 'Yogyakarta', 3471),
-(5, '127.0.0.1', 'rega.blank+3@gmail.com', '$2y$10$gUqzAYXjf6BPzzE4OxRiOe96X6tRucpMo3FSrcHO.jv8k2DL5RHBq', 'rega.blank+3@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1567824002, NULL, 1, 'Rega Cahya Gumilang', NULL, NULL, NULL, 'Yogyakarta', 3471),
-(6, '127.0.0.1', 'rega.blank+4@gmail.com', '$2y$10$MYcfV.Jlks1eL74YWJI1oe2WYC9WGSGLAyFtzxtk2NI4.r3DTBTLW', 'rega.blank+4@gmail.com', '7c231ce15e688582f327', '$2y$10$c/UAaDoat4C9UAQaOwiYguYg7C9DI691pX7cvJOwU8RVJkq8XNK3O', NULL, NULL, NULL, NULL, NULL, 1567824141, NULL, 0, 'Rega Cahya Gumilang', NULL, NULL, NULL, 'Yogyakarta', 3471),
-(7, '127.0.0.1', 'rega.blank+5@gmail.com', '$2y$10$VK3lSDm1eTWHquk1sy1mdew1lpUCbN.xLl.0o2942G.d/yfxDyepe', 'rega.blank+5@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1567824388, NULL, 1, 'Rega Cahya Gumilang', NULL, NULL, NULL, 'Yogyakarta', 3471),
-(8, '127.0.0.1', 'rega.blank+6@gmail.com', '$2y$10$kiBxgibhtuqLlE.WZgUV1uF4i.SqDLTq5E0ZsN70fRwRFmsbFsH.a', 'rega.blank+6@gmail.com', '951b8063c94d45250b39', '$2y$10$aptfgnyGROQKsPVNi5vDTOlCcMs.0VivYAo1pB4Yu6yTP63OQG98y', NULL, NULL, NULL, NULL, NULL, 1567849028, NULL, 0, 'Rega Cahya Gumilang', NULL, NULL, NULL, 'Yogyakarta', 3471),
-(9, '127.0.0.1', 'rega.blank+7@gmail.com', '$2y$10$GWxapY7VuN7yMHsJAmS1OuWHE5AV4R7TmPxUNI8OveN4JZdU0x/Jq', 'rega.blank+7@gmail.com', NULL, NULL, NULL, NULL, NULL, '520eb0b3a0ebf54579f3051949d470ecc652cf50', '$2y$10$pVLdmyN7Ha9yxqtAE2UDyOe0igv5lQGEWWIxeHSAzrnoqBZwIM6uy', 1567849089, 1567849129, 1, 'Rega Cahya Gumilang', NULL, NULL, NULL, 'Yogyakarta', 3471),
-(10, '127.0.0.1', 'rega.blank+8@gmail.com', '$2y$10$2fr/tKncFpxr86LUtraVueX.E14F/V7IfEpR5UMdTlmfLrWT2uNBC', 'rega.blank+8@gmail.com', NULL, NULL, NULL, NULL, NULL, '7991cf7e304b5e7d31b03718d69b592f88842a78', '$2y$10$ObT6sq0hWGZpDbfIhLICxuuIQwZf9oD2z107aTj1/dsfL.EKlh1W.', 1568205910, 1569110395, 1, 'Rega Cahya Gumilang', NULL, NULL, NULL, 'Yogyakarta', 3471),
-(11, '127.0.0.1', 'rega.blank+9@gmail.com', '$2y$10$jM4YxI1Yt8lrdyTATfsR9eEROKTBqhCDac39aqjY1MbuAaRsNkRqS', 'rega.blank+9@gmail.com', NULL, NULL, NULL, NULL, NULL, 'b63d92acebbae34dc3b0d7675e90aa07fc017c31', '$2y$10$P4LNWJY022p2ZOGdRyeu.ekJEyb8OgourWta.gV3bN4kLs.lMcUuy', 1569109319, 1569109453, 1, 'Rega Cahya Gumilang +9', NULL, NULL, NULL, 'Yogyakarta', 3471),
-(12, '127.0.0.1', 'masfer.st@gmail.com', '$2y$10$Pixw3R/uj9Zn9MPXy7o3gONlOKHmZsn.WwHQXM7p.7JWUkTFnwram', 'masfer.st@gmail.com', NULL, NULL, NULL, NULL, NULL, 'a3eb40fce11a0fc999c4abbdee92cd6d580cb088', '$2y$10$8dkQiEfsQ/VlMPL6ysst2uHgJY1jR13vk9fCDop7FOkCr3dY.weJO', 1569421017, 1569421128, 1, 'tes', NULL, NULL, NULL, 'dasda', 1102);
+INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `active_admin`, `first_name`, `last_name`, `no_ktp`, `tempat_lahir`, `tgl_lahir`, `pendidikan`, `jenis_usaha`, `deskripsi_usaha`, `omset`, `company`, `phone`, `tempat`, `id_kota`, `id_provinsi`, `updated_at`) VALUES
+(1, '127.0.0.1', 'administrator', '$2y$12$VHgXsfiBwp0N0xfaKocN8.1fj.MEQHpGnSA2hSniPH7gKhoxL9Hkq', 'admin@admin.com', NULL, '', NULL, NULL, NULL, '579ff7876e0e42829695bb12250a454a5c20b7c6', '$2y$10$1TOsuTQFpWtG.qoPgc.Mnubj6cQOQkV9tBvV6RhAWjFIZYVwVZ1Pu', 1268889823, 1570664869, 1, 0, 'Admin', 'istrator', '', '', '0000-00-00', 'sd', '', '', 0, 'ADMIN', '0', '', 0, 0, '0000-00-00 00:00:00'),
+(2, '127.0.0.1', 'suryo-utomo', '$2y$10$72z9NmeU.pJPn3.LYpni7uqzxmuSi7EFdF4apEzfVh3C.Jg5w6l3i', 'user.satu@gmail.com', NULL, NULL, NULL, NULL, NULL, '4d2d0ce5c7a523256a4bb20c468a80b30b482202', '$2y$10$MJ5yuPHGfArNeZYn1pwHbuWvPq6vRIB.rM0e6dYT731Ovn4YCYJmm', 1567848417, 1570665378, 1, 1, 'suryo utomo', NULL, '', '', '0000-00-00', 'sd', '', '', 0, NULL, NULL, 'nitikan', 3471, 0, '2019-10-01 19:14:14'),
+(3, '127.0.0.1', 'susilo-hadi', '$2y$10$ThfcKVKv4ktupJHLKs5G6uIdLxF4Mg3/szyQUKIMsV8UZOGJLnqzG', 'user.dua@gmail.com', NULL, NULL, NULL, NULL, NULL, '99d2e8cac07e1f154f4b479f093934b49fee6e05', '$2y$10$2To0tk9T6vNxxtyYLj.jLe3g/Te.921oyr6SEUbUwaa7DIDSoI7Fa', 1567823395, 1570466395, 1, 0, 'susilo hadi', NULL, '', '', '0000-00-00', 'sd', '', '', 0, NULL, NULL, 'Yogyakarta', 3471, 0, '0000-00-00 00:00:00'),
+(4, '127.0.0.1', 'rega.blank+2@gmail.com', '$2y$10$SQ7eACqgbGkJA8gtSHsCEuLn/fXCXC.6EzWAqSM2SppLYHqaPtnxy', 'rega.blank+2@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1567823950, NULL, 1, 0, 'Rega Cahya Gumilang', NULL, '', '', '0000-00-00', 'sd', '', '', 0, NULL, NULL, 'Yogyakarta', 3471, 0, '0000-00-00 00:00:00'),
+(5, '127.0.0.1', 'rega.blank+3@gmail.com', '$2y$10$gUqzAYXjf6BPzzE4OxRiOe96X6tRucpMo3FSrcHO.jv8k2DL5RHBq', 'rega.blank+3@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1567824002, NULL, 1, 0, 'Rega Cahya Gumilang', NULL, '', '', '0000-00-00', 'sd', '', '', 0, NULL, NULL, 'Yogyakarta', 3471, 0, '0000-00-00 00:00:00'),
+(6, '127.0.0.1', 'rega.blank+4@gmail.com', '$2y$10$MYcfV.Jlks1eL74YWJI1oe2WYC9WGSGLAyFtzxtk2NI4.r3DTBTLW', 'rega.blank+4@gmail.com', '7c231ce15e688582f327', '$2y$10$c/UAaDoat4C9UAQaOwiYguYg7C9DI691pX7cvJOwU8RVJkq8XNK3O', NULL, NULL, NULL, NULL, NULL, 1567824141, NULL, 0, 0, 'Rega Cahya Gumilang', NULL, '', '', '0000-00-00', 'sd', '', '', 0, NULL, NULL, 'Yogyakarta', 3471, 0, '0000-00-00 00:00:00'),
+(7, '127.0.0.1', 'rega.blank+5@gmail.com', '$2y$10$VK3lSDm1eTWHquk1sy1mdew1lpUCbN.xLl.0o2942G.d/yfxDyepe', 'rega.blank+5@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1567824388, NULL, 1, 0, 'Rega Cahya Gumilang', NULL, '', '', '0000-00-00', 'sd', '', '', 0, NULL, NULL, 'Yogyakarta', 3471, 0, '0000-00-00 00:00:00'),
+(8, '127.0.0.1', 'rega.blank+6@gmail.com', '$2y$10$kiBxgibhtuqLlE.WZgUV1uF4i.SqDLTq5E0ZsN70fRwRFmsbFsH.a', 'rega.blank+6@gmail.com', '951b8063c94d45250b39', '$2y$10$aptfgnyGROQKsPVNi5vDTOlCcMs.0VivYAo1pB4Yu6yTP63OQG98y', NULL, NULL, NULL, NULL, NULL, 1567849028, NULL, 0, 0, 'Rega Cahya Gumilang', NULL, '', '', '0000-00-00', 'sd', '', '', 0, NULL, NULL, 'Yogyakarta', 3471, 0, '0000-00-00 00:00:00'),
+(9, '127.0.0.1', 'rega.blank+7@gmail.com', '$2y$10$GWxapY7VuN7yMHsJAmS1OuWHE5AV4R7TmPxUNI8OveN4JZdU0x/Jq', 'rega.blank+7@gmail.com', NULL, NULL, NULL, NULL, NULL, '520eb0b3a0ebf54579f3051949d470ecc652cf50', '$2y$10$pVLdmyN7Ha9yxqtAE2UDyOe0igv5lQGEWWIxeHSAzrnoqBZwIM6uy', 1567849089, 1567849129, 1, 0, 'Rega Cahya Gumilang', NULL, '', '', '0000-00-00', 'sd', '', '', 0, NULL, NULL, 'Yogyakarta', 3471, 0, '0000-00-00 00:00:00'),
+(10, '127.0.0.1', 'rega.blank+8@gmail.com', '$2y$10$2fr/tKncFpxr86LUtraVueX.E14F/V7IfEpR5UMdTlmfLrWT2uNBC', 'rega.blank+8@gmail.com', NULL, NULL, NULL, NULL, NULL, '7991cf7e304b5e7d31b03718d69b592f88842a78', '$2y$10$ObT6sq0hWGZpDbfIhLICxuuIQwZf9oD2z107aTj1/dsfL.EKlh1W.', 1568205910, 1569110395, 1, 0, 'Rega Cahya Gumilang', NULL, '', '', '0000-00-00', 'sd', '', '', 0, NULL, NULL, 'Yogyakarta', 3471, 0, '0000-00-00 00:00:00'),
+(11, '127.0.0.1', 'rega.blank+9@gmail.com', '$2y$10$jM4YxI1Yt8lrdyTATfsR9eEROKTBqhCDac39aqjY1MbuAaRsNkRqS', 'rega.blank+9@gmail.com', NULL, NULL, NULL, NULL, NULL, 'b63d92acebbae34dc3b0d7675e90aa07fc017c31', '$2y$10$P4LNWJY022p2ZOGdRyeu.ekJEyb8OgourWta.gV3bN4kLs.lMcUuy', 1569109319, 1569109453, 1, 0, 'Rega Cahya Gumilang +9', NULL, '', '', '0000-00-00', 'sd', '', '', 0, NULL, NULL, 'Yogyakarta', 3471, 0, '0000-00-00 00:00:00'),
+(12, '127.0.0.1', 'masfer.st@gmail.com', '$2y$10$Pixw3R/uj9Zn9MPXy7o3gONlOKHmZsn.WwHQXM7p.7JWUkTFnwram', 'masfer.st@gmail.com', NULL, NULL, NULL, NULL, NULL, 'a3eb40fce11a0fc999c4abbdee92cd6d580cb088', '$2y$10$8dkQiEfsQ/VlMPL6ysst2uHgJY1jR13vk9fCDop7FOkCr3dY.weJO', 1569421017, 1569421128, 1, 0, 'tes', NULL, '', '', '0000-00-00', 'sd', '', '', 0, NULL, NULL, 'dasda', 1102, 0, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 

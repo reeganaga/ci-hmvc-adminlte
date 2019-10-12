@@ -2,34 +2,38 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Isi_kpi extends MY_Controller {
+class Isi_kpi extends MY_Controller
+{
 
-    function __construct() {
+    function __construct()
+    {
 
         // //load template here
         $this->template_main = 'template/index';
         $this->template_member = 'template/user';
         $this->load->model(['periode_model', 'kpi_model', 'kpi_detail_model', 'penilaian_kpi_model', 'penilaian_kpi_detail_model']);
-		$this->menu = 'kpi-isi-kpi';
-		
-		$this->set_groups([1,2]);
-		parent::__construct();
+        $this->menu = 'kpi-isi-kpi';
+
+        $this->set_groups([1, 2]);
+        parent::__construct();
     }
 
-    public function index() {
+    public function index()
+    {
         $this->kpi_periode();
     }
 
-    public function kpi_periode() {
+    public function kpi_periode()
+    {
         $periode = $this->periode_model->get_all();
-		$data['breadcrumbs'] = array('Isi KPI' => '/kpi/kpi');
-		$user = $this->ion_auth->user()->row();
-		if($user->active_admin==0 && !$this->ion_auth->is_admin()){ // not verify
-			$this->session->set_flashdata('warning','Akun anda perlu diaktifkan admin, Silahkan kontak Admin');
-			$data['content'] = 'kpi/content-not-found';
-		}else{
-			$data['content'] = 'kpi/kpi-periode-box';
-		}
+        $data['breadcrumbs'] = array('Isi KPI' => '/kpi/kpi');
+        $user = $this->ion_auth->user()->row();
+        if (($user->active_admin == 0 || $user->active_admin == 2) && !$this->ion_auth->is_admin()) { // not verify
+            $this->session->set_flashdata('warning', 'Akun anda perlu diaktifkan admin, Silahkan kontak Admin');
+            $data['content'] = 'kpi/content-not-found';
+        } else {
+            $data['content'] = 'kpi/kpi-periode-box';
+        }
         $data['data'] = $periode;
         $data['title'] = "Daftar periode aktif";
         $data['subtitle'] = "Silahkan pilih periode";
@@ -37,7 +41,8 @@ class Isi_kpi extends MY_Controller {
         echo Modules::run($this->template_member, $data);
     }
 
-    public function ajax_kpi_list($id_periode_kpi) {
+    public function ajax_kpi_list($id_periode_kpi)
+    {
         // $jenis_kpi = $this->kpi_model->as_array()->get_all();
 
         $jenis_kpi = $this->kpi_model->get_filled_kpi($id_periode_kpi);
@@ -58,7 +63,8 @@ class Isi_kpi extends MY_Controller {
      * @param string $id_user only for admin
      * @return void
      */
-    public function start($id_periode_kpi, $id_kpi_rev, $id_user = '') {
+    public function start($id_periode_kpi, $id_kpi_rev, $id_user = '')
+    {
 
         $kpi = $this->kpi_model->get($id_kpi_rev);
         $periode = $this->periode_model->get($id_periode_kpi);
@@ -108,7 +114,8 @@ class Isi_kpi extends MY_Controller {
         echo Modules::run($this->template_member, $data);
     }
 
-    public function proses_isi_kpi() {
+    public function proses_isi_kpi()
+    {
         $post = $this->input->post();
         //var_dump($post);
 
@@ -130,7 +137,7 @@ class Isi_kpi extends MY_Controller {
             'id_periode_kpi' => $post['id_periode_kpi'],
             'id_users' => $user_id,
             'id_kpi_rev' => $post['id_kpi_rev'],
-                // 'status' => 1,
+            // 'status' => 1,
         ];
 
         //check already inserted or not
@@ -204,5 +211,4 @@ class Isi_kpi extends MY_Controller {
         // $this->penilaian_kpi_model->insert($data);
         // var_dump($post);
     }
-
 }

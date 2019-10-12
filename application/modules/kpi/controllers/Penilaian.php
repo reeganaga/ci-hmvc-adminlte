@@ -37,12 +37,12 @@ class Penilaian extends MY_Controller
 		// var_dump($table);
 
 		$data['breadcrumbs'] = array('Periode' => '/kpi/periode');
-		
+
 		$user = $this->ion_auth->user()->row();
-		if($user->active_admin==0 && !$this->ion_auth->is_admin()){ // not verify
-			$this->session->set_flashdata('warning','Akun anda perlu diaktifkan admin, Silahkan kontak Admin');
+		if (($user->active_admin == 0 || $user->active_admin == 2) && !$this->ion_auth->is_admin()) { // not verify
+			$this->session->set_flashdata('warning', 'Akun anda perlu diaktifkan admin, Silahkan kontak Admin');
 			$data['content'] = 'kpi/content-not-found';
-		}else{
+		} else {
 			$data['content'] = 'kpi/kpi-penilaian-table';
 		}
 		$data['tables'] = $table;

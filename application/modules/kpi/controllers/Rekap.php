@@ -37,6 +37,15 @@ class Rekap extends MY_Controller
         // 	$table = $this->penilaian_kpi_model->with_periode()->with_kpi()->with_user()->get_all();
         // }
 
+
+        $user = $this->ion_auth->user()->row();
+        if (($user->active_admin == 0 || $user->active_admin == 2) && !$this->ion_auth->is_admin()) { // not verify
+			$this->session->set_flashdata('warning', 'Akun anda perlu diaktifkan admin, Silahkan kontak Admin');
+			$data['content'] = 'kpi/content-not-found';
+		} else {
+			$data['content'] = 'kpi/kpi-rekap-table';
+        }
+        
         if ($this->ion_auth->is_admin()) {
             $id_user = $this->input->get('id_user');
         }else{
@@ -67,7 +76,7 @@ class Rekap extends MY_Controller
         $data['periodes'] = $periodes;
         $data['data_periode'] = $periode;
         $data['breadcrumbs'] = array('KPI' => '/kpi/kpi');
-        $data['content'] = 'kpi/kpi-rekap-table';
+        // $data['content'] = 'kpi/kpi-rekap-table';
         $data['tables'] = $tables;
         $data['menu_active'] = $this->menu;
         echo Modules::run($this->template_member, $data);

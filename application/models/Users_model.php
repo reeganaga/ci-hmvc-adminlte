@@ -1,68 +1,125 @@
-<?php  if(!defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 class Users_model extends MY_Model
 {
-    
-    public function __construct()
-	{
-        $this->table = 'users';
-        $this->primary_key = 'id';        
 
-        $this->has_many['groups'] = array('foreign_model'=>'Users_group_model','foreign_table'=>'Users_group','foreign_key'=>'user_id','local_key'=>'id');
-        $this->has_one['regency'] = array('local_key'=>'id_kota', 'foreign_key'=>'id', 'foreign_model'=>'Regencies_model');
-		parent::__construct();
-    }    
-    
-    /* public $rules = [
-        'insert'=>[
-            'periode'=>[
-                'field'=>'periode',
-                'label'=>'Periode',
-                'rules'=>'trim|required|numeric',
-                
+    public function __construct()
+    {
+        $this->table = 'users';
+        $this->primary_key = 'id';
+
+        $this->has_many['groups'] = array('foreign_model' => 'Users_group_model', 'foreign_table' => 'Users_group', 'foreign_key' => 'user_id', 'local_key' => 'id');
+        $this->has_one['regency'] = array('local_key' => 'id_kota', 'foreign_key' => 'id', 'foreign_model' => 'Regencies_model');
+        $this->pendidikan = ['sd', 'smp', 'sma', 'd3', 's1', 's2/s3'];
+        $this->jenis_usaha = ['pns', 'swasta'];
+        parent::__construct();
+    }
+
+    public $rules = [
+        'update' => [
+            'first_name' => [
+                'field' => 'first_name',
+                'label' => 'first_name',
+                'rules' => 'trim|required',
             ],
-            'tgl_buka'=>[
-                'field'=>'tgl_buka',
-                'label'=>'Tanggal Buka',
-                'rules'=>'trim|required'
+            'no_ktp' => [
+                'field' => 'no_ktp',
+                'label' => 'no_ktp',
+                'rules' => 'trim|required|numeric',
             ],
-            'tgl_tutup'=>[
-                'field'=>'tgl_tutup',
-                'label'=>'Tanggal tutup',
-                'rules'=>'trim|required'
+            'tgl_lahir' => [
+                'field' => 'tgl_lahir',
+                'label' => 'tgl_lahir',
+                'rules' => 'trim|required',
             ],
-            'k_aktif'=>[
-                'field'=>'k_aktif',
-                'label'=>'Aktif',
-                'rules'=>'numeric'
+            'pendidikan' => [
+                'field' => 'pendidikan',
+                'label' => 'pendidikan',
+                'rules' => 'trim|required',
             ],
+            'jenis_usaha' => [
+                'field' => 'jenis_usaha',
+                'label' => 'jenis_usaha',
+                'rules' => 'trim|required',
+            ],
+            'deskripsi_usaha' => [
+                'field' => 'deskripsi_usaha',
+                'label' => 'deskripsi_usaha',
+                'rules' => 'trim|required',
+            ],
+            'omset' => [
+                'field' => 'omset',
+                'label' => 'omset',
+                'rules' => 'trim|required|numeric',
+            ],
+            'tempat' => [
+                'field' => 'tempat',
+                'label' => 'tempat',
+                'rules' => 'trim|required',
+            ],
+            'id_provinsi' => [
+                'field' => 'id_provinsi',
+                'label' => 'id_provinsi',
+                'rules' => 'trim|required|numeric',
+            ],
+            'id_kota' => [
+                'field' => 'id_kota',
+                'label' => 'id_kota',
+                'rules' => 'trim|required|numeric',
+            ],
+
         ],
-        'update'=>[
-            'id_periode_kpi'=>[
-                'field'=>'id_periode_kpi',
-                'label'=>'Id Periode KPI',
-                'rules'=>'trim|is_natural_no_zero|required'
+        'insert' => [
+            'first_name' => [
+                'field' => 'first_name',
+                'label' => 'first_name',
+                'rules' => 'trim|required',
             ],
-            'periode'=>[
-                'field'=>'periode',
-                'label'=>'Periode',
-                'rules'=>'trim|required|numeric',
+            'no_ktp' => [
+                'field' => 'no_ktp',
+                'label' => 'no_ktp',
+                'rules' => 'trim|required|numeric',
             ],
-            'tgl_buka'=>[
-                'field'=>'tgl_buka',
-                'label'=>'Tanggal Buka',
-                'rules'=>'trim|required'
+            'tgl_lahir' => [
+                'field' => 'tgl_lahir',
+                'label' => 'tgl_lahir',
+                'rules' => 'trim|required',
             ],
-            'tgl_tutup'=>[
-                'field'=>'tgl_tutup',
-                'label'=>'Tanggal tutup',
-                'rules'=>'trim|required'
+            'pendidikan' => [
+                'field' => 'pendidikan',
+                'label' => 'pendidikan',
+                'rules' => 'trim|required',
             ],
-            'k_aktif'=>[
-                'field'=>'k_aktif',
-                'label'=>'Aktif',
-                'rules'=>'numeric'
+            'jenis_usaha' => [
+                'field' => 'jenis_usaha',
+                'label' => 'jenis_usaha',
+                'rules' => 'trim|required',
+            ],
+            'deskripsi_usaha' => [
+                'field' => 'deskripsi_usaha',
+                'label' => 'deskripsi_usaha',
+                'rules' => 'trim|required',
+            ],
+            'omset' => [
+                'field' => 'omset',
+                'label' => 'omset',
+                'rules' => 'trim|required|numeric',
+            ],
+            'tempat' => [
+                'field' => 'tempat',
+                'label' => 'tempat',
+                'rules' => 'trim|required',
+            ],
+            'id_provinsi' => [
+                'field' => 'id_provinsi',
+                'label' => 'id_provinsi',
+                'rules' => 'trim|required|numeric',
+            ],
+            'id_kota' => [
+                'field' => 'id_kota',
+                'label' => 'id_kota',
+                'rules' => 'trim|required|numeric',
             ],
         ]
-    ]; */
+    ];
 }

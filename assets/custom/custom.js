@@ -1,7 +1,7 @@
-(function($) {
+(function ($) {
 
     var AppKPI = {
-        init: function() {
+        init: function () {
             this.init_icheck();
             this.init_datepicker();
             this.init_datatable();
@@ -9,12 +9,13 @@
             this.init_select_2();
             this.submit_isi_kpi();
             this.init_print_pdf();
+            this.init_select_2_province();
         },
 
         /**
          * Init icheck for class .iCheck
          */
-        init_icheck: function() {
+        init_icheck: function () {
             $('.iCheck').iCheck({
                 checkboxClass: 'icheckbox_square-blue',
                 // radioClass: 'iradio_square-blue',
@@ -25,7 +26,7 @@
         /**
          * Init datepicker for class .input-datepicker
          */
-        init_datepicker: function() {
+        init_datepicker: function () {
             $('.input-datepicker').datepicker({
                 format: 'yyyy-mm-dd'
             });
@@ -34,33 +35,33 @@
         /**
          * Init datatable for class .datatable
          */
-        init_datatable: function() {
+        init_datatable: function () {
             $('.datatable').DataTable();
         },
 
-        submit_isi_kpi: function() {
-            $('.submit-isi-kpi').click(function(e) {
+        submit_isi_kpi: function () {
+            $('.submit-isi-kpi').click(function (e) {
                 e.preventDefault();
                 // console.log('click')
                 valid = true;
-                $('.input-kpi').each(function(index) {
+                $('.input-kpi').each(function (index) {
                     // console.log(index);
                     target = parseInt($(this).closest('tr').find('.nilai-target').html());
                     nama_indikator = $(this).closest('tr').find('.nama-indikator').html();
                     // console.log(nama_indikator);
                     value = parseInt($(this).val());
-//                    console.log("value =" + value);
+                    //                    console.log("value =" + value);
 
-//                    console.log("target = " + target)
+                    //                    console.log("target = " + target)
                     //validate nilai cannot be greater than target
                     check = value > target;
-//                    console.log(check)
+                    //                    console.log(check)
                     if (check) {
                         console.log("realisasi " + nama_indikator);
                         toastr.warning('Realisasi ' + nama_indikator + " Harus lebih kecil dari " + target)
                         valid = false;
                     }
-//                    console.log('===========')
+                    //                    console.log('===========')
                 })
                 if (valid) {
                     $('.form-isi-kpi').submit();
@@ -68,7 +69,7 @@
             })
         },
 
-        init_confirm_js: function() {
+        init_confirm_js: function () {
 
             //confirm delete
             $('.js-confirm').confirm({
@@ -76,33 +77,74 @@
                 // 'title': this.$target.data('title'),
                 'icon': 'fa fa-warning',
                 "theme": 'supervan',
-                "onContentReady": function() {
+                "onContentReady": function () {
                     self.$content = this.$target.data('content');
                     self.$title = this.$target.data('title');
                 },
                 "buttons": {
-                    ok: function() {
+                    ok: function () {
                         console.log('yes pressed')
                         location.href = this.$target.data('target');
                     },
-                    close: function() {
+                    close: function () {
                         console.log('cancel')
                     }
                 }
             })
         },
 
-        init_select_2: function() {
+        init_select_2: function () {
             $('.select2').select2({
                 placeholder: $(this).data('placeholder')
             })
         },
-        init_print_pdf: function() {
+        init_select_2_province: function () {
+            $('.select-province').select2({
+                placeholder: $(this).data('placeholder')
+            })
+            $('.select-province').on('select2:select', function (e) {
+                var data = e.params.data;
+
+                //ajax get regencies
+                console.log(data);
+                url = kpi_data.base_url;
+                $.ajax({
+                    type: "get",
+                    url: url + 'kpi/profile/ajax_get_regencies/' + data.id,
+                    // data: "data",
+                    dataType: "json",
+                    success: function (response) {
+                        // var data = {
+                        //     id: 1,
+                        //     text: 'Barn owl'
+                        // };
+                        // console.log(response);
+                        // console.log(data);
+                        if(response){
+                            //clear first
+                            $('.select-regencies').html('').select2({data: [{id: '', text: ''}]});
+
+                            //loop response and append regencies
+                            response.forEach(function(item,index){
+                                // console.log(item);
+                                var newOption = new Option(item.name, item.id, false, false);
+                                $('.select-regencies').append(newOption).trigger('change');
+                            });
+                            // response.array.forEach(element => {
+                                
+                            // });
+                        }
+
+                    }
+                });
+            })
+        },
+        init_print_pdf: function () {
 
 
             var doc = new jsPDF();
             var specialElementHandlers = {
-                '#editor': function(element, renderer) {
+                '#editor': function (element, renderer) {
                     return true;
                 }
             };
@@ -114,36 +156,36 @@
             };
 
 
-            $('.print-pdf').click(function() {
+            $('.print-pdf').click(function () {
                 var pdf = new jsPDF('p', 'pt', 'letter');
                 source = $('#table-rekap')[0];
 
 
                 pdf.fromHTML(
-                        source, // HTML string or DOM elem ref.
-                        margins.left, // x coord
-                        margins.top, {// y coord
-                            'width': margins.width, // max width of content on PDF
-                            'elementHandlers': specialElementHandlers
-                        },
-                        function(dispose) {
-                            // dispose: object with X, Y of the last line add to the PDF
-                            //          this allow the insertion of new lines after html
-                            pdf.save('Test.pdf');
-                            // var string = doc.output('datauristring');
-                            // var embed = "<embed width='100%' height='100%' src='" + string + "'/>"
-                            // var x = window.open();
-                            // x.document.open();
-                            // x.document.write(embed);
-                            // x.document.close();
-                        }
-                , margins);
+                    source, // HTML string or DOM elem ref.
+                    margins.left, // x coord
+                    margins.top, {// y coord
+                    'width': margins.width, // max width of content on PDF
+                    'elementHandlers': specialElementHandlers
+                },
+                    function (dispose) {
+                        // dispose: object with X, Y of the last line add to the PDF
+                        //          this allow the insertion of new lines after html
+                        pdf.save('Test.pdf');
+                        // var string = doc.output('datauristring');
+                        // var embed = "<embed width='100%' height='100%' src='" + string + "'/>"
+                        // var x = window.open();
+                        // x.document.open();
+                        // x.document.write(embed);
+                        // x.document.close();
+                    }
+                    , margins);
             });
             // pdf.output('dataurlnewwindow');
 
         }
     }
-    $(function() {
+    $(function () {
         // Run on DOM ready
         AppKPI.init();
 

@@ -17,8 +17,11 @@
         <?php if ($user->active_admin == 0 && !$this->ion_auth->is_admin()) { ?>
           <span class="text-sm" title="Anda perlu di verifikasi Admin" data-toggle="tooltip"><i class="fa fa-circle text-warning"></i> Status Tidak Aktif</span>
           <!-- <span class="btn btn-default disabled btn-flat" data-toggle="tooltip" title="Anda tidak diijinkan mengisi KPI ini">Isi Kpi</span> -->
-          <?php } else { ?>
+          <?php } elseif($user->active_admin == 1) { ?>
             <span class="text-sm" title="Anda Aktif, Silahkan isi KPI" data-toggle="tooltip"><i class="fa fa-circle text-success"></i> Status Aktif</span>
+
+          <?php } elseif($user->active_admin == 2) { ?>
+            <span class="text-sm" title="Anda Pending, Tunggu konfirmasi admin" data-toggle="tooltip"><i class="fa fa-circle text-info"></i> Status Pending</span>
 
         <?php } ?>
       </div>

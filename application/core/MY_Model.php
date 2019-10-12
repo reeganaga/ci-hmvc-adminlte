@@ -518,6 +518,7 @@ class MY_Model extends CI_Model
                     $return = $this->trigger('after_update',$affected);
                     return $return;
                 }
+                echo $this->_database->last_query();
             }
             else
             {
@@ -528,6 +529,7 @@ class MY_Model extends CI_Model
                     $return = $this->trigger('after_update',$affected);
                     return $return;
                 }
+                echo $this->_database->last_query();
             }
             return FALSE;
         }
@@ -557,6 +559,7 @@ class MY_Model extends CI_Model
                     {
                         $rows++;
                     }
+                    var_dump($this->_database->last_query());
                 }
                 else
                 {

@@ -49,6 +49,11 @@
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script> -->
 
 
+<?php 
+//localize variable by php
+$url = base_url();
+echo "<script>var kpi_data={'base_url':'{$url}'};</script>";
+?>
 
 <!-- custom js -->
 <script src="<?php echo base_url('assets/custom/custom.js') ?>"></script>

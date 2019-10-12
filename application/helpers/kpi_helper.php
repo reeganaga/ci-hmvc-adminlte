@@ -48,15 +48,35 @@ function form_value($key, $form)
     }
 }
 
-function form_checked($key, $form, $checked = true)
+function form_checked($key, $form, $checked = true,$value='')
 {
     $temp_value = set_value($key);
     if (!empty($temp_value) && $temp_value == 1) {
         echo "checked";
+    } elseif (!empty($value)) {
+        if (isset($form[$key]) && $form[$key] == $value ) {
+            echo 'checked';
+        }
     } elseif (isset($form[$key])) {
         echo ($form[$key] == 1) ? "checked" : "";
     } else {
         echo ($checked) ? "checked" : "";
+    }
+}
+
+function form_selected($key, $form, $selected = true,$value='')
+{
+    $temp_value = set_value($key);
+    if (!empty($temp_value) && $temp_value == 1) {
+        echo "selected";
+    } elseif (!empty($value)) {
+        if (isset($form[$key]) && $form[$key] == $value ) {
+            echo 'selected';
+        }
+    } elseif (isset($form[$key])) {
+        echo ($form[$key] == 1) ? "selected" : "";
+    } else {
+        echo ($selected) ? "selected" : "";
     }
 }
 
