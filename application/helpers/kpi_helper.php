@@ -48,64 +48,91 @@ function form_value($key, $form)
     }
 }
 
-function form_checked($key, $form, $checked=true)
+function form_checked($key, $form, $checked = true)
 {
     $temp_value = set_value($key);
-    if (!empty($temp_value) && $temp_value==1) {
+    if (!empty($temp_value) && $temp_value == 1) {
         echo "checked";
-    }elseif(isset($form[$key])) {
+    } elseif (isset($form[$key])) {
         echo ($form[$key] == 1) ? "checked" : "";
-    }else{
-        echo ($checked)?"checked":"";
+    } else {
+        echo ($checked) ? "checked" : "";
     }
 }
 
-function send_email($to='',$subject='',$content=''){
+function send_email($to = '', $subject = '', $content = '')
+{
 
-    $ci =& get_instance();
+    $ci = &get_instance();
 
     $ci->config->load('email');
-    $config['mailtype']= $ci->config->item('mailtype');
-    $config['charset']= $ci->config->item('charset');
-    $config['protocol']= $ci->config->item('protocol');
-    $config['smtp_host']= $ci->config->item('smtp_host');
-    $config['smtp_user']= $ci->config->item('smtp_user');
-    $config['smtp_pass']= $ci->config->item('smtp_pass');
-    $config['smtp_port']= $ci->config->item('smtp_port');
-    $config['crlf']= $ci->config->item('crlf');
+    $config['mailtype'] = $ci->config->item('mailtype');
+    $config['charset'] = $ci->config->item('charset');
+    $config['protocol'] = $ci->config->item('protocol');
+    $config['smtp_host'] = $ci->config->item('smtp_host');
+    $config['smtp_user'] = $ci->config->item('smtp_user');
+    $config['smtp_pass'] = $ci->config->item('smtp_pass');
+    $config['smtp_port'] = $ci->config->item('smtp_port');
+    $config['crlf'] = $ci->config->item('crlf');
     $config['newline']    = $ci->config->item('newline');
 
     // var_dump($config);
     // die();
 
-    $config = 
-    $ci->load->library('email',$config);
+    $config =
+        $ci->load->library('email', $config);
 
     $ci->email->from('rega@softwareseni.com', 'Rega');
     $ci->email->to($to);
     // $ci->email->cc('another@another-example.com');
     $ci->email->bcc('rega.blank@gmail.com');
-    
+
     $ci->email->subject($subject);
     $ci->email->message($content);
-    
-    return $ci->email->send();    
+
+    return $ci->email->send();
 }
 
-function calculate_score($realisasi,$target,$bobot){
-	
-	
-	
-	if($target==0) $score= 0;
-	else $score = ($realisasi/$target)*100;
-	
-    $end_score = ($score * $bobot)/100;
+function calculate_score($realisasi, $target, $bobot)
+{
+
+
+
+    if ($target == 0) $score = 0;
+    else $score = ($realisasi / $target) * 100;
+
+    $end_score = ($score * $bobot) / 100;
 
     $result['score'] = $score;
     $result['end_score'] = $end_score;
     return $result;
 }
 
-function kpi_format_date($data){
-    return date('l, d M Y',strtotime($data));
+function kpi_format_date($data)
+{
+    return date('l, d M Y', strtotime($data));
+}
+
+/**
+ * calculate Nilai by total score
+ *
+ * @param integer $skor
+ * @return void
+ */
+function calculate_nilai(int $skor)
+{
+    // Nilai : 0 - 20 : E  ------  21 - 40 : D  --------- 41 - 60 : C ----------- 61 - 80 : B ----------- 81 - 100 : A
+    // if (!$skor) return false;
+    if ($skor < 21) {
+        $nilai = "E";
+    } elseif ($skor < 41) {
+        $nilai = "D";
+    } elseif ($skor < 61) {
+        $nilai  = "C";
+    } elseif ($skor < 81) {
+        $nilai  = "B";
+    } else {
+        $nilai  = "A";
+    }
+    return $nilai;
 }
