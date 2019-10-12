@@ -46,7 +46,10 @@ $base_url = base_url();
                       <td><?= $table->tempat; ?></td>
                       <td><?= $table->id_kota; ?></td>
                       <td><?= ($table->active) == 1 ? "<span class='label label-success'>Active</span>" : "<span class='label label-default'>Not Active</span>"; ?></td>
-                      <td><?= ($table->active_admin) == 1 ? "<span class='label label-success'>Active</span>" : "<a class='label label-default js-confirm' data-target='{$base_url}kpi/users/activate_user/{$table->id}' data-title='Konfirmasi Aktifan user' data-content='Apakah anda yakin ingin mengaktifkan user {$table->first_name} ini ?' >Not Active</a>"; ?></td>
+                      <td><?= ($table->active_admin) == 1 ? 
+                      "<a class='label label-success js-confirm' data-target='{$base_url}kpi/users/active_deactive_user/{$table->id}/deactive' data-title='Konfirmasi Nonaktifan user' data-content='Apakah anda yakin ingin menonaktifkan user {$table->first_name} ini ?' >Active</a>" : 
+
+                      "<a class='label label-default js-confirm' data-target='{$base_url}kpi/users/active_deactive_user/{$table->id}/active' data-title='Konfirmasi Aktifan user' data-content='Apakah anda yakin ingin mengaktifkan user {$table->first_name} ini ?' >Not Active</a>"; ?></td>
                       <td>
                         <!-- <a href="<?=  base_url();  ?>kpi/users/edit/<?= $table->id; ?>" class="btn btn-default">Edit User</a> -->
                       </td>
