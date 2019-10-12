@@ -124,4 +124,15 @@ class Users extends MY_Controller
 		}
 		redirect(base_url('/kpi/users'));
 	}
+
+
+	public function view($id_user){
+		$user = $this->users_model->with_regency()->get($id_user);
+
+		$data['breadcrumbs'] = array('Users' => '/kpi/users',$id_user=>"/kpi/users/view/{$id_user}");
+		$data['content'] = 'kpi/kpi-users-view';
+		$data['user'] = $user;
+		$data['menu_active'] = $this->menu;
+		echo Modules::run($this->template_member, $data);
+	}
 }

@@ -51,7 +51,7 @@ $base_url = base_url();
 
                       "<a class='label label-default js-confirm' data-target='{$base_url}kpi/users/active_deactive_user/{$table->id}/active' data-title='Konfirmasi Aktifan user' data-content='Apakah anda yakin ingin mengaktifkan user {$table->first_name} ini ?' >Not Active</a>"; ?></td>
                       <td>
-                        <!-- <a href="<?=  base_url();  ?>kpi/users/edit/<?= $table->id; ?>" class="btn btn-default">Edit User</a> -->
+                        <a href="<?=  base_url();  ?>kpi/users/view/<?= $table->id; ?>" class="btn btn-default">View</a>
                       </td>
                     </tr>
                   <?php endforeach; ?>

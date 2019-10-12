@@ -9,6 +9,7 @@ class Users_model extends MY_Model
         $this->primary_key = 'id';        
 
         $this->has_many['groups'] = array('foreign_model'=>'Users_group_model','foreign_table'=>'Users_group','foreign_key'=>'user_id','local_key'=>'id');
+        $this->has_one['regency'] = array('local_key'=>'id_kota', 'foreign_key'=>'id', 'foreign_model'=>'Regencies_model');
 		parent::__construct();
     }    
     
