@@ -7,9 +7,9 @@
  * @param [any text message] $message
  * @return void
  */
-function alert($type, $message)
-{
-    if (empty($message)) return;
+function alert($type, $message) {
+    if (empty($message))
+        return;
 
     switch ($type) {
         case 'error':
@@ -38,9 +38,7 @@ function alert($type, $message)
     </script>";
 }
 
-
-function form_value($key, $form)
-{
+function form_value($key, $form) {
     if (isset($form) && !empty($form[$key])) {
         echo $form[$key];
     } else {
@@ -48,13 +46,12 @@ function form_value($key, $form)
     }
 }
 
-function form_checked($key, $form, $checked = true,$value='')
-{
+function form_checked($key, $form, $checked = true, $value = '') {
     $temp_value = set_value($key);
     if (!empty($temp_value) && $temp_value == 1) {
         echo "checked";
     } elseif (!empty($value)) {
-        if (isset($form[$key]) && $form[$key] == $value ) {
+        if (isset($form[$key]) && $form[$key] == $value) {
             echo 'checked';
         }
     } elseif (isset($form[$key])) {
@@ -64,13 +61,12 @@ function form_checked($key, $form, $checked = true,$value='')
     }
 }
 
-function form_selected($key, $form, $selected = true,$value='')
-{
+function form_selected($key, $form, $selected = true, $value = '') {
     $temp_value = set_value($key);
     if (!empty($temp_value) && $temp_value == 1) {
         echo "selected";
     } elseif (!empty($value)) {
-        if (isset($form[$key]) && $form[$key] == $value ) {
+        if (isset($form[$key]) && $form[$key] == $value) {
             echo 'selected';
         }
     } elseif (isset($form[$key])) {
@@ -80,8 +76,7 @@ function form_selected($key, $form, $selected = true,$value='')
     }
 }
 
-function send_email($to = '', $subject = '', $content = '')
-{
+function send_email($to = '', $subject = '', $content = '') {
 
     $ci = &get_instance();
 
@@ -94,13 +89,12 @@ function send_email($to = '', $subject = '', $content = '')
     $config['smtp_pass'] = $ci->config->item('smtp_pass');
     $config['smtp_port'] = $ci->config->item('smtp_port');
     $config['crlf'] = $ci->config->item('crlf');
-    $config['newline']    = $ci->config->item('newline');
+    $config['newline'] = $ci->config->item('newline');
 
     // var_dump($config);
     // die();
 
-    $config =
-        $ci->load->library('email', $config);
+    $config = $ci->load->library('email', $config);
 
     $ci->email->from('rega@softwareseni.com', 'Rega');
     $ci->email->to($to);
@@ -113,13 +107,14 @@ function send_email($to = '', $subject = '', $content = '')
     return $ci->email->send();
 }
 
-function calculate_score($realisasi, $target, $bobot)
-{
+function calculate_score($realisasi, $target, $bobot) {
 
 
 
-    if ($target == 0) $score = 0;
-    else $score = ($realisasi / $target) * 100;
+    if ($target == 0)
+        $score = 0;
+    else
+        $score = ($realisasi / $target) * 100;
 
     $end_score = ($score * $bobot) / 100;
 
@@ -128,19 +123,17 @@ function calculate_score($realisasi, $target, $bobot)
     return $result;
 }
 
-function kpi_format_date($data)
-{
+function kpi_format_date($data) {
     return date('l, d M Y', strtotime($data));
 }
 
 /**
  * calculate Nilai by total score
  *
- * @param integer $skor
+ * @param $skor
  * @return void
  */
-function calculate_nilai(int $skor)
-{
+function calculate_nilai($skor) {
     // Nilai : 0 - 20 : E  ------  21 - 40 : D  --------- 41 - 60 : C ----------- 61 - 80 : B ----------- 81 - 100 : A
     // if (!$skor) return false;
     if ($skor < 21) {
@@ -148,11 +141,25 @@ function calculate_nilai(int $skor)
     } elseif ($skor < 41) {
         $nilai = "D";
     } elseif ($skor < 61) {
-        $nilai  = "C";
+        $nilai = "C";
     } elseif ($skor < 81) {
-        $nilai  = "B";
+        $nilai = "B";
     } else {
-        $nilai  = "A";
+        $nilai = "A";
     }
     return $nilai;
+}
+
+function calculate_ket_nilai($skor) {
+    if ($skor < 21) {
+        echo "Sangat Kurang Baik";
+    } elseif ($skor < 41) {
+        echo "Kurang Baik";
+    } elseif ($skor < 61) {
+        echo "Cukup Baik";
+    } elseif ($skor < 81) {
+        echo "Baik";
+    } else {
+        echo "Sangat Baik";
+    }
 }

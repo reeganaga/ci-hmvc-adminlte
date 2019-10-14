@@ -18,35 +18,36 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    
+
                     <div class="table-responsive">
-                <table class="table no-margin">
-                  <thead>
-                  <tr>
-                    <th>KPI ID</th>
-                    <th>KPI Name</th>
-                    <th>Action</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                      <?php foreach ($kpis as $kpi) : ?>
-                      <tr>
-                        <td><?= $kpi->id_kpi; ?></td>
-                        <td><a href="<?php echo base_url('') ?>"><?= $kpi->nama_kpi; ?></a></td>
-                        <td>
-                          <a href="<?=  base_url();  ?>kpi/add_indicator/<?= $kpi->id_kpi; ?>" class="btn btn-default">Configure indicator</a>
-                        </td>
-                      </tr>
-                    <?php endforeach; ?>    
-                  </tbody>
-                </table>
-              </div> 
+                        <table class="table no-margin">
+                            <thead>
+                                <tr>
+                                    <th>KPI ID</th>
+                                    <th>KPI Name</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($kpis as $kpi) : ?>
+                                    <tr>
+                                        <td><?= $kpi->id_kpi; ?></td>
+                <!--                        <td><a href="<?php // echo base_url('')   ?>"><?//= $kpi->nama_kpi; ?></a></td>-->
+                                        <td><?= $kpi->nama_kpi; ?></td>
+                                        <td>
+                                            <a href="<?= base_url(); ?>kpi/add_indicator/<?= $kpi->id_kpi; ?>" class="btn btn-default">Configure indicator</a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
                     <!-- /.table-responsive -->
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer clearfix">
-                    <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left">Place New Order</a>
-                    <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">View All Orders</a>
+                    <!--                    <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left">Place New Order</a>
+                                        <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">View All Orders</a>-->
                 </div>
                 <!-- /.box-footer -->
             </div>
