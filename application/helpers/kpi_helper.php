@@ -107,9 +107,11 @@ function send_email($to = '', $subject = '', $content = '') {
     return $ci->email->send();
 }
 
-function calculate_score($realisasi, $target, $bobot) {
+function calculate_score($realisasi='', $target, $bobot) {
 
-
+    if (empty($realisasi)) {
+        $realisasi = 0;
+    }
 
     if ($target == 0)
         $score = 0;
