@@ -54,7 +54,7 @@ class Penilaian_kpi_model extends MY_Model
         return $data;
     }
 
-    public function get_penilaian_rekap($id_user = '', $id_periode = '')
+    public function get_penilaian_rekap($id_user = '', $id_periode = '',$other_param=[])
     {
         $where = [];
         if (!empty($id_user)) {
@@ -62,6 +62,12 @@ class Penilaian_kpi_model extends MY_Model
         }
         if (!empty($id_periode)) {
             $where['id_periode_kpi'] = $id_periode;
+        }
+        // var_dump($other_param);
+        if (!empty($other_param)) {
+            foreach ($other_param as $key=>$param) {
+                $where[$key] = $param;  
+            }
         }
 
         $datas = $this->with_kpi()->with_details()->get_all($where);
