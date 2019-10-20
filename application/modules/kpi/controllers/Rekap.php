@@ -13,6 +13,7 @@ class Rekap extends MY_Controller
         $this->template_member = 'template/user';
         $this->load->model(['kpi_model', 'kpi_detail_model', 'penilaian_kpi_model', 'users_model', 'periode_model']);
         $this->menu = 'kpi-rekap';
+        $this->title = 'Rekap';
 
         $this->set_groups([1,2]);
         parent::__construct();
@@ -94,6 +95,7 @@ class Rekap extends MY_Controller
         $data['tables'] = $tables;
         $data['menu_active'] = $this->menu;
         // var_dump($data);
+        $data['title'] = $this->title;
         echo Modules::run($this->template_member, $data);
     }
 }

@@ -12,6 +12,7 @@ class Kpi extends MY_Controller {
         $this->load->model('kpi_model');
         $this->load->model('kpi_detail_model');
         $this->menu = 'kpi';
+        $this->title="KPI";
 
         $this->set_groups([1]);
 		parent::__construct();
@@ -26,6 +27,7 @@ class Kpi extends MY_Controller {
         $data['breadcrumbs'] = array('KPI' => '/kpi/kpi');
         $data['content'] = 'kpi/kpi-table';
         $data['kpis'] = $table;
+        $data['title'] = $this->title;
         $data['menu_active'] = $this->menu;
         echo Modules::run($this->template_member, $data);
     }
@@ -71,6 +73,7 @@ class Kpi extends MY_Controller {
         // var_dump($data['table_indikators']);
         // $data['kpis'] = $table;
         $data['menu_active'] = $this->menu;
+        $data['title'] = $this->title;
         echo Modules::run($this->template_member, $data);
     }
 

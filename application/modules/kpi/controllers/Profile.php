@@ -12,6 +12,7 @@ class Profile extends MY_Controller
 		$this->template_member = 'template/user';
 		$this->load->model(['users_model', 'provinces_model', 'regencies_model']);
 		$this->menu = 'kpi-users';
+		$this->title = 'Profile';
 
 		$this->set_groups([2]);
 		parent::__construct();
@@ -33,6 +34,7 @@ class Profile extends MY_Controller
 		$data['list_kelompok_usaha'] = $this->users_model->kelompok_usaha;
 		$data['menu_active'] = $this->menu;
 		// var_dump($data);
+		$data['title'] = $this->title;
 		echo Modules::run($this->template_member, $data);
 
 		// $this->users_table();
