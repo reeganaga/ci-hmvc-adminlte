@@ -75,7 +75,7 @@ $arr_user = (array) $user;
                             <div class="col-md-9">
                                 <?php foreach ($list_pendidikan as $value) { ?>
                                     <label for="pendidikan">
-                                        <input required type="radio" name="pendidikan" value="<?= $value; ?>" <?= form_checked('pendidikan',$arr_user,false,$value); ?>  > <?= $value; ?>
+                                        <input required type="radio" name="pendidikan" value="<?= $value; ?>" <?= form_checked('pendidikan', $arr_user, false, $value); ?>> <?= $value; ?>
                                     </label>
                                 <?php } ?>
                             </div>
@@ -87,7 +87,7 @@ $arr_user = (array) $user;
                             <div class="col-md-9">
                                 <?php foreach ($list_kelompok_usaha as $value) { ?>
                                     <label for="kelompok_usaha">
-                                        <input required type="radio" name="kelompok_usaha" value="<?= $value; ?>" <?php form_checked('kelompok_usaha',$arr_user,false,$value); ?> > <?= $value; ?>
+                                        <input required type="radio" name="kelompok_usaha" value="<?= $value; ?>" <?php form_checked('kelompok_usaha', $arr_user, false, $value); ?>> <?= $value; ?>
                                     </label>
                                 <?php } ?>
                             </div>
@@ -99,7 +99,7 @@ $arr_user = (array) $user;
                             <div class="col-md-9">
                                 <?php foreach ($list_usaha as $value) { ?>
                                     <label for="jenis_usaha">
-                                        <input required type="radio" name="jenis_usaha" value="<?= $value; ?>" <?php form_checked('jenis_usaha',$arr_user,false,$value); ?> > <?= $value; ?>
+                                        <input required type="radio" name="jenis_usaha" value="<?= $value; ?>" <?php form_checked('jenis_usaha', $arr_user, false, $value); ?>> <?= $value; ?>
                                     </label>
                                 <?php } ?>
                             </div>
@@ -109,7 +109,7 @@ $arr_user = (array) $user;
                                 <label for="" class="control-label">Deskripsi Usaha</label>
                             </div>
                             <div class="col-md-9">
-                                <textarea required class="form-control" name="deskripsi_usaha"  cols="30" rows="4"><?php form_value('deskripsi_usaha', $arr_user); ?></textarea>
+                                <textarea required class="form-control" name="deskripsi_usaha" cols="30" rows="4"><?php form_value('deskripsi_usaha', $arr_user); ?></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -136,9 +136,9 @@ $arr_user = (array) $user;
                                 <select class="form-control select-province" name="id_provinsi" data-placeholder="Pilih Kota">
                                     <option></option>
                                     <?php foreach ($provinces as $province) {
-                                         ?>
-                                        <option <?php form_selected('id_provinsi',$arr_user,false,$province->id); ?> value='<?= $province->id ?>'><?= $province->name ?></option>
-                                        <?php
+                                        ?>
+                                        <option <?php form_selected('id_provinsi', $arr_user, false, $province->id); ?> value='<?= $province->id ?>'><?= $province->name ?></option>
+                                    <?php
                                     }
                                     ?>
                                 </select>
@@ -153,9 +153,9 @@ $arr_user = (array) $user;
                                     <option></option>
                                     <?php foreach ($regencies as $regency) {
                                         ?>
-                                        <option <?php form_selected('id_kota',$arr_user,false,$regency->id); ?> value='<?= $regency->id ?>'><?= $regency->name ?></option>
-                                        <?php 
-                                        
+                                        <option <?php form_selected('id_kota', $arr_user, false, $regency->id); ?> value='<?= $regency->id ?>'><?= $regency->name ?></option>
+                                    <?php
+
                                     }
                                     ?>
                                 </select>
@@ -177,7 +177,62 @@ $arr_user = (array) $user;
         <!-- /.box -->
     </div>
     <!-- /.col -->
+
+    <div class="row">
+        <!-- Left col -->
+        <div class="col-md-12">
+            <!-- Form: Input Indicator -->
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Password Form</h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <?php
+                    echo validation_errors();
+                    alert('error', form_error('password'));
+                    alert('error', form_error('current_password'));
+                    ?>
+                    <form class="form-horizontal" action="<?= base_url();  ?>kpi/profile/save_password" method="post">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="" class="control-label">Password sekarang</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input required type="password" class="form-control" value="" name="current_password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="" class="control-label">Password baru</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input required type="password" class="form-control" value="" name="password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-9 col-md-offset-3">
+                                <button class="btn btn-default" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.table-responsive -->
+            </div>
+            <!-- /.box-body -->
+            <!-- /.box-footer -->
+        </div>
+        <!-- /.box -->
     </div>
     <!-- /.row -->
+
+
+
 </section>
 <!-- /.content -->

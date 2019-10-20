@@ -5,7 +5,7 @@
     if (isset($title)) {
       echo $title;
     } else {
-      echo "Dashboard HMVC";
+      echo "Dashboard KPI";
     }
     ?>
     <small><?= isset($subtitle) ? $subtitle : "Version 2.0"; ?></small>

@@ -12,6 +12,7 @@ class Penilaian extends MY_Controller
 		$this->template_member = 'template/user';
 		$this->load->model('penilaian_kpi_model');
 		$this->menu = 'kpi-penilaian';
+		$this->title = 'Penilaian';
 
 		$this->set_groups([2]);
 		parent::__construct();
@@ -47,6 +48,7 @@ class Penilaian extends MY_Controller
 		}
 		$data['tables'] = $table;
 		$data['menu_active'] = $this->menu;
+		$data['title'] = $this->title;
 		echo Modules::run($this->template_member, $data);
 	}
 

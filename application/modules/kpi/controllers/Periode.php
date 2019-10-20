@@ -12,6 +12,7 @@ class Periode extends MY_Controller
 		$this->template_member = 'template/user';
 		$this->load->model('periode_model');
 		$this->menu='kpi-periode';
+		$this->title='Periode';
 		
 		$this->set_groups([1]);
 		parent::__construct();
@@ -28,6 +29,7 @@ class Periode extends MY_Controller
 		$data['breadcrumbs'] = array('Periode' => '/kpi/periode');
 		$data['content'] = 'kpi/kpi-periode-table';
 		$data['tables'] = $table;
+		$data['title'] = $this->title;
 		$data['menu_active'] = $this->menu;
 		echo Modules::run($this->template_member, $data);
 	}
@@ -99,7 +101,7 @@ class Periode extends MY_Controller
 		// var_dump($data['table_indikators']);
 		// $data['kpis'] = $table;
 		$data['menu_active'] = $this->menu;
-
+		$data['title'] = $this->title;
 		echo Modules::run($this->template_member, $data);
 	}
 

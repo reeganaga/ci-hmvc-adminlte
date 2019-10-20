@@ -12,6 +12,7 @@ class Users extends MY_Controller
 		$this->template_member = 'template/user';
 		$this->load->model('users_model');
 		$this->menu='kpi-users';
+		$this->title='Users';
 
 		$this->set_groups([1]);
 		parent::__construct();
@@ -30,6 +31,7 @@ class Users extends MY_Controller
 		$data['breadcrumbs'] = array('Users' => '/kpi/users');
 		$data['content'] = 'kpi/kpi-users-table';
 		$data['tables'] = $table;
+		$data['title'] = $this->title;
 		$data['menu_active'] = $this->menu;
 		echo Modules::run($this->template_member, $data);
 	}
@@ -101,7 +103,7 @@ class Users extends MY_Controller
 		// var_dump($data['table_indikators']);
 		// $data['kpis'] = $table;
 		$data['menu_active'] = $this->menu;
-
+		$data['title'] = $this->title;
 		echo Modules::run($this->template_member, $data);
 	}
 
@@ -133,6 +135,7 @@ class Users extends MY_Controller
 		$data['content'] = 'kpi/kpi-users-view';
 		$data['user'] = $user;
 		$data['menu_active'] = $this->menu;
+		$data['title'] = $this->title;
 		echo Modules::run($this->template_member, $data);
 	}
 }

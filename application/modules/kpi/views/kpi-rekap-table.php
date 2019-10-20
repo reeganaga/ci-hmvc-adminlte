@@ -24,13 +24,40 @@
                                 <select required name="id_user" id="" data-placehoder="Pilih" class="select2 form-control">
                                     <option value="">Pilih nama user</option>
                                     <?php
-                                    if ($users) {
-                                        foreach ($users as $user) {
-                                            $checked = ($id_user == $user->id) ? 'selected' : "";
-                                            echo "<option  {$checked} value='{$user->id}'>{$user->first_name}</option>";
+                                        if ($users) {
+                                            foreach ($users as $user) {
+                                                $checked = ($id_user == $user->id) ? 'selected' : "";
+                                                echo "<option  {$checked} value='{$user->id}'>{$user->first_name}</option>";
+                                            }
                                         }
-                                    }
-                                    ?>
+                                        ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputName2">Nama KPI</label>
+                                <select name="id_kpi_rev" id="" data-placehoder="Pilih" class="select2 form-control">
+                                    <option value="">Pilih nama KPI</option>
+                                    <?php
+                                        if ($kpis) {
+                                            foreach ($kpis as $kpi) {
+                                                $checked = ($id_kpi == $kpi->id_kpi) ? 'selected' : "";
+                                                echo "<option  {$checked} value='{$kpi->id_kpi}'>{$kpi->nama_kpi}</option>";
+                                            }
+                                        }
+                                        ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputName2">Status</label>
+                                <select name="status" id="" data-placehoder="Pilih" class="select2 form-control">
+                                    <option value="">Pilih status</option>
+                                    <?php
+                                        $status_data = [1 => 'pending', 2 => 'verify'];
+                                        foreach ($status_data as $number => $value) {
+                                            $checked = ($get_status == $number) ? 'selected' : "";
+                                            echo "<option  {$checked} value='{$number}'>{$value}</option>";
+                                        }
+                                        ?>
                                 </select>
                             </div>
                         <?php } ?>
@@ -56,7 +83,7 @@
                         // var_dump($data_user);
                         // var_dump($periode);
                         ?>
-                                                                                                    <!-- <button class='btn btn-primary' onclick="printJS('table-rekap', 'html',{'css':'<?= base_url('assets/bootstrap/css/bootstrap.min.css') ?>'} )">Print PDF</button> -->
+                        <!-- <button class='btn btn-primary' onclick="printJS('table-rekap', 'html',{'css':'<?= base_url('assets/bootstrap/css/bootstrap.min.css') ?>'} )">Print PDF</button> -->
                         <button class='btn btn-primary print-pdf'>Print PDF</button>
                         <div id="editor"></div>
 
@@ -81,28 +108,28 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                    if (!empty($tables)) {
-                                        $total = 0;  //var_dump($tables);
-                                        ?>
-                                        <?php foreach ($tables as $table) : $total += $table->total_skor;
+                                        if (!empty($tables)) {
+                                            $total = 0;  //var_dump($tables);
                                             ?>
+                                        <?php foreach ($tables as $table) : $total += $table->total_skor;
+                                                    ?>
                                             <tr>
                                                 <td><?= isset($table->kpi->nama_kpi) ? $table->kpi->nama_kpi : ""; ?></td>
                                                 <td><?= isset($table->total_skor) ? $table->total_skor : ""; ?></td>
                                                 <td>
                                                     <?php
-//                                                    if ($table->total_skor < 21) {
-//                                                        $nilai = "E";
-//                                                    } elseif ($table->total_skor < 41) {
-//                                                        $nilai = "D";
-//                                                    } elseif ($table->total_skor < 61) {
-//                                                        $nilai = "C";
-//                                                    } elseif ($table->total_skor < 81) {
-//                                                        $nilai = "B";
-//                                                    } else {
-//                                                        $nilai = "A";
-//                                                    }
-                                                    ?>
+                                                                //                                                    if ($table->total_skor < 21) {
+                                                                //                                                        $nilai = "E";
+                                                                //                                                    } elseif ($table->total_skor < 41) {
+                                                                //                                                        $nilai = "D";
+                                                                //                                                    } elseif ($table->total_skor < 61) {
+                                                                //                                                        $nilai = "C";
+                                                                //                                                    } elseif ($table->total_skor < 81) {
+                                                                //                                                        $nilai = "B";
+                                                                //                                                    } else {
+                                                                //                                                        $nilai = "A";
+                                                                //                                                    }
+                                                                ?>
                                                     <?= isset($table->total_skor) ? calculate_nilai($table->total_skor) : ""; ?></td>
                                                 <?php /* if ($table->status == 1) { ?>
                                                   <a class="btn btn-success btn-flat js-confirm" data-target="<?= base_url('kpi/penilaian/verifikasi/' . $table->id); ?>" data-title="Verifikasi KPI" data-content="Apakah anda sudah yakin dengan data KPI anda ? ">Verify</a>
@@ -114,8 +141,8 @@
                                                   <?php } */ ?>
                                                 <td>
                                                     <?php
-                                                    isset($table->total_skor) ? calculate_ket_nilai($table->total_skor) : "";
-                                                    ?></td>
+                                                                isset($table->total_skor) ? calculate_ket_nilai($table->total_skor) : "";
+                                                                ?></td>
                                             </tr>
                                         <?php endforeach; ?>
                                     <?php } ?>
@@ -128,8 +155,11 @@
                             </table>
                         </div>
                     <?php } else { ?>
-
+                        <p class="alert alert-warning">Data tidak ditemukanSilahkan pilih filter diatas</p>
+                        <?php
+                            /*
                         <p class="alert alert-warning">Silahkan pilih <?= $this->ion_auth->is_admin() ? "Nama userd dan" : ""; ?> periode</p>
+                        */ ?>
                     <?php } ?>
                     <!-- /.table-responsive -->
                 </div>
