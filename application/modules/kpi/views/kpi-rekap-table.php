@@ -1,6 +1,14 @@
 <!-- Main content -->
 <section class="content">
     <!-- Main row -->
+    <?php if ($this->ion_auth->is_admin()) { ?>
+        <div class="row">
+            <div class="col-md-12">
+                <canvas id="myChart" width="400" height="300"></canvas>
+
+            </div>
+        </div>
+    <?php } ?>
     <div class="row">
         <!-- Left col -->
         <div class="col-md-12">

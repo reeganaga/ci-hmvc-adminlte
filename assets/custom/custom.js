@@ -10,6 +10,54 @@
             this.submit_isi_kpi();
             this.init_print_pdf();
             this.init_select_2_province();
+            this.init_chart_rekap();
+        },
+
+        init_chart_rekap: function () {
+            if (!$('#myChart').length) return;
+
+            //ajax to get data and set chart
+            url = kpi_data.base_url;
+            $.ajax({
+                type: "get",
+                url: url + '/kpi/rekap/ajax_chart_data',
+                data: "",
+                dataType: "json",
+                success: function (response) {
+                    // set chart
+                    response.datasets.label="test";
+                    console.log(response)
+                    var ctx = document.getElementById('myChart').getContext('2d');
+
+                    var options = {
+                        scales: {
+                            yAxes: [{
+                                barPercentage: 0.5,
+                                // categoryPercentage:5,
+                                // barThickness: 15,
+                                maxBarThickness: 10,
+                                minBarLength: 5,
+                                gridLines: {
+                                    offsetGridLines: true
+                                },
+                            }],
+
+                        },
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    };
+                    // var data_dummmy = 
+                    var myChart = new Chart(ctx, {
+                        type: 'horizontalBar',
+                        data: response,
+                        options: options
+                    });
+                    
+                }
+            });
         },
 
         /**
@@ -120,18 +168,18 @@
                         // };
                         // console.log(response);
                         // console.log(data);
-                        if(response){
+                        if (response) {
                             //clear first
-                            $('.select-regencies').html('').select2({data: [{id: '', text: ''}]});
+                            $('.select-regencies').html('').select2({ data: [{ id: '', text: '' }] });
 
                             //loop response and append regencies
-                            response.forEach(function(item,index){
+                            response.forEach(function (item, index) {
                                 // console.log(item);
                                 var newOption = new Option(item.name, item.id, false, false);
                                 $('.select-regencies').append(newOption).trigger('change');
                             });
                             // response.array.forEach(element => {
-                                
+
                             // });
                         }
 
