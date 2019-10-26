@@ -1,3 +1,5 @@
+<?php //var_dump($form); ?>
+
 <!-- Main content -->
 <section class="content">
     <!-- Main row -->
@@ -25,6 +27,9 @@
                     alert('error', form_error('nilai_target'));
                     ?>
                     <form class="form-horizontal" action="<?= base_url(); ?>kpi/save_indikator/" method="post">
+                        <?php if (isset($form) && !empty($form['id_kpi_detail'])) { ?>
+                            <input type="hidden" name="id_kpi_detail_rev" value="<?= $form['id_kpi_detail']; ?>">
+                        <?php } ?>
                         <input type="hidden" name="id_kpi" value="<?= $id_kpi; ?>">
                         <div class="form-group">
                             <div class="col-md-3">
@@ -60,7 +65,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-9 col-md-offset-3">
-                                <button class="btn btn-default" type="submit">Add</button>
+                                <button class="btn btn-default" type="submit">Submit</button>
                             </div>
                         </div>
                     </form>
@@ -71,11 +76,11 @@
             <div class="box-footer clearfix">
                 <table class="table table-responsive">
                     <thead>
-                    <th>Sasaran</th>
-                    <th>Indikator</th>
-                    <th>Bobot</th>
-                    <th>Target</th>
-                    <th>Action</th>
+                        <th>Sasaran</th>
+                        <th>Indikator</th>
+                        <th>Bobot</th>
+                        <th>Target</th>
+                        <th>Action</th>
                     </thead>
                     <tbody>
                         <?php
@@ -92,7 +97,7 @@
                                         <button data-target="<?= base_url('kpi/delete_indikator/' . $indikator->id_kpi_detail_rev); ?>" data-content="Apakah anda ingin menghapus data ini ?" data-title="Konfirmasi Hapus" class="btn btn-danger js-confirm">Delete</button>
                                     </td>
                                 </tr>
-                                <?php
+                        <?php
                             }
                         }
                         ?>
@@ -106,7 +111,7 @@
         <!-- /.box -->
     </div>
     <!-- /.col -->
-</div>
-<!-- /.row -->
+    </div>
+    <!-- /.row -->
 </section>
 <!-- /.content -->

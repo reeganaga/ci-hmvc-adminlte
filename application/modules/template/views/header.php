@@ -24,6 +24,8 @@
 
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/plugins/jquery-confirm/jquery-confirm.min.css'); ?>">
 
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/plugins/Chart.js/Chart.min.css'); ?>">
+
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/custom/custom.css'); ?>">
 
   <!-- iCheck -->
