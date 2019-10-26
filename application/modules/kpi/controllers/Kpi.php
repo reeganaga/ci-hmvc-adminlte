@@ -37,16 +37,38 @@ class Kpi extends MY_Controller {
     }
 
     public function save_indikator() {
-        $id = $this->kpi_detail_model->from_form()->insert();
+        $post = $this->input->post();
+        // var_dump($post);
+        // die();
+        if (isset($post['id_kpi_detail_rev'])) {
+            //edit begin
+            $id = $this->kpi_detail_model->from_form()->update();
+            // var_dump($id);
+            // die();
+        }else{
+            //add begin
+            $id = $this->kpi_detail_model->from_form()->insert();
+        }
         if ($id) {
             $this->session->set_flashdata('success', 'Data Indikator berhasil disimpan');
-            redirect($this->agent->referrer());
+        }else{
+            $this->session->set_flashdata('error', 'Data Indikator gagal disimpan');
         }
+        redirect($this->agent->referrer());
     }
 
     public function delete_indikator($id_indikator) {
-        $this->kpi_detail_model->delete($id_indikator);
-        $this->session->set_flashdata('success', 'Data Indikator berhasil dihapus');
+
+        //checking used indicator 
+        $check = $this->penilaian_kpi_detail_model->get(['id_kpi_detail_rev'=>$id_indikator]);
+        if ($check) {
+            $this->session->set_flashdata('error', 'Indikator sudah digunakan dan tidak bisa dihapus');
+        }else{
+            // var_dump($check);
+            // die('hapus');
+            $this->kpi_detail_model->delete($id_indikator);
+            $this->session->set_flashdata('success', 'Data Indikator berhasil dihapus');
+        }
         redirect($this->agent->referrer(), 'location');
     }
 
@@ -61,6 +83,7 @@ class Kpi extends MY_Controller {
         // var_dump($id_indikator);
         if (!empty($indikator)) {
             $data['form'] = [
+                'id_kpi_detail' => $indikator->id_kpi_detail_rev,
                 'sasaran' => $indikator->sasaran,
                 'nama_indikator' => $indikator->nama_indikator,
                 'bobot' => $indikator->bobot,

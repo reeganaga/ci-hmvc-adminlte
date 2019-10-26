@@ -56,6 +56,11 @@ class Kpi_detail_model extends MY_Model {
                 'label' => 'Id Indikator',
                 'rules' => 'trim|is_natural_no_zero|required'
             ],
+            'id_kpi' => [
+                'field' => 'id_kpi',
+                'label' => 'Id Kpi',
+                'rules' => 'trim|required',
+            ],
             'sasaran' => [
                 'field' => 'sasaran',
                 'label' => 'Sasaran',
@@ -68,6 +73,11 @@ class Kpi_detail_model extends MY_Model {
             ],
             'bobot' => [
                 'field' => 'bobot',
+                'label' => 'Nama indikator',
+                'rules' => 'trim|required'
+            ],
+            'nilai_target' => [
+                'field' => 'nilai_target',
                 'label' => 'Nama indikator',
                 'rules' => 'trim|required'
             ],
