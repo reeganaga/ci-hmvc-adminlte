@@ -172,8 +172,8 @@ class Rekap extends MY_Controller
         $response['labels'] = $labels;
         $response['datasets'][] = [
             'label' => 'Rata - Rata',
-            "backgroundColor" => "rgba(54, 162, 235, 0.2)",
-            "borderColor" => "rgba(54, 162, 235, 0.2)",
+            "backgroundColor" => "rgb(243, 156, 18)",
+            "borderColor" => "rgb(243, 156, 18)",
             'data' => $data
         ];
         $response = json_encode($response);
