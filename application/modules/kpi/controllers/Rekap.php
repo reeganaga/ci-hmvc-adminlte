@@ -101,7 +101,7 @@ class Rekap extends MY_Controller
 
     public function ajax_chart_data()
     {
-        if (!$this->ion_auth->is_admin()) return;
+        // if (!$this->ion_auth->is_admin()) return;
         // var data = {
         //     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
         //     datasets: [{
@@ -128,54 +128,79 @@ class Rekap extends MY_Controller
         // };
 
 
-        $penilaian_rekap = $this->penilaian_kpi_model->get_penilaian_rekap();
-        // $count=[];
-        $average = [];
+        if ($this->ion_auth->is_admin()) {
+            $id_user = $this->input->get('id_user');
+        } else {
+            $id_user = $this->ion_auth->user()->row()->id;
+        }
+        // var_dump($id_user);
+        $id_periode = $this->input->get('id_periode');
 
-        //loop and get all average score 
-        foreach ($penilaian_rekap as $penilaian) {
+        $other_param=[];
+        if (!empty($this->input->get('id_kpi_rev'))) {
+            $other_param['id_kpi_rev']=$this->input->get('id_kpi_rev');
+        }
 
-            if (empty($average[$penilaian->id_kpi_rev])) {
-                $average[$penilaian->id_kpi_rev] = $penilaian->total_skor;
-            } else {
-                // echo "<br> ".$average[$penilaian->id_kpi_rev]."   sebelunya <==<br>";
-                // echo "<br> ".$penilaian->total_skor."   ditambah ini terus dibagi 2 <==<br>";
-                $average[$penilaian->id_kpi_rev] = ($penilaian->total_skor + $average[$penilaian->id_kpi_rev]) / 2;
+        if (!empty($this->input->get('status'))) {
+            $other_param['status']=$this->input->get('status');
+        }
+        // $id_kpi_rev = $this->input->get('id_kpi_rev');
+        // $status = $this->input->get('status');
+
+        // var_dump($id_periode);
+        $penilaian_rekap = $this->penilaian_kpi_model->get_penilaian_rekap($id_user, $id_periode, $other_param);
+        // var_dump($penilaian_rekap);
+        $response = false;
+        if ($penilaian_rekap) {
+            // $count=[];
+            $average = [];
+
+            //loop and get all average score 
+            foreach ($penilaian_rekap as $penilaian) {
+
+                if (empty($average[$penilaian->id_kpi_rev])) {
+                    $average[$penilaian->id_kpi_rev] = $penilaian->total_skor;
+                } else {
+                    // echo "<br> ".$average[$penilaian->id_kpi_rev]."   sebelunya <==<br>";
+                    // echo "<br> ".$penilaian->total_skor."   ditambah ini terus dibagi 2 <==<br>";
+                    $average[$penilaian->id_kpi_rev] = ($penilaian->total_skor + $average[$penilaian->id_kpi_rev]) / 2;
+                }
+                // echo "rata rata {$penilaian->kpi->nama_kpi} = {$average[$penilaian->id_kpi_rev]} <br>";
+
+
+                // $summarize_kpi_score[$penilaian->id_kpi_rev] = $average;
+
+                // echo $penilaian->id_kpi_rev;
+                // echo "<br>";
+                // echo $penilaian->total_skor;
+                // echo "<br>";
+                // echo $penilaian->kpi->nama_kpi;
+                // echo "<br>";
+                // echo "<br>===========<br>";
             }
-            // echo "rata rata {$penilaian->kpi->nama_kpi} = {$average[$penilaian->id_kpi_rev]} <br>";
+            // var_dump($count);
+            // var_dump($average);
 
+            //get kpi
+            $kpis = $this->kpi_model->get_all();
+            $data = false;
+            // var_dump($kpis);
+            foreach ($kpis as $kpi) {
+                if (isset($average[$kpi->id_kpi])) {
+                    $data[] = $average[$kpi->id_kpi];
+                } else $data[] = 0;
 
-            // $summarize_kpi_score[$penilaian->id_kpi_rev] = $average;
-
-            // echo $penilaian->id_kpi_rev;
-            // echo "<br>";
-            // echo $penilaian->total_skor;
-            // echo "<br>";
-            // echo $penilaian->kpi->nama_kpi;
-            // echo "<br>";
-            // echo "<br>===========<br>";
+                $labels[] = $kpi->nama_kpi;
+                // $this->penilaian_kpi_detail_model->get_summary_score($kpi->id_kpi);
+            }
+            $response['labels'] = $labels;
+            $response['datasets'][] = [
+                'label' => 'Rata - Rata',
+                "backgroundColor" => "rgb(243, 156, 18)",
+                "borderColor" => "rgb(243, 156, 18)",
+                'data' => $data
+            ];
         }
-        // var_dump($count);
-        // var_dump($average);
-
-        //get kpi
-        $kpis = $this->kpi_model->get_all();
-        // var_dump($kpis);
-        foreach ($kpis as $kpi) {
-            if (isset($average[$kpi->id_kpi])) {
-                $data[] = $average[$kpi->id_kpi];
-            } else $data[] = 0;
-
-            $labels[] = $kpi->nama_kpi;
-            // $this->penilaian_kpi_detail_model->get_summary_score($kpi->id_kpi);
-        }
-        $response['labels'] = $labels;
-        $response['datasets'][] = [
-            'label' => 'Rata - Rata',
-            "backgroundColor" => "rgb(243, 156, 18)",
-            "borderColor" => "rgb(243, 156, 18)",
-            'data' => $data
-        ];
         $response = json_encode($response);
         echo $response;
         // var_dump($kpis);

@@ -18,17 +18,23 @@
 
             //ajax to get data and set chart
             url = kpi_data.base_url;
+            form = $('.form-filter-rekap').serialize();
+            // id_periode = $('.id_periode').val();
+            // other_data = { 'id_periode': id_periode }
+            console.log(form);
+
             $.ajax({
                 type: "get",
-                url: url + '/kpi/rekap/ajax_chart_data',
+                url: url + '/kpi/rekap/ajax_chart_data?'+form,
                 data: "",
                 dataType: "json",
                 success: function (response) {
                     // set chart
-                    response.datasets.label="test";
-                    console.log(response)
+                    // console.log(response)
+                    if (!response) return;
+                    response.datasets.label = "test";
                     var ctx = document.getElementById('myChart').getContext('2d');
-
+                    $('#myChart').css({'height':"400px"});
                     var options = {
                         scales: {
                             yAxes: [{
@@ -55,7 +61,7 @@
                         data: response,
                         options: options
                     });
-                    
+
                 }
             });
         },

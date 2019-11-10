@@ -1,14 +1,14 @@
 <!-- Main content -->
 <section class="content">
     <!-- Main row -->
-    <?php if ($this->ion_auth->is_admin()) { ?>
+    <?php //if ($this->ion_auth->is_admin()) { ?>
         <div class="row">
             <div class="col-md-12">
-                <canvas id="myChart" width="400" height="300"></canvas>
+                <canvas id="myChart" height="0px" ></canvas>
 
             </div>
         </div>
-    <?php } ?>
+    <?php //} ?>
     <div class="row">
         <!-- Left col -->
         <div class="col-md-12">
@@ -71,7 +71,7 @@
                         <?php } ?>
                         <div class="form-group">
                             <label for="exampleInputEmail2">Periode</label>
-                            <select required class="select2 form-control" data-placehoder="Pilih" name="id_periode" id="">
+                            <select required class="select2 form-control id_periode" data-placehoder="Pilih" name="id_periode" id="">
                                 <option value="">Pilih Periode</option>
                                 <?php
                                 if ($periodes) {
