@@ -39,6 +39,7 @@
 <script src="<?= base_url('assets/plugins/jsPDF/html.js'); ?>"></script> -->
 
 <script src="<?= base_url('assets/plugins/jsPDF/jspdf.min.js'); ?>"></script>
+<script src="<?= base_url('assets/plugins/html2pdf.js-master/dist/html2pdf.bundle.min.js'); ?>"></script>
 
 
 <!-- jquery validation -->
