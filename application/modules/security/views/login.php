@@ -24,6 +24,7 @@
           </div>
           <!-- /.col -->
         </div>
+        <input class="google-token" type="hidden" name="token">
       </form>
 
 

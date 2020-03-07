@@ -13,6 +13,7 @@ class Auth extends MY_Controller
         // $this->template_member = 'template/user';
 
         $this->load->model('regencies_model');
+        $this->load->library('curl');
     }
 
     public function index()
@@ -31,6 +32,25 @@ class Auth extends MY_Controller
         $remember = ($this->input->post('remember')) ? true : false;
         // var_dump($email);
         // var_dump($password);
+        $token = $this->input->post('token');
+
+        $this->curl->create('https://www.google.com/recaptcha/api/siteverify');
+        $this->curl->post([
+            'secret'=>'6LcgC8cUAAAAAGWBMCIF5gyplngM5VAukJrsElIt',
+            'response'=>$token
+        ]);
+        $data = $this->curl->execute();
+
+        $captcha_data = json_decode($data);
+
+        // if(!$captcha_data['success'])
+        // var_dump($token);
+        // var_dump($data);
+        // var_dump($captcha_data->success);
+        if(!$captcha_data->success){
+            $this->session->set_flashdata('error', 'Recaptcha tidak valid, silahkan coba lagi');
+            redirect(base_url() . 'security/auth');
+        }
         // die();
         if (!$this->ion_auth->logged_in()) {
 
