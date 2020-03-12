@@ -14,43 +14,114 @@ class Auth extends MY_Controller
 
         $this->load->model('regencies_model');
         $this->load->library('curl');
+        $this->load->helper('captcha');
     }
 
+    public function generate_captcha()
+    {
+        // init captcha
+        $vals = array(
+            // 'word'          => 'Random word',
+            'img_path'      => './captcha/',
+            'img_url'       => 'http://localhost/kpi/captcha/',
+            // 'font_path'     => './path/to/fonts/texb.ttf',
+            'img_width'     => '150',
+            'img_height'    => 30,
+            'expiration'    => 7200,
+            'word_length'   => 5,
+            'font_size'     => 16,
+            'img_id'        => 'Imageid',
+            'pool'          => '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+
+            // White background and border, black text and red grid
+            'colors'        => array(
+                'background' => array(255, 255, 255),
+                'border' => array(255, 255, 255),
+                'text' => array(0, 0, 0),
+                'grid' => array(255, 40, 40)
+            )
+        );
+
+        // var_dump($vals);
+        $cap = create_captcha($vals);
+        return $cap;
+    }
     public function index()
     {
         // echo "test";
         // add breadcrumbs
         // $data['breadcrumbs'] = array('Dashboard' => '/dashboard');
         // echo Modules::run($this->template_main, $data);
-        $this->load->view('auth-template', ['page' => 'login']);
+
+
+        // var_dump($cap);
+
+        $cap = $this->generate_captcha();
+        $data = array(
+            'captcha_time'  => $cap['time'],
+            'ip_address'    => $this->input->ip_address(),
+            'word'          => $cap['word']
+        );
+
+        $query = $this->db->insert_string('captcha', $data);
+        $this->db->query($query);
+
+        // die();
+        // echo $cap['image'];
+
+        $this->load->view('auth-template', ['page' => 'login', 'cap' => $cap]);
     }
 
     public function check()
     {
+
+        // First, delete old captchas
+        $expiration = time() - 7200; // Two hour limit
+        $this->db->where('captcha_time < ', $expiration)
+            ->delete('captcha');
+
+        // Then see if a captcha exists:
+        $sql = 'SELECT COUNT(*) AS count FROM captcha WHERE word = ? AND ip_address = ? AND captcha_time > ?';
+        $binds = array($_POST['captcha'], $this->input->ip_address(), $expiration);
+        $query = $this->db->query($sql, $binds);
+        $row = $query->row();
+
+        if ($row->count == 0) {
+            // echo 'You must submit the word that appears in the image.';
+            $this->session->set_flashdata('error', 'Recaptcha tidak valid, silahkan coba lagi');
+            redirect(base_url() . 'security/auth');
+        }
+
         $email = $this->input->post('email');
         $password = $this->input->post('password');
         $remember = ($this->input->post('remember')) ? true : false;
         // var_dump($email);
         // var_dump($password);
-        $token = $this->input->post('token');
 
-        $this->curl->create('https://www.google.com/recaptcha/api/siteverify');
-        $this->curl->post([
-            'secret'=>'6LcgC8cUAAAAAGWBMCIF5gyplngM5VAukJrsElIt',
-            'response'=>$token
-        ]);
-        $data = $this->curl->execute();
 
-        $captcha_data = json_decode($data);
+        // captcha pakai google
 
-        // if(!$captcha_data['success'])
-        // var_dump($token);
-        // var_dump($data);
-        // var_dump($captcha_data->success);
-        if(!$captcha_data->success){
-            $this->session->set_flashdata('error', 'Recaptcha tidak valid, silahkan coba lagi');
-            redirect(base_url() . 'security/auth');
-        }
+        // $token = $this->input->post('token');
+
+        // $this->curl->create('https://www.google.com/recaptcha/api/siteverify');
+        // $this->curl->post([
+        //     'secret' => '6LcgC8cUAAAAAGWBMCIF5gyplngM5VAukJrsElIt',
+        //     'response' => $token
+        // ]);
+        // $data = $this->curl->execute();
+
+        // $captcha_data = json_decode($data);
+
+        // // if(!$captcha_data['success'])
+        // // var_dump($token);
+        // // var_dump($data);
+        // // var_dump($captcha_data->success);
+        // if (!$captcha_data->success) {
+        //     $this->session->set_flashdata('error', 'Recaptcha tidak valid, silahkan coba lagi');
+        //     redirect(base_url() . 'security/auth');
+        // }
+
+
         // die();
         if (!$this->ion_auth->logged_in()) {
 
@@ -69,9 +140,9 @@ class Auth extends MY_Controller
                 //     // die();
                 // }else{
 
-                    // var_dump($user);
-                    // die();
-                    redirect(base_url() . '/dashboard');
+                // var_dump($user);
+                // die();
+                redirect(base_url() . '/dashboard');
                 // }
             } else {
                 $this->session->set_flashdata('error', 'Email / Password anda salah.');
