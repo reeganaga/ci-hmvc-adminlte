@@ -23,7 +23,7 @@ class Auth extends MY_Controller
         $vals = array(
             // 'word'          => 'Random word',
             'img_path'      => './captcha/',
-            'img_url'       => 'http://localhost/kpi/captcha/',
+            'img_url'       => base_url().'captcha/',
             // 'font_path'     => './path/to/fonts/texb.ttf',
             'img_width'     => '150',
             'img_height'    => 30,
@@ -54,9 +54,9 @@ class Auth extends MY_Controller
         // echo Modules::run($this->template_main, $data);
 
 
-        // var_dump($cap);
-
+        
         $cap = $this->generate_captcha();
+        var_dump($cap);
         $data = array(
             'captcha_time'  => $cap['time'],
             'ip_address'    => $this->input->ip_address(),
