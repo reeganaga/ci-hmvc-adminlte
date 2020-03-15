@@ -41,6 +41,9 @@
 <script src="<?= base_url('assets/plugins/jsPDF/jspdf.min.js'); ?>"></script>
 <script src="<?= base_url('assets/plugins/html2pdf.js-master/dist/html2pdf.bundle.min.js'); ?>"></script>
 
+<!-- mask js -->
+<script src="<?= base_url('assets/plugins/jQuery-Mask-Plugin-master/dist/jquery.mask.min.js'); ?>"></script>
+
 
 <!-- jquery validation -->
 <!-- <script src="<?= base_url('assets/plugins/jquery-validation/jquery.validate.min.js'); ?>"></script> -->

@@ -51,7 +51,7 @@ class Users_model extends MY_Model
             'omset' => [
                 'field' => 'omset',
                 'label' => 'omset',
-                'rules' => 'trim|required|numeric',
+                'rules' => 'trim|required',
             ],
             'tempat' => [
                 'field' => 'tempat',
@@ -109,7 +109,7 @@ class Users_model extends MY_Model
             'omset' => [
                 'field' => 'omset',
                 'label' => 'omset',
-                'rules' => 'trim|required|numeric',
+                'rules' => 'trim|required',
             ],
             'tempat' => [
                 'field' => 'tempat',

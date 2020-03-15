@@ -57,7 +57,6 @@ class Profile extends MY_Controller
 	public function save()
 	{
 		// $k_aktif = $this->input->post()==1;
-		// var_dump($this->input->post());
 		$user = $this->ion_auth->user()->row();
 		$id_user = $user->id;
 
@@ -67,7 +66,19 @@ class Profile extends MY_Controller
 			//set active admin 2 -> pending
 			$additional_data['active_admin'] = 2;
 		}
+
+		//modify date
+		$cur_date = $this->input->post('tgl_lahir');
+		$additional_data['tgl_lahir'] = convert_date_format($cur_date);
+		
+		//modify omset
+		$cur_date = $this->input->post('omset');
+		$additional_data['omset'] = str_replace(".","",$cur_date);
+
+		// var_dump($this->input->post());
 		// var_dump($additional_data);
+		
+		// die();
 		$id = $this->users_model->from_form(NULL, $additional_data)->update(null, ['id' => $id_user]);
 		// var_dump($id);
 		if ($id) {

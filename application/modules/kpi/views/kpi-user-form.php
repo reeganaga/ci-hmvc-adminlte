@@ -65,7 +65,8 @@ $arr_user = (array) $user;
                                 <label for="" class="control-label">Tanggal Lahir</label>
                             </div>
                             <div class="col-md-9">
-                                <input required type="text" class="form-control input-datepicker" value="<?php form_value('tgl_lahir', $arr_user); ?>" name="tgl_lahir">
+
+                                <input required type="text" class="form-control mask mask-date" placeholder="DD/MM/YYYY" value="<?php echo convert_date_format(form_value('tgl_lahir', $arr_user,true) , 'd-m-Y') ; ?>" name="tgl_lahir">
                             </div>
                         </div>
                         <div class="form-group">
@@ -117,7 +118,7 @@ $arr_user = (array) $user;
                                 <label for="" class="control-label">Omset</label>
                             </div>
                             <div class="col-md-9">
-                                <input required type="number" class="form-control" value="<?php form_value('omset', $arr_user); ?>" name="omset" placeholder="Omset">
+                                <input required type="text" class="form-control mask mask-money" value="<?php form_value('omset', $arr_user); ?>" name="omset" placeholder="Omset">
                             </div>
                         </div>
                         <div class="form-group">

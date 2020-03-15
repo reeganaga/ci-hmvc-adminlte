@@ -7,7 +7,8 @@
  * @param [any text message] $message
  * @return void
  */
-function alert($type, $message) {
+function alert($type, $message)
+{
     if (empty($message))
         return;
 
@@ -38,15 +39,25 @@ function alert($type, $message) {
     </script>";
 }
 
-function form_value($key, $form) {
-    if (isset($form) && !empty($form[$key])) {
-        echo $form[$key];
+function form_value($key, $form, $return = false)
+{
+    if (isset($form) && !empty($form[$key]) ) {
+        if($return==false){
+            echo $form[$key];
+        }else{
+            return $form[$key];
+        }
     } else {
-        echo set_value($key);
+        if ($return==false) {
+            echo set_value($key);
+        }else{
+            return set_value($key);
+        }
     }
 }
 
-function form_checked($key, $form, $checked = true, $value = '') {
+function form_checked($key, $form, $checked = true, $value = '')
+{
     $temp_value = set_value($key);
     if (!empty($temp_value) && $temp_value == 1) {
         echo "checked";
@@ -61,7 +72,8 @@ function form_checked($key, $form, $checked = true, $value = '') {
     }
 }
 
-function form_selected($key, $form, $selected = true, $value = '') {
+function form_selected($key, $form, $selected = true, $value = '')
+{
     $temp_value = set_value($key);
     if (!empty($temp_value) && $temp_value == 1) {
         echo "selected";
@@ -76,7 +88,8 @@ function form_selected($key, $form, $selected = true, $value = '') {
     }
 }
 
-function send_email($to = '', $subject = '', $content = '') {
+function send_email($to = '', $subject = '', $content = '')
+{
 
     $ci = &get_instance();
 
@@ -107,7 +120,8 @@ function send_email($to = '', $subject = '', $content = '') {
     return $ci->email->send();
 }
 
-function calculate_score($realisasi='', $target, $bobot) {
+function calculate_score($realisasi = '', $target, $bobot)
+{
 
     if (empty($realisasi)) {
         $realisasi = 0;
@@ -125,7 +139,8 @@ function calculate_score($realisasi='', $target, $bobot) {
     return $result;
 }
 
-function kpi_format_date($data) {
+function kpi_format_date($data)
+{
     return date('l, d M Y', strtotime($data));
 }
 
@@ -135,7 +150,8 @@ function kpi_format_date($data) {
  * @param $skor
  * @return void
  */
-function calculate_nilai($skor) {
+function calculate_nilai($skor)
+{
     // Nilai : 0 - 20 : E  ------  21 - 40 : D  --------- 41 - 60 : C ----------- 61 - 80 : B ----------- 81 - 100 : A
     // if (!$skor) return false;
     if ($skor < 21) {
@@ -152,7 +168,8 @@ function calculate_nilai($skor) {
     return $nilai;
 }
 
-function calculate_ket_nilai($skor) {
+function calculate_ket_nilai($skor)
+{
     if ($skor < 21) {
         echo "Sangat Kurang Baik";
     } elseif ($skor < 41) {
@@ -164,4 +181,12 @@ function calculate_ket_nilai($skor) {
     } else {
         echo "Sangat Baik";
     }
+}
+
+function convert_date_format($cur_date,$format='Y-m-d')
+{
+    $strtotime = strtotime($cur_date);
+    // var_dump($strtotime);
+    $new_date = date($format, $strtotime);
+    return $new_date;
 }

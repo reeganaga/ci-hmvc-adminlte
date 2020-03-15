@@ -22,21 +22,25 @@ class Kpi_model extends MY_Model
 
     public function get_filled_kpi($id_periode_kpi)
     {
-        $kpis = $this->as_array()->get_all();
-
+        
+        $user = $this->ion_auth->user()->row();
+        // var_dump($kpis);
+        if ($user->kelompok_usaha=='umkm') {
+            $kpis = $this->as_array()->limit(11)->get_all();
+        }else{
+            $kpis = $this->as_array()->get_all();
+        }
         
         if ($kpis) {
             foreach ($kpis as &$kpi) {
                 //check on pengisian kpi to detect it's already filled or not
 
-                $user = $this->ion_auth->user()->row();
 
                 $where['id_kpi_rev'] = $kpi['id_kpi'];
                 $where['id_users'] = $user->id;
                 $where['id_periode_kpi'] = $id_periode_kpi;
 
                 $pengisian_kpis = $this->penilaian_kpi_model->as_array()->get($where);
-                // var_dump($pengisian_kpis);
                 // var_dump($this->ion_auth->user()->row());
                 // var_dump($pengisian_kpis['id_users']);
                 if ($pengisian_kpis) {
