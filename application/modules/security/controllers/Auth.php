@@ -56,7 +56,7 @@ class Auth extends MY_Controller
 
         
         $cap = $this->generate_captcha();
-        var_dump($cap);
+        // var_dump($cap);
         $data = array(
             'captcha_time'  => $cap['time'],
             'ip_address'    => $this->input->ip_address(),
