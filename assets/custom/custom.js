@@ -3,8 +3,8 @@
         init: function() {
             this.init_icheck();
             this.init_datepicker();
-            this.init_datatable();
             this.init_confirm_js();
+            this.init_datatable();
             this.init_select_2();
             this.submit_isi_kpi();
             this.init_print_pdf();
@@ -135,7 +135,9 @@
         },
 
         init_confirm_js: function() {
-            //confirm delete
+            //confirm delete on datatable
+            // $('.datatable').on('click', '.js-confirm', function() {
+            // console.log('clicked');
             $(".js-confirm").confirm({
                 // 'content': this.$target.data('content'),
                 // 'title': this.$target.data('title'),
@@ -155,6 +157,7 @@
                     }
                 }
             });
+            // });
         },
 
         init_select_2: function() {
