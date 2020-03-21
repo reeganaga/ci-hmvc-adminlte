@@ -220,13 +220,13 @@
                 ?>
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="<?php echo base_url('assets/dist/img/user2-160x160.jpg') ?>" class="user-image" alt="User Image">
+                        <img src="<?php echo (!empty($user->foto)) ? base_url('/kpi/profile/get_foto/'.$user->id) : base_url('assets/dist/img/user2-160x160.jpg') ?>" class="user-image" alt="User Image">
                         <span class="hidden-xs"><?= $user->first_name; ?></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="<?php echo base_url('assets/dist/img/user2-160x160.jpg') ?>" class="img-circle" alt="User Image">
+                            <img src="<?php echo (!empty($user->foto)) ? base_url('/kpi/profile/get_foto/'.$user->id) : base_url('assets/dist/img/user2-160x160.jpg') ?>" class="img-circle" alt="User Image">
 
                             <p>
                                 <?= $user->first_name; ?>

@@ -1,3 +1,7 @@
+<?php
+$user = $this->ion_auth->user()->row();
+// var_dump($user);
+?>
 <!-- Left side column. contains the logo and sidebar -->
 <aside class="main-sidebar">
   <!-- sidebar: style can be found in sidebar.less -->
@@ -5,14 +9,10 @@
     <!-- Sidebar user panel -->
     <div class="user-panel">
       <div class="pull-left image">
-        <img src="<?php echo base_url('assets/dist/img/user2-160x160.jpg') ?>" class="img-circle" alt="User Image">
+        <img src="<?php echo (!empty($user->foto)) ? base_url('/kpi/profile/get_foto/'.$user->id) : base_url('assets/dist/img/user2-160x160.jpg') ?>" class="img-circle img-profile" alt="User Image">
 
       </div>
       <div class="pull-left info">
-        <?php
-        $user = $this->ion_auth->user()->row();
-        // var_dump($user);
-        ?>
         <p><?= $user->first_name; ?></p>
         <?php if ($user->active_admin == 0 && !$this->ion_auth->is_admin()) { ?>
           <span class="text-sm" title="Anda perlu di verifikasi Admin" data-toggle="tooltip"><i class="fa fa-circle text-warning"></i> Status Tidak Aktif</span>

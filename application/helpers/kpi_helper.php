@@ -41,16 +41,16 @@ function alert($type, $message)
 
 function form_value($key, $form, $return = false)
 {
-    if (isset($form) && !empty($form[$key]) ) {
-        if($return==false){
+    if (isset($form) && !empty($form[$key])) {
+        if ($return == false) {
             echo $form[$key];
-        }else{
+        } else {
             return $form[$key];
         }
     } else {
-        if ($return==false) {
+        if ($return == false) {
             echo set_value($key);
-        }else{
+        } else {
             return set_value($key);
         }
     }
@@ -183,10 +183,94 @@ function calculate_ket_nilai($skor)
     }
 }
 
-function convert_date_format($cur_date,$format='Y-m-d')
+function convert_date_format($cur_date, $format = 'Y-m-d')
 {
     $strtotime = strtotime($cur_date);
     // var_dump($strtotime);
     $new_date = date($format, $strtotime);
     return $new_date;
+}
+
+if (!function_exists('upload_file')) {
+    function upload_file($folder, $input, $old_file, $file_allow, $custom_name = '', $rand = FALSE, $thumb = FALSE)
+    {
+        $CI = &get_instance();
+        // $config['upload_path']          = './gambar/';
+        $path = realpath(FCPATH . $folder);
+        // var_dump($path);die();
+        $config['upload_path']          = $path;
+        if ($custom_name != '') {
+            $config['file_name'] = $custom_name;
+        }
+        // $config['allowed_types']        = 'gif|jpg|png';
+        $config['allowed_types']        = $file_allow;
+        $config['max_size']             = 1000;
+        if ($rand == TRUE) {
+            $config['encrypt_name']     = TRUE;
+        }
+        $config['max_size']             = 1000;
+        // $config['max_width']            = 1024;
+        // $config['max_height']           = 768;
+
+        $CI->load->library('upload', $config);
+        $CI->upload->initialize($config);
+
+
+
+        // if ( ! $CI->upload->do_upload('gambar')){
+        if (!$CI->upload->do_upload($input)) {
+            return $CI->upload->display_errors();
+            // $error = array('error' => $CI->upload->display_errors());
+            // $CI->load->view('v_upload', $error);
+        } else {
+            /*Delete old file*/
+            if ($old_file) {
+                // echo $path;
+                // echo realpath(FCPATH.$folder.$old_file);die();
+                $deleted_path = realpath(FCPATH . $folder . $old_file);
+                // var_dump($deleted_path);
+                if (file_exists($deleted_path)) {
+                    unlink($deleted_path);
+                    //delete thumb
+                    $ext = pathinfo($old_file, PATHINFO_EXTENSION);
+                    $filename = explode('.', $old_file)[0] . '_thumb.' . $ext;
+                    $thumb_file = realpath(FCPATH . $folder . $filename);
+                    // echo FCPATH.$folder.$filename;
+                    // die();
+                    // var_dump($ext);
+                    // var_dump($filename);
+                    // var_dump($thumb_file);
+                    // die();
+                    if (file_exists($thumb_file)) {
+                        unlink($thumb_file);
+                    }
+                } else {
+                    /*echo "file not exist";
+                echo $path.$old_file;*/
+                }
+            }
+            //CREATE THUMBNAIL
+            if ($thumb == TRUE) {
+                $uploaded = $CI->upload->data();
+                $filename = $CI->upload->data()['file_name'];
+                $config2['image_library'] = 'gd2';
+                $config2['source_image'] = $path . $filename;
+                $config2['create_thumb'] = TRUE;
+                $config2['maintain_ratio'] = TRUE;
+                $config2['width']         = 300;
+                $config2['height']       = 300;
+
+                $CI->load->library('image_lib', $config2);
+
+                $CI->image_lib->resize();
+                // $CI->image_lib->crop();
+            }
+            // $path_url = explode('/assets', $CI->upload->data()['full_path']);
+            // $return['file_url']=site_url().'assets'.$path_url[1];
+            $return = $CI->upload->data();
+            return $return;
+            // $data = array('upload_data' => $CI->upload->data());
+            // $CI->load->view('v_upload_sukses', $data);
+        }
+    }
 }

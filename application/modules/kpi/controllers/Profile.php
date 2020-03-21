@@ -14,6 +14,10 @@ class Profile extends MY_Controller
 		$this->menu = 'kpi-users';
 		$this->title = 'Profile';
 
+		$this->upload_path = 'uploads/';
+		$this->ext_permit = 'jpg|png|jpeg';
+
+
 		$this->set_groups([2]);
 		parent::__construct();
 	}
@@ -58,6 +62,7 @@ class Profile extends MY_Controller
 	{
 		// $k_aktif = $this->input->post()==1;
 		$user = $this->ion_auth->user()->row();
+		// var_dump($user);die();
 		$id_user = $user->id;
 
 		//update
@@ -70,14 +75,33 @@ class Profile extends MY_Controller
 		//modify date
 		$cur_date = $this->input->post('tgl_lahir');
 		$additional_data['tgl_lahir'] = convert_date_format($cur_date);
-		
+
 		//modify omset
 		$cur_date = $this->input->post('omset');
-		$additional_data['omset'] = str_replace(".","",$cur_date);
+		$additional_data['omset'] = str_replace(".", "", $cur_date);
 
 		// var_dump($this->input->post());
 		// var_dump($additional_data);
-		
+
+		//upload photo
+		$foto_tmp = (!empty($_FILES['foto'])) ? $_FILES['foto'] : '';
+		// var_dump($foto_tmp);
+		if (!empty($foto_tmp['name'])) {
+			$old_file = (!empty($user->foto)) ? $user->foto : ""; 
+			// var_dump($this->upload_path);
+			// die();
+			$upload = upload_file($this->upload_path, 'foto', $old_file, $this->ext_permit, '', true);
+			// var_dump($upload);
+			// die();
+			if (is_array($upload)) {
+				$additional_data['foto'] = $upload['file_name'];
+			}else{
+				$this->session->set_flashdata('error', $upload);
+			}
+		}
+		// var_dump($additional_data);
+
+
 		// die();
 		$id = $this->users_model->from_form(NULL, $additional_data)->update(null, ['id' => $id_user]);
 		// var_dump($id);
@@ -133,4 +157,60 @@ class Profile extends MY_Controller
 			redirect(base_url() . '/kpi/profile');
 		}
 	}
-}
+
+	public function get_foto($user_id = '')
+	{
+		// get_file($type,$id);
+		$base_file = FCPATH.'uploads/';
+
+		$user = $this->ion_auth->user()->row();
+		if($user_id!==$user->id) show_404();
+
+		if (empty($user)) {
+			show_404(); //user should login
+		}
+		$filename = $this->users_model->fields('foto')->get($user_id);
+		if ($filename) {
+			$filename = $filename->foto;
+			$path = $base_file . $filename;
+		}
+		
+		// echo $path; die();
+		if (empty($path)) show_404();
+		
+		$ext = pathinfo($filename, PATHINFO_EXTENSION);
+		// $fileurl = $path.$filename;
+		switch ($ext) {
+			case 'png':
+				$content_type = 'image/png';
+			break;
+			case 'jpeg':
+				case 'jpg':
+					case 'JPG':
+						$content_type = 'image/jpeg';
+					break;
+					case 'pdf':
+						$content_type = 'application/pdf';
+					break;
+					case 'doc':
+						case 'docx';
+						$content_type = 'application/msword';
+					break;
+					default:
+					# code...
+				break;
+			}
+			//"image/jpeg","image/png","application/pdf","application/msword"
+			// echo $ext;
+			// include $fileurl;
+			if (!file_exists($path)) show_404();
+			if (empty($content_type)) show_404();
+			// echo $path;
+			// var_dump($filename);
+			// die();
+			
+			header("Content-type:" . $content_type);
+			header('Content-Disposition: inline; filename=' . $filename);
+			readfile($path);
+		}
+	}

@@ -1,13 +1,19 @@
-.ml-1{
+.ml-1 {
     margin-left: 1rem;
 }
-.link-black{
-    color:#000;
+
+.link-black {
+    color: #000;
 }
-.input-kpi{
+
+.input-kpi {
     width: 70px;
 }
 
-.form-filter-rekap{
+.form-filter-rekap {
     margin-bottom: 20px;
+}
+
+.max-100 {
+    max-width: 300px !important;
 }

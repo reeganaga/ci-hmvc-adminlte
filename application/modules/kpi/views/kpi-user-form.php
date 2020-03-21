@@ -35,7 +35,27 @@ $arr_user = (array) $user;
                     alert('error', form_error('id_provinsi'));
                     alert('error', form_error('id_kota'));
                     ?>
-                    <form class="form-horizontal" action="<?= base_url();  ?>kpi/profile/save" method="post">
+                    <form class="form-horizontal" action="<?= base_url();  ?>kpi/profile/save" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="" class="control-label">Foto</label>
+                            </div>
+                            <div class="col-md-9">
+                                <?php
+                                // var_dump($arr_user);
+                                if (!empty($arr_user['foto'])) {
+                                    //displaying photo
+                                    echo "<img class='max-100 img-responsive img-thumb' src='".base_url('/kpi/profile/get_foto/'.$arr_user['id'])."' alt=''>";
+                                }else{
+                                    //displaying default photo
+                                    echo "<img class='max-100 img-responsive img-thumb' src='".base_url('/assets/images/user-default.png')."' alt='>";
+                                }
+                                ?>
+
+                                <input type="file" name="foto" class="form-control">
+                                <!-- <input required type="foto" class="form-control" value="<?php form_value('foto', $arr_user); ?>" name="email" placeholder="email@example.com"> -->
+                            </div>
+                        </div>
                         <div class="form-group">
                             <div class="col-md-3">
                                 <label for="" class="control-label">Email</label>
