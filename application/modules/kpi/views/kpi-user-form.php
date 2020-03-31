@@ -48,7 +48,7 @@ $arr_user = (array) $user;
                                     echo "<img class='max-100 img-responsive img-thumb' src='".base_url('/kpi/profile/get_foto/'.$arr_user['id'])."' alt=''>";
                                 }else{
                                     //displaying default photo
-                                    echo "<img class='max-100 img-responsive img-thumb' src='".base_url('/assets/images/user-default.png')."' alt='>";
+                                    echo "<img class='max-100 img-responsive img-thumb' src='".base_url('/assets/images/user-default.png')."' alt=''>";
                                 }
                                 ?>
 

@@ -9,7 +9,7 @@ $user = $this->ion_auth->user()->row();
     <!-- Sidebar user panel -->
     <div class="user-panel">
       <div class="pull-left image">
-        <img src="<?php echo (!empty($user->foto)) ? base_url('/kpi/profile/get_foto/'.$user->id) : base_url('assets/dist/img/user2-160x160.jpg') ?>" class="img-circle img-profile" alt="User Image">
+        <img src="<?php echo (!empty($user->foto)) ? base_url('/kpi/profile/get_foto/'.$user->id) : base_url('assets/images/user-default.png') ?>" class="img-circle img-profile" alt="User Image">
 
       </div>
       <div class="pull-left info">
