@@ -10,6 +10,8 @@
         <div class="form-group">
             <button type="submit" class="form-control btn btn-primary btn-block btn-flat">Submit</button>
         </div>
+        <a href="<?= base_url('security/auth') ?>">Login</a><br>
+        <a href="<?= base_url('security/auth/register') ?>">Register</a>
         <!-- /.col -->
     </form>
 </div>

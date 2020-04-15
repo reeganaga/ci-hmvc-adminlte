@@ -88,7 +88,7 @@ function form_selected($key, $form, $selected = true, $value = '')
     }
 }
 
-function send_email($to = '', $subject = '', $content = '')
+function kpi_send_email($to = '', $subject = '', $content = '')
 {
 
     $ci = &get_instance();
