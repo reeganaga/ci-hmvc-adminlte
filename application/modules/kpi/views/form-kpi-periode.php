@@ -1,3 +1,5 @@
+<?php 
+/*
 <!-- Main content -->
 <section class="content">
     <!-- Main row -->
@@ -23,6 +25,7 @@
                     alert('error', form_error('tgl_buka'));
                     alert('error', form_error('tgl_tutup'));
                     ?>
+*/ ?>
                     <form rel="async" class="form-horizontal" action="<?=  base_url();  ?>kpi/periode/save" method="post">
                         <input type="hidden" name="id_periode_kpi" value="<?= $id_periode_kpi; ?>">
                         <div class="form-group">
@@ -64,6 +67,8 @@
                             </div>
                         </div>
                     </form>
+<?php 
+/*
                 </div>
                 <!-- /.table-responsive -->
             </div>
@@ -77,3 +82,4 @@
     <!-- /.row -->
 </section>
 <!-- /.content -->
+*/ ?>

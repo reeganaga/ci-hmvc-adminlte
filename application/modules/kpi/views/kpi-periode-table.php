@@ -37,7 +37,7 @@
                       <td><?= $table->tgl_tutup; ?></td>
                       <td><?= ($table->k_aktif)==1 ?"<span class='label label-success'>Active</span>":"<span class='label label-default'>Not Active</span>"; ?></td>
                       <td>
-                        <a href="<?=  base_url();  ?>kpi/periode/edit/<?= $table->id_periode_kpi; ?>" class="btn btn-default">Edit Periode</a>
+                        <a rel="async" ajaxify="<?=  base_url();  ?>kpi/periode/edit_ajax/<?= $table->id_periode_kpi; ?>" class="btn btn-default">Edit Periode</a>
                       </td>
                     </tr>
                   <?php endforeach; ?>

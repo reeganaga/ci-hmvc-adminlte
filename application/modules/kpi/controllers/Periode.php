@@ -143,4 +143,9 @@ class Periode extends MY_Controller
 	{
 		$this->display_form_periode($id_periode);
 	}
+
+	public function edit_ajax($id_periode){
+		Modules::run('tampil/modal/set_modal', 'kpi', 'periode', 'edit',$id_periode);
+		// $this->display_form_periode($id_periode);
+	}
 }
