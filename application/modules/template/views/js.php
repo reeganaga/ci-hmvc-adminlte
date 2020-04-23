@@ -59,6 +59,9 @@ $url = base_url();
 echo "<script>var kpi_data={'base_url':'{$url}'};</script>";
 ?>
 
+<!-- main js for ajax -->
+<script src="<?php echo base_url('assets/custom/main.js') ?>"></script>
+
 <!-- custom js -->
 <script src="<?php echo base_url('assets/custom/custom.js') ?>"></script>
 

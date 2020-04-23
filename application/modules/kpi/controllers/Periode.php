@@ -11,14 +11,17 @@ class Periode extends MY_Controller
 		$this->template_main = 'template/index';
 		$this->template_member = 'template/user';
 		$this->load->model('periode_model');
-		$this->menu='kpi-periode';
-		$this->title='Periode';
-		
+		$this->load->library('tampil/response');
+		$this->load->helper('tampil_helper');
+		$this->menu = 'kpi-periode';
+		$this->title = 'Periode';
+
 		$this->set_groups([1]);
 		parent::__construct();
 	}
 	public function index()
 	{
+
 		$this->periode_table();
 	}
 
@@ -31,12 +34,24 @@ class Periode extends MY_Controller
 		$data['tables'] = $table;
 		$data['title'] = $this->title;
 		$data['menu_active'] = $this->menu;
+
+
 		echo Modules::run($this->template_member, $data);
 	}
 
 	public function add()
 	{
 		$this->display_form_periode();
+	}
+
+	public function add_ajax()
+	{
+		// $modul, $controller, $function
+		// $data['modul']='kpi';
+		// $data['controller']='periode';
+		// $data['function']='';
+		// echo modal('kpi','periode','add');
+		Modules::run('tampil/modal/set_modal', 'kpi', 'periode', 'add');
 	}
 
 	public function save()
@@ -54,18 +69,33 @@ class Periode extends MY_Controller
 			$id = $this->periode_model->from_form(null, ['k_aktif' => $k_aktif])->update();
 			if ($id) {
 				$this->session->set_flashdata('success', 'Data periode berhasil diupdate');
-				redirect('/kpi/periode');
-			}else{
-				$this->display_form_periode($id_periode_kpi);
+				$this->response->reload_page();
+				$this->response->send();
+				// redirect('/kpi/periode');
+			} else {
+				alert('error', form_error('id_periode_kpi'));
+				alert('error', form_error('periode'));
+				alert('error', form_error('tgl_buka'));
+				alert('error', form_error('tgl_tutup'));
+				// $this->display_form_periode($id_periode_kpi);
 			}
 		} else {
 			//insert
 			$id = $this->periode_model->from_form(null, ['k_aktif' => $k_aktif])->insert();
 			if ($id) {
 				$this->session->set_flashdata('success', 'Data periode berhasil disimpan');
-				redirect('/kpi/periode');
-			}else{
-				$this->display_form_periode();
+				// redirect('/kpi/periode');
+				$this->response->reload_page();
+				$this->response->send();
+			} else {
+
+				$error = alert('error', form_error('id_periode_kpi'),true);
+				$error .= alert('error', form_error('periode'),true);
+				$error .= alert('error', form_error('tgl_buka'),true);
+				$error .= alert('error', form_error('tgl_tutup'),true);
+				$this->response->script($error);
+				$this->response->send();
+				// $this->display_form_periode();
 			}
 		}
 	}
@@ -102,7 +132,11 @@ class Periode extends MY_Controller
 		// $data['kpis'] = $table;
 		$data['menu_active'] = $this->menu;
 		$data['title'] = $this->title;
-		echo Modules::run($this->template_member, $data);
+
+
+
+		$this->load->view($data['content'], $data);
+		// echo Modules::run($this->template_member, $data);
 	}
 
 	public function edit($id_periode)

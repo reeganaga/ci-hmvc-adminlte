@@ -289,6 +289,17 @@
     $(function() {
         // Run on DOM ready
         AppKPI.init();
+        console.log(AppKPI);
+        $(document).ajaxComplete(function() {
+            // console.log(AppKPI);
+            //init js needed
+            AppKPI.init_datepicker();
+            // $(".input-datepicker").datepicker({
+            //     format: "yyyy-mm-dd"
+            // });
+            console.log('ajax done');
+            // $(".log").text("Triggered ajaxComplete handler.");
+        });
     });
 
     // Run right away

@@ -7,7 +7,7 @@
       <!-- TABLE: LATEST ORDERS -->
       <div class="box box-info">
         <div class="box-header with-border">
-          <h3 class="box-title">KPI Periode<a href="<?=  base_url();  ?>kpi/periode/add" class="btn btn-default ml-1">Add</a></h3>
+          <h3 class="box-title">KPI Periode<a rel="async" ajaxify="<?=  base_url();  ?>kpi/periode/add_ajax" class="btn btn-default ml-1">Add</a></h3>
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
             </button>

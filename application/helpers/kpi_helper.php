@@ -7,30 +7,33 @@
  * @param [any text message] $message
  * @return void
  */
-function alert($type, $message)
+function alert($type, $message,$return=false)
 {
     if (empty($message))
         return;
 
     switch ($type) {
         case 'error':
-            $script = "toastr.error('{$message}')";
+            $script = "toastr.error('{$message}');";
             break;
 
         case 'success':
-            $script = "toastr.success('{$message}')";
+            $script = "toastr.success('{$message}');";
             break;
 
         case 'warning':
-            $script = "toastr.error('{$message}')";
+            $script = "toastr.error('{$message}');";
             # code...
             break;
 
         case 'info':
-            $script = "toastr.info('{$message}')";
+            $script = "toastr.info('{$message}');";
             break;
         default:
             break;
+    }
+    if($return==true){
+        return $script;
     }
     echo "<script>
         jQuery(document).ready(function(){
