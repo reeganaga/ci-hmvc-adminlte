@@ -2,7 +2,7 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Rekap extends MY_Controller
+class Public_user extends MX_Controller
 {
 
     function __construct()
@@ -15,19 +15,23 @@ class Rekap extends MY_Controller
         $this->menu = 'kpi-rekap';
         $this->title = 'Rekap';
 
-        $this->set_groups([1, 2]);
         parent::__construct();
     }
 
     public function index()
     {
-        $this->rekap_table();
+        // $this->rekap_public();
+        show_404();
     }
 
-    public function rekap_table()
+    public function rekap($code)
     {
 
+        
+        $json = base64_decode($code);
+        $param = (array)json_decode($json);
 
+        var_dump($param);
 
         // $table = $this->kpi_model->get_all();
         // if (!$this->ion_auth->in_group('admin')) {
@@ -38,23 +42,14 @@ class Rekap extends MY_Controller
         // 	$table = $this->penilaian_kpi_model->with_periode()->with_kpi()->with_user()->get_all();
         // }
 
-        $param=[];
-        $param['id_user'] = $this->input->get('id_user');
-        $param['id_periode'] = $this->input->get('id_periode');
-        $param['id_kpi_rev'] = $this->input->get('id_kpi_rev');
-        $param['status'] = $this->input->get('status');
-        // var_dump($param);
 
         $user = $this->ion_auth->user()->row();
-        if (($user->active_admin == 0 || $user->active_admin == 2) && !$this->ion_auth->is_admin()) { // not verify
-            $this->session->set_flashdata('warning', 'Akun anda perlu diaktifkan admin, Silahkan kontak Admin');
-            $data['content'] = 'kpi/content-not-found';
-        } else {
+       
             $data['content'] = 'kpi/kpi-rekap-table';
-        }
+    
 
         if ($this->ion_auth->is_admin()) {
-            $id_user = $param['id_user'];
+            $id_user = $this->input->get('id_user');
         } else {
             $id_user = $this->ion_auth->user()->row()->id;
         }
@@ -62,30 +57,34 @@ class Rekap extends MY_Controller
 
        
 
-        $data['id_periode'] = $param['id_periode'];
+        $id_periode = $this->input->get('id_periode');
+        $data['id_periode'] = $id_periode;
 
+        $id_kpi = $this->input->get('id_kpi_rev');
+        $get_status = $this->input->get('status');
         $other_param = [];
-        if (!empty($param['id_kpi_rev'])) {
-            $other_param['id_kpi_rev'] = $param['id_kpi_rev'];
+        if (!empty($id_kpi)) {
+            $other_param['id_kpi_rev'] = $id_kpi;
         }
-        $data['id_kpi'] = $param['id_kpi_rev'];
-        if (!empty($param['status'])) {
-            $other_param['status'] = $param['status'];
+        $data['id_kpi'] = $id_kpi;
+        if (!empty($get_status)) {
+            $other_param['status'] = $get_status;
         }
-        $data['get_status'] = $param['status'];
-        if (empty($id_user) && empty($param['id_periode'])) {
+        $data['get_status'] = $get_status;
+        var_dump($id_periode);
+        if (empty($id_user) && empty($id_periode)) {
             $tables = false;
         } else {
-            $tables = $this->penilaian_kpi_model->get_penilaian_rekap($id_user, $param['id_periode'], $other_param);
+            $tables = $this->penilaian_kpi_model->get_penilaian_rekap($id_user, $id_periode, $other_param);
         }
-        // var_dump($tables);die();
+        var_dump($tables);die();
 
 
         //get data first
         $users = $this->users_model->get_all();
         $kpis = $this->kpi_model->get_all();
         $periodes = $this->periode_model->order_by('periode', 'asc')->get_all();
-        $periode = $this->periode_model->get($param['id_periode']);
+        $periode = $this->periode_model->get($id_periode);
         $user = $this->users_model->with_regency()->with_province()->get($id_user);
         // var_dump($periodes);
 
@@ -101,14 +100,13 @@ class Rekap extends MY_Controller
         // var_dump($data);
         $data['title'] = $this->title;
 
-        
-        // generate qr code for public access
-        // $key = 'M%k!fI7R7^hG';
-        $code = base64_encode(json_encode($param));
-        $data['code'] = base_url('kpi/public_user/rekap/'.$code);
-        // $data['qr_code'] = "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=".base_url('kpi/rekap/'.$code);
-        // $data['qr_code'] = "https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=".base_url('kpi/rekap/'.$code);
+        $param['id_user'] = $this->input->get('id_user');
+        $param['id_periode'] = $this->input->get('id_periode');
+        $param['id_kpi_rev'] = $this->input->get('id_kpi_rev');
+        $param['status'] = $this->input->get('status');
 
+        $code = base64_encode(json_encode($param));
+        $data['qr_code'] = "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=".base_url('kpi/rekap/'.$code);
         echo Modules::run($this->template_member, $data);
     }
 

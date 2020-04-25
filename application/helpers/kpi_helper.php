@@ -171,6 +171,25 @@ function calculate_nilai($skor)
     return $nilai;
 }
 
+/**
+ * @param $total grand total of skor
+ */
+function calculate_nilai_total($total){
+    if ($total < 220) {
+        $nilai = "E";
+    } elseif ($total < 440) {
+        $nilai = "D";
+    } elseif ($total < 660) {
+        $nilai = "C";
+    } elseif ($total < 880) {
+        $nilai = "B";
+    } else {
+        $nilai = "A";
+    }
+
+    return $nilai;
+}
+
 function calculate_ket_nilai($skor)
 {
     if ($skor < 21) {
@@ -184,6 +203,54 @@ function calculate_ket_nilai($skor)
     } else {
         echo "Sangat Baik";
     }
+}
+
+/**
+ * display ket nilai from grand total
+ * @param $total grand total of skor
+ */
+function calculate_ket_nilai_total($total)
+{
+    if ($total < 220) {
+        echo "Sangat Kurang Baik";
+    } elseif ($total < 440) {
+        echo "Kurang Baik";
+    } elseif ($total < 660) {
+        echo "Cukup Baik";
+    } elseif ($total < 880) {
+        echo "Baik";
+    } else {
+        echo "Sangat Baik";
+    }
+}
+
+function convert_number_to_str($number){
+    if ($number==1) {
+        $string="satu";
+    }elseif ($number==2) {
+        $string="dua";
+    }elseif ($number==3) {
+        $string="tiga";
+    }elseif ($number==4) {
+        $string="empat";
+    }elseif ($number==5) {
+        $string="lima";
+    }elseif ($number==6) {
+        $string="enam";
+    }elseif ($number==7) {
+        $string="tujuh";
+    }elseif ($number==8) {
+        $string="delapan";
+    }elseif ($number==9) {
+        $string="sembilan";
+    }elseif ($number==10) {
+        $string="sepuluh";
+    }elseif ($number==11) {
+        $string="sebelas";
+    }elseif ($number==12) {
+        $string="dua belas";
+    }
+    return $string;
 }
 
 function convert_date_format($cur_date, $format = 'Y-m-d')

@@ -44,6 +44,9 @@
 <!-- mask js -->
 <script src="<?= base_url('assets/plugins/jQuery-Mask-Plugin-master/dist/jquery.mask.min.js'); ?>"></script>
 
+<!-- qrcode -->
+<script src="<?= base_url('assets/plugins/qrcodejs-master/qrcode.js'); ?>"></script>
+
 
 <!-- jquery validation -->
 <!-- <script src="<?= base_url('assets/plugins/jquery-validation/jquery.validate.min.js'); ?>"></script> -->

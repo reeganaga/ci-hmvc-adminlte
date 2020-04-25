@@ -11,6 +11,7 @@
             this.init_select_2_province();
             this.init_chart_rekap();
             this.init_mask_js();
+            this.init_qrcode();
         },
 
         init_chart_rekap: function() {
@@ -284,6 +285,27 @@
             $('.mask-money').mask("#.##0", { reverse: true });
 
 
+        },
+        init_qrcode: function() {
+            if (!$('#qr-code-area1').length || !$('#qr-code-area2')) return;
+
+            var text = $('.qrcodelink').val();
+            var qrcode1 = new QRCode("qr-code-area1", {
+                text: text,
+                width: 200,
+                height: 200,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+            var qrcode2 = new QRCode("qr-code-area2", {
+                text: text,
+                width: 200,
+                height: 200,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
         }
     };
     $(function() {

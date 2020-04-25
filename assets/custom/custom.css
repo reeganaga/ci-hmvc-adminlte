@@ -17,3 +17,15 @@
 .max-100 {
     max-width: 300px !important;
 }
+
+.signer {
+    height: 50px;
+}
+
+.mb-50 {
+    margin-bottom: 50px;
+}
+
+img.img-qrcode {
+    width: 150px;
+}

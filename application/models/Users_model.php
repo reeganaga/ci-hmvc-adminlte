@@ -10,6 +10,7 @@ class Users_model extends MY_Model
 
         $this->has_many['groups'] = array('foreign_model' => 'Users_group_model', 'foreign_table' => 'Users_group', 'foreign_key' => 'user_id', 'local_key' => 'id');
         $this->has_one['regency'] = array('local_key' => 'id_kota', 'foreign_key' => 'id', 'foreign_model' => 'Regencies_model');
+        $this->has_one['province'] = array('local_key' => 'id_provinsi', 'foreign_key' => 'id', 'foreign_model' => 'Provinces_model');
         $this->pendidikan = ['sd', 'smp', 'sma', 'd3', 's1', 's2/s3'];
         $this->jenis_usaha = ['agribisnis', 'jasa', 'kuliner', 'fashion', 'lainnya'];
         $this->kelompok_usaha = ['umkm', 'bumdes'];
