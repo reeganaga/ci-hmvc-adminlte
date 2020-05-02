@@ -7,11 +7,12 @@
             this.init_datatable();
             this.init_select_2();
             this.submit_isi_kpi();
-            this.init_print_pdf();
+            // this.init_print_pdf();
             this.init_select_2_province();
             this.init_chart_rekap();
             this.init_mask_js();
             this.init_qrcode();
+            this.init_date_ttd();
         },
 
         init_chart_rekap: function() {
@@ -229,50 +230,65 @@
                 console.log('click print')
                 var element = document.getElementById("table-rekap");
 
-                // html2pdf(element);
 
 
-                var opt = {
-                    margin: 0.5,
-                    filename: "myfile.pdf",
-                    image: { type: "jpeg", quality: 0.98 },
-                    html2canvas: { scale: 2 },
-                    jsPDF: { unit: "in", format: "letter", orientation: "portrait" }
-                };
+                // JS 2 PDF Start
 
-                // New Promise-based usage:
-                html2pdf()
-                    .set(opt)
-                    .from(element)
-                    .save();
+                // var opt = {
+                //     margin: 0.5,
+                //     filename: "myfile.pdf",
+                //     image: { type: "jpeg", quality: 0.98 },
+                //     html2canvas: { scale: 2 },
+                //     jsPDF: { unit: "in", format: "letter", orientation: "portrait" }
+                // };
 
-                console.log('export pdf')
+                // // New Promise-based usage:
+                // html2pdf()
+                //     .set(opt)
+                //     .from(element)
+                //     .save();
 
-                // var pdf = new jsPDF("p", "pt", "letter");
-                // source = $("#table-rekap")[0];
+                // console.log('export pdf')
 
-                // pdf.fromHTML(
-                //   source, // HTML string or DOM elem ref.
-                //   margins.left, // x coord
-                //   margins.top,
-                //   {
-                //     // y coord
-                //     width: margins.width, // max width of content on PDF
-                //     elementHandlers: specialElementHandlers
-                //   },
-                //   function(dispose) {
-                //     // dispose: object with X, Y of the last line add to the PDF
-                //     //          this allow the insertion of new lines after html
-                //     pdf.save("Test.pdf");
-                //     // var string = doc.output('datauristring');
-                //     // var embed = "<embed width='100%' height='100%' src='" + string + "'/>"
-                //     // var x = window.open();
-                //     // x.document.open();
-                //     // x.document.write(embed);
-                //     // x.document.close();
-                //   },
-                //   margins
-                // );
+                // JS 2 PDF END
+
+                //=================
+
+
+                // JS PDF Start
+
+                var pdf = new jsPDF("p", "pt", "letter");
+                source = $("#table-rekap")[0];
+
+                pdf.fromHTML(
+                    source, // HTML string or DOM elem ref.
+                    margins.left, // x coord
+                    margins.top, {
+                        // y coord
+                        width: margins.width, // max width of content on PDF
+                        elementHandlers: specialElementHandlers
+                    },
+                    function(dispose) {
+                        // dispose: object with X, Y of the last line add to the PDF
+                        //          this allow the insertion of new lines after html
+                        pdf.save("Test.pdf");
+                        // var string = doc.output('datauristring');
+                        // var embed = "<embed width='100%' height='100%' src='" + string + "'/>"
+                        // var x = window.open();
+                        // x.document.open();
+                        // x.document.write(embed);
+                        // x.document.close();
+                    },
+                    margins
+                );
+
+                // pdf.html(source, {
+                //     callback: function(doc) {
+                //         doc.save();
+                //     }
+                // });
+
+                // JS PDF End
 
             });
             // pdf.output('dataurlnewwindow');
@@ -306,6 +322,15 @@
                 colorLight: "#ffffff",
                 correctLevel: QRCode.CorrectLevel.H
             });
+        },
+        init_date_ttd: function() {
+            if (!$('.date-ttd').length) return;
+
+            console.log('type')
+            $('.date-ttd').on('keyup', function(e) {
+                var date = $(this).val();
+                $('.date-ttd-text').html(date)
+            })
         }
     };
     $(function() {

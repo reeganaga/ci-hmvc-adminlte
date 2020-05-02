@@ -96,84 +96,99 @@
                         // var_dump($periode);
                     ?>
                         <!-- <button class='btn btn-primary' onclick="printJS('table-rekap', 'html',{'css':'<?= base_url('assets/bootstrap/css/bootstrap.min.css') ?>'} )">Print PDF</button> -->
-                        <button class='btn btn-primary print-pdf'>Print PDF</button>
-                        <div id="editor"></div>
+                        <!-- <button class='btn btn-primary print-pdf'>Print PDF</button> -->
+
+                        <?php
+                        if ($this->ion_auth->is_admin()) {
+                        ?>
+                            <input type="text" placeholder="{Tgl_ttd}" class="date-ttd">
+                        <?php
+                        }
+                        ?>
+                        <button class='btn btn-primary' onclick="printJS({
+                            'printable':'table-rekap', 
+                            'css':'<?php echo base_url('assets/bootstrap/css/bootstrap.min.css') ?>',
+                            'type':'html'
+                        })">Print PDF</button>
 
                         <!-- <button onclick="javascript:demoFromHTML();">PDF</button> -->
 
-                        <div class="table-responsive " id="table-rekap">
-                            <div class="biodata">
-                                <img style="width:150px;" src="<?= base_url() . '/assets/images/logo-kpi.png'; ?>" class="mb-50 center-block" alt="">
-                                <h4 class="text-center text-bold">Berdasarkan hasil pengisian evaluasi diri menggunakan</h4>
-                                <h4 class="mb-50 text-center text-bold">Key Performance Indicators (KPI)</h4>
-                                <table style="page-break-after: always;" class="table table-responsive">
-                                    <tr>
-                                        <td class="text-bold">
-                                            <p>Nama</p>
-                                            <p>Alamat</p>
-                                            <?php if (!empty($data_user->regency)) { ?>
-                                                <p>Kota</p>
-                                            <?php } ?>
-                                            <p>Kelompok Usaha</p>
-                                            <p>Jenis Usaha</p>
-                                            <p>Email</p>
-                                        </td>
-                                        <td>
-                                            <p>: <?= $data_user->first_name; ?></p>
-                                            <p>: <?= $data_user->tempat; ?></p>
-                                            <?php if (!empty($data_user->regency)) { ?>
-                                                <p>: <?= $data_user->regency->name; ?></p>
-                                            <?php } ?>
-                                            <p>: <?= $data_user->kelompok_usaha; ?></p>
-                                            <p>: <?= $data_user->jenis_usaha; ?></p>
-                                            <p>: <?= $data_user->email; ?></p>
+                        <div class="" id="table-rekap">
+                            <?php
+                            if ($this->ion_auth->is_admin()) {
+                            ?>
+                                <div class="biodata">
+                                    <table style="page-break-after: always;" class="table">
+                                        <tr>
+                                            <td style="border-top: 0px;" colspan="3">
+                                                <img style="width:150px;" src="<?= base_url() . '/assets/images/logo-kpi.png'; ?>" class="mb-50 center-block" alt="">
+                                                <h4 class="text-center text-bold">Berdasarkan hasil pengisian evaluasi diri menggunakan</h4>
+                                                <h4 class="mb-50 text-center text-bold">Key Performance Indicators (KPI)</h4>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border-top: 0px;" class="text-bold">
+                                                <p>Nama</p>
+                                                <p>Alamat</p>
+                                                <?php if (!empty($data_user->regency)) { ?>
+                                                    <p>Kota</p>
+                                                <?php } ?>
+                                                <p>Kelompok Usaha</p>
+                                                <p>Jenis Usaha</p>
+                                                <p>Email</p>
+                                            </td>
+                                            <td style="border-top: 0px;">
+                                                <p>: <?= $data_user->first_name; ?></p>
+                                                <p>: <?= $data_user->tempat; ?></p>
+                                                <?php if (!empty($data_user->regency)) { ?>
+                                                    <p>: <?= $data_user->regency->name; ?></p>
+                                                <?php } ?>
+                                                <p>: <?= $data_user->kelompok_usaha; ?></p>
+                                                <p>: <?= $data_user->jenis_usaha; ?></p>
+                                                <p>: <?= $data_user->email; ?></p>
 
-                                        </td>
-                                        <td>&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3">
-                                            <?php if (!empty($tables)) {
+                                            </td>
+                                            <td style="border-top: 0px;">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border-top: 0px;" colspan="3">
+                                                <?php if (!empty($tables)) {
 
-                                                // var_dump($data_periode);
-                                                $start_month = date("F", strtotime($data_periode->tgl_buka));
-                                                $end_month = date("F", strtotime($data_periode->tgl_tutup));
-                                                $end_year = date("Y", strtotime($data_periode->tgl_tutup));
-                                                // var_dump($start_month);
-                                                $total = 0;
-                                                foreach ($tables as $table) : $total += $table->total_skor;
-                                                endforeach;
-                                            ?>
+                                                    // var_dump($data_periode);
+                                                    $start_month = date("F", strtotime($data_periode->tgl_buka));
+                                                    $end_month = date("F", strtotime($data_periode->tgl_tutup));
+                                                    $end_year = date("Y", strtotime($data_periode->tgl_tutup));
+                                                    // var_dump($start_month);
+                                                    $total = 0;
+                                                    foreach ($tables as $table) : $total += $table->total_skor;
+                                                    endforeach;
+                                                ?>
 
-                                                Dengan total skor akhir <?= $total ?>, nilai <?= calculate_nilai_total($total); ?> (UMKM <?php calculate_ket_nilai_total($total); ?>), surat keterangan ini untuk dapat digunakan sebagai evaluasi profil kinerja UMKM dengan periode <?= $data_periode->periode; ?> (<?= convert_number_to_str($data_periode->periode); ?>) bulan (periode <?= $start_month ?> – <?= $end_month; ?> <?= $end_year; ?>)
-                                            <?php } ?>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                            <!-- for qr code -->
-                                          <!-- <img class="img-qrcode" src="<?= $qr_code; ?>" alt=""> -->
-                                            <div class="qr-code-area" id="qr-code-area1"></div>
-                                        </td>
-                                        <td>
-                                            <p>Yogyakarta, 14 April 2020</p>
-                                            <p>Kabid Pengembangan Usaha Kecil Menengah</p>
-                                            <div class="signer"></div>
-                                            <p>Andi Setyono</p>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <h3 class="text-center">USAHA MIKRO, KECIL, DAN MENENGAH (UMKM)</h3>
-                            <hr>
-                            <h3 class="hide text-bold">Pengisian KPI - <?= ($data_user) ? $data_user->first_name : ""; ?> - Periode <?= ($data_periode) ? $data_periode->periode : ""; ?></h3>
-                            <table class="table no-margin table-striped">
-                                <colgroup>
-                                    <col width="40%">
-                                    <col width="20%">
-                                    <col width="10%">
-                                    <col width="30%">
-                                </colgroup>
+                                                    <p>Dengan total skor akhir <?= $total ?>, nilai <?= calculate_nilai_total($total); ?> (UMKM <?php calculate_ket_nilai_total($total); ?>), surat keterangan ini untuk dapat digunakan sebagai evaluasi profil kinerja UMKM dengan periode <?= $data_periode->periode; ?> (<?= convert_number_to_str($data_periode->periode); ?>) bulan (periode <?= $start_month ?> – <?= $end_month; ?> <?= $end_year; ?>)</p>
+                                                <?php } ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border-top: 0px;" colspan="2">
+                                                <!-- for qr code -->
+                                                <!-- <img class="img-qrcode" src="<?= $qr_code; ?>" alt=""> -->
+                                                <div class="qr-code-area" id="qr-code-area1"></div>
+                                            </td>
+                                            <td style="border-top: 0px;">
+                                                <p>Yogyakarta, <span class="date-ttd-text">{Tgl_ttd}</span></p>
+                                                <p>Kabid Pengembangan Usaha Kecil Menengah</p>
+                                                <div class="signer" style="height: 50px;"></div>
+                                                <p>Andi Setyono</p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <h4 class="text-center">USAHA MIKRO, KECIL, DAN MENENGAH (UMKM)</h4>
+                                <hr>
+                            <?php } ?>
+                            <!-- <h3 class="hide text-bold">Pengisian KPI - <?= ($data_user) ? $data_user->first_name : ""; ?> - Periode <?= ($data_periode) ? $data_periode->periode : ""; ?></h3> -->
+                            <table class="table table-striped">
+
                                 <thead>
                                     <tr>
                                         <th>Nama KPI</th>
@@ -193,28 +208,7 @@
                                                 <td><?= isset($table->kpi->nama_kpi) ? $table->kpi->nama_kpi : ""; ?></td>
                                                 <td><?= isset($table->total_skor) ? $table->total_skor : ""; ?></td>
                                                 <td>
-                                                    <?php
-                                                    //                                                    if ($table->total_skor < 21) {
-                                                    //                                                        $nilai = "E";
-                                                    //                                                    } elseif ($table->total_skor < 41) {
-                                                    //                                                        $nilai = "D";
-                                                    //                                                    } elseif ($table->total_skor < 61) {
-                                                    //                                                        $nilai = "C";
-                                                    //                                                    } elseif ($table->total_skor < 81) {
-                                                    //                                                        $nilai = "B";
-                                                    //                                                    } else {
-                                                    //                                                        $nilai = "A";
-                                                    //                                                    }
-                                                    ?>
                                                     <?= isset($table->total_skor) ? calculate_nilai($table->total_skor) : ""; ?></td>
-                                                <?php /* if ($table->status == 1) { ?>
-                                                  <a class="btn btn-success btn-flat js-confirm" data-target="<?= base_url('kpi/penilaian/verifikasi/' . $table->id); ?>" data-title="Verifikasi KPI" data-content="Apakah anda sudah yakin dengan data KPI anda ? ">Verify</a>
-                                                  <?php } ?>
-                                                  <?php if ($this->ion_auth->is_admin()) { ?>
-                                                  <a class="btn btn-primary btn-flat" href="<?= base_url('kpi/isi_kpi/start/' . $table->id_periode_kpi . "/" . $table->id_kpi_rev . '?user_id=' . $table->id_users); ?>">View</a>
-                                                  <?php } else { ?>
-                                                  <a class="btn btn-primary btn-flat" href="<?= base_url('kpi/isi_kpi/start/' . $table->id_periode_kpi . "/" . $table->id_kpi_rev); ?>">View</a>
-                                                  <?php } */ ?>
                                                 <td>
                                                     <?php
                                                     isset($table->total_skor) ? calculate_ket_nilai($table->total_skor) : "";
@@ -229,14 +223,17 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <hr>
-                            <table class="table table-responsive">
+                            <!-- <hr> -->
+                            <?php
+                            if ($this->ion_auth->is_admin()) {
+                            ?>
+                            <table class="table ">
                                 <tr>
-                                    <td width="50%">
+                                    <td style="width: 50%; ">
                                         <div class="qr-code-area" id="qr-code-area2"></div>
                                         <!-- <img class="img-qrcode" src="<?= $qr_code; ?>" alt=""> -->
                                     </td>
-                                    <td width="50%">
+                                    <td style="width: 50%; ">
                                         <b>Kategori Nilai :</b>
                                         <p>880 - 1100 A Sangat Baik</p>
                                         <p>660 - 879 B Baik</p>
@@ -246,9 +243,12 @@
                                     </td>
                                 </tr>
                             </table>
+                            <?php
+                            }
+                            ?>
                         </div>
                     <?php } else { ?>
-                        <p class="alert alert-warning">Data tidak ditemukanSilahkan pilih filter diatas</p>
+                        <p class="alert alert-warning">Data tidak ditemukan</p>
                         <?php
                         /*
                         <p class="alert alert-warning">Silahkan pilih <?= $this->ion_auth->is_admin() ? "Nama userd dan" : ""; ?> periode</p>

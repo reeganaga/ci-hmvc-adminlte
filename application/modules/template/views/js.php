@@ -36,10 +36,18 @@
 
 
 <!-- <script src="<?= base_url('assets/plugins/jsPDF/html2canvas.js'); ?>"></script>
-<script src="<?= base_url('assets/plugins/jsPDF/html.js'); ?>"></script> -->
 
 <script src="<?= base_url('assets/plugins/jsPDF/jspdf.min.js'); ?>"></script>
-<script src="<?= base_url('assets/plugins/html2pdf.js-master/dist/html2pdf.bundle.min.js'); ?>"></script>
+
+<script src="<?= base_url('assets/plugins/jsPDF/html.js'); ?>"></script>  -->
+
+
+
+<!-- <script src="<?= base_url('assets/plugins/html2pdf.js-master/dist/html2pdf.bundle.min.js'); ?>"></script> -->
+
+<!-- JS PDF -->
+<!-- <script src="<?= base_url('assets/plugins/Print.js-1.0.63/src/js/print.js'); ?>"></script> -->
+<script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
 
 <!-- mask js -->
 <script src="<?= base_url('assets/plugins/jQuery-Mask-Plugin-master/dist/jquery.mask.min.js'); ?>"></script>

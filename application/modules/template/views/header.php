@@ -51,4 +51,10 @@
   <![endif]-->
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
+<?php
+
+if($this->uri->segment( 3 )!=='rekap'){
+  echo '<div class="wrapper">';
+
+}
+?>

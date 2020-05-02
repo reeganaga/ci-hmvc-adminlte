@@ -100,4 +100,19 @@ class Template extends MY_Controller
 
 		$this->load->view('main', $data);
 	}
+
+	public function public($data){
+		$data['header'] = 'template/header';
+		$data['js'] = 'template/js';
+		// $data['footer'] = 'template/footer';
+
+		foreach ($data['breadcrumbs'] as $key => $value) {
+			$this->breadcrumbs->push($key, $value);
+		}
+
+		$data['menus'] = $this->menus;
+
+		$this->load->view('main_public', $data);
+
+	}
 }
