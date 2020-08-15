@@ -5,60 +5,12 @@ class Template extends MY_Controller
 
 	public $menus = [
 		[
-			'id' => 'kpi',
-			'name' => "KPI",
-			'uri' => "kpi/kpi",
+			'id' => 'kelompok',
+			'name' => "Kelompok",
+			'uri' => "pendaftaran/kelompok",
 			'label' => "new",
 			'icon' => 'fa fa-th',
 			'role'=>[1]
-		],
-		[
-			'id' => 'kpi-periode',
-			'name' => "Periode",
-			'uri' => "kpi/periode",
-			'label' => "new",
-			'icon' => 'fa fa-calendar',
-			'role'=>[1]
-		],
-		[
-			'id' => 'kpi-isi-kpi',
-			'name' => "Isi KPI",
-			'uri' => "kpi/isi_kpi",
-			'label' => "new",
-			'icon' => 'fa fa-pencil',
-			'role'=>[1,2]
-		],
-		[
-			'id' => 'kpi-users',
-			'name' => "Users",
-			'uri' => "kpi/users",
-			'label' => "new",
-			'icon' => 'fa fa-users',
-			'role'=>[1]
-		],
-		[
-			'id' => 'kpi-penilaian',
-			'name' => "Penilaian KPI",
-			'uri' => "kpi/penilaian",
-			'label' => "new",
-			'icon' => 'fa fa-check',
-			'role'=>[1,2]
-		],
-		[
-			'id' => 'kpi-rekap',
-			'name' => "Rekap KPI",
-			'uri' => "kpi/rekap",
-			'label' => "new",
-			'icon' => 'fa fa-check',
-			'role'=>[1,2]
-		],
-		[
-			'id' => 'kpi-profile',
-			'name' => "Profile",
-			'uri' => "kpi/profile",
-			'label' => "new",
-			'icon' => 'fa fa-check',
-			'role'=>[2]
 		],
 	];
 

@@ -10,9 +10,9 @@ $active_admin = $user->active_admin;
     <?php if ($active_admin == 0) { ?>
         <div class="row">
             <div class="col-md-12">
-                <div class="alert alert-info">belum aktif</div>
+                <div class="alert alert-info">Selamat Datang</div>
 
-                <b>Silakan lengkapi terlebih dahulu halaman (isian) profile anda, dan pengelola akan memverifikasi data anda</b>
+                <!-- <b>Silakan lengkapi terlebih dahulu halaman (isian) profile anda, dan pengelola akan memverifikasi data anda</b> -->
             </div>
         </div>
     <?php } else { ?>

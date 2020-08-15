@@ -10,11 +10,11 @@
           <input type="password" name="password" class="form-control" placeholder="Password">
           <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         </div>
-        <div class="form-group has-feedback">
+        <!-- <div class="form-group has-feedback">
           <?= $cap['image']; ?>
           <input type="text" name="captcha" class="form-control" placeholder="Fill you captcha">
           <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-        </div>
+        </div> -->
         <div class="row">
           <div class="col-xs-8">
             <div class="checkbox icheck">
@@ -33,7 +33,7 @@
       </form>
 
 
-      <a href="<?=  base_url();  ?>security/auth/forgot">I forgot my password</a><br>
-      <a href="<?=  base_url();  ?>security/auth/register" class="text-center">Register a new membership</a>
+      <!-- <a href="<?=  base_url();  ?>security/auth/forgot">I forgot my password</a><br> -->
+      <!-- <a href="<?=  base_url();  ?>security/auth/register" class="text-center">Register a new membership</a> -->
 
     </div>

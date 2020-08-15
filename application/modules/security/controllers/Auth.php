@@ -12,7 +12,7 @@ class Auth extends MY_Controller
         // $this->template_main = 'template/index';
         // $this->template_member = 'template/user';
 
-        $this->load->model('regencies_model');
+        // $this->load->model('regencies_model');
         $this->load->library('curl');
         $this->load->helper('captcha');
     }
@@ -55,42 +55,42 @@ class Auth extends MY_Controller
 
 
 
-        $cap = $this->generate_captcha();
+        // $cap = $this->generate_captcha();
         // var_dump($cap);
-        $data = array(
-            'captcha_time'  => $cap['time'],
-            'ip_address'    => $this->input->ip_address(),
-            'word'          => $cap['word']
-        );
+        // $data = array(
+        //     'captcha_time'  => $cap['time'],
+        //     'ip_address'    => $this->input->ip_address(),
+        //     'word'          => $cap['word']
+        // );
 
-        $query = $this->db->insert_string('captcha', $data);
-        $this->db->query($query);
+        // $query = $this->db->insert_string('captcha', $data);
+        // $this->db->query($query);
 
         // die();
         // echo $cap['image'];
 
-        $this->load->view('auth-template', ['page' => 'login', 'cap' => $cap]);
+        $this->load->view('auth-template', ['page' => 'login']);
     }
 
     public function check()
     {
 
         // First, delete old captchas
-        $expiration = time() - 7200; // Two hour limit
-        $this->db->where('captcha_time < ', $expiration)
-            ->delete('captcha');
+        // $expiration = time() - 7200; // Two hour limit
+        // $this->db->where('captcha_time < ', $expiration)
+        //     ->delete('captcha');
 
-        // Then see if a captcha exists:
-        $sql = 'SELECT COUNT(*) AS count FROM captcha WHERE word = ? AND ip_address = ? AND captcha_time > ?';
-        $binds = array($_POST['captcha'], $this->input->ip_address(), $expiration);
-        $query = $this->db->query($sql, $binds);
-        $row = $query->row();
+        // // Then see if a captcha exists:
+        // $sql = 'SELECT COUNT(*) AS count FROM captcha WHERE word = ? AND ip_address = ? AND captcha_time > ?';
+        // $binds = array($_POST['captcha'], $this->input->ip_address(), $expiration);
+        // $query = $this->db->query($sql, $binds);
+        // $row = $query->row();
 
-        if ($row->count == 0) {
-            // echo 'You must submit the word that appears in the image.';
-            $this->session->set_flashdata('error', 'Recaptcha tidak valid, silahkan coba lagi');
-            redirect(base_url() . 'security/auth');
-        }
+        // if ($row->count == 0) {
+        //     // echo 'You must submit the word that appears in the image.';
+        //     $this->session->set_flashdata('error', 'Recaptcha tidak valid, silahkan coba lagi');
+        //     redirect(base_url() . 'security/auth');
+        // }
 
         $email = $this->input->post('email');
         $password = $this->input->post('password');

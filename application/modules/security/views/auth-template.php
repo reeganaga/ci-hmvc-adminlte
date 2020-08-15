@@ -52,7 +52,7 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="<?= base_url(); ?>"><b>Sistem Informasi Pengelolaan dan Pengembangan UMKM </b>(SIPPUM)</a>
+            <a href="<?= base_url(); ?>"><b>CI ADMIN LTE </b></a>
         </div>
         <!-- /.login-logo -->
 
